@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="35px" viewBox="0 0 20 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>翻页 copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="翻页-copy" transform="translate(10.000000, 17.500000) scale(-1, 1) translate(-10.000000, -17.500000) " fill-rule="nonzero" fill="#FFFFFF">
+            <path d="M0.651748591,15.5415592 L15.5645692,0.628738668 C16.3893404,-0.196032588 17.7233183,-0.196032588 18.5480895,0.628738668 C19.3704701,1.45111928 19.3728608,2.78748778 18.5480895,3.61225904 L5.12702915,17.0333194 L18.5480895,30.4543798 C19.3704701,31.2767604 19.3728608,32.6131289 18.5480895,33.4379002 C17.7233183,34.2626714 16.3893404,34.2602808 15.5645692,33.4379002 L0.651748591,18.5250796 C-0.170632024,17.7003084 -0.170632024,16.3663305 0.651748591,15.5415592 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>社区个人中心</title>
+    <link rel="icon" href="/images/Favicon.ico" type="img/x-ico"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/community/cropper.min.css">
+    <link rel="stylesheet" href="/css/community/center.css">
+    <link rel="stylesheet" href="/css/community/main-top.css">
+    <link rel="stylesheet" href="/css/community/info-page-btn.css">
+    <link rel="stylesheet" href="/css/community/nav.css">
+    <link rel="stylesheet" href="/css/community/footer.css">
+</head>
+<body>
+<div id="center-new-community" class="center-new-community">
+    <div id="center-new-community-content" class="center-new-community-content">
+        <div class="center-new-community-content-tip">申请社区</div>
+        <div class="center-new-community-content-content">
+            <div class="center-new-community-content-one">
+                <div class="center-new-community-content-one-one">社区名：</div>
+                <div class="center-new-community-content-one-two">社区简介：</div>
+                <div class="center-new-community-content-one-three">头像：</div>
+                <div class="center-new-community-content-one-four">验证码：</div>
+            </div>
+            <div class="center-new-community-content-two">
+                <div class="center-new-community-content-two-one">
+                    <div class="center-new-community-content-two-one-one">
+                        <input id="center-new-community-name" type="text">
+                        <span class="center-new-community-fail">*</span>
+                    </div>
+                    <div class="center-new-community-content-two-one-two">
+                        <div class="center-new-community-content-two-one-two-one">类别：</div>
+                        <div class="center-new-community-content-two-one-two-two">
+                            <div id="center-new-community-select"
+                                 class="center-new-community-content-two-one-two-two-show">选择
+                            </div>
+                            <div id="center-new-community-select-hide"
+                                 class="center-new-community-content-two-one-two-two-hide">
+                            </div>
+                            <span class="center-new-community-fail">*</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-new-community-content-two-two">
+                    <div id="center-new-community-label" contenteditable="true"></div>
+                    <span class="center-new-community-fail">*</span>
+                </div>
+                <div class="center-new-community-content-two-three">
+                    <div class="center-new-community-content-two-three-one">
+                        <div>
+                            <input id="select-portrait" type="file" title="选择图片"
+                                   accept="image/jpg, image/jpeg, image/png">选择图片
+                        </div>
+                        <span id="select-portrait-v" class="center-new-community-fail">*</span>
+                        <p>Tip:只允许jpg、png、jpeg的图片喔~</p>
+                    </div>
+                    <div id="img-show" class="center-new-community-content-two-three-two">
+                        <div></div>
+                    </div>
+                </div>
+                <div class="center-new-community-content-two-four">
+                    <div class="center-new-community-content-two-four-one">
+                        <input id="v-code" type="text">
+                        <span class="center-new-community-fail">*</span>
+                    </div>
+                    <div id="v-code-container" class="center-new-community-content-two-four-two">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center-new-community-content-btn">
+            <div>
+                <div id="community-new-community-btn" class="center-new-community-content-btn-one">提交申请</div>
+                <div id="community-clear-community-btn" class="center-new-community-content-btn-two">取消</div>
+            </div>
+        </div>
+        <div id="img-crop" class="center-new-community-img">
+            <div class="center-new-community-img-crop">
+                <div class="center-new-community-img-crop-one">
+                    <div>
+                        <img id="image" src="">
+                    </div>
+                </div>
+                <div class="center-new-community-img-crop-two">
+                    <div class="center-new-community-img-crop-two-one">
+                        <div class="preview-one">
+                        </div>
+                    </div>
+                    <div class="center-new-community-img-crop-two-two">
+                        <div class="preview-one"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-new-community-img-confirm">
+                <div class="center-new-community-img-confirm-one">
+                    <input id="select-portrait-again" type="file" title="选择图片"
+                           accept="image/jpg, image/jpeg, image/png">重新选择
+                </div>
+                <div id="get-new-image" class="center-new-community-img-confirm-two">确定</div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="community-nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 community-nav-logo"><a href="/">
+                <img src="/images/community/logo-black.png"/>
+            </a></div>
+            <div class="col-md-4 community-nav-search">
+                <div class="community-nav-search-content">
+                    <img id="community-nav-search-img" src="/images/community/search-1.png"/>
+                    <input id="community-nav-search" type="text" placeholder="搜索">
+                </div>
+                <div id="community-nav-search-hide" class="community-nav-search-tip"></div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 community-nav-btn">
+                <div>
+                    <a class="community-nav-btn-one" href="/">
+                        <img src="/images/community/index.png"/>
+                        <span>首页</span>
+                    </a>
+                </div>
+                <div class="community-nav-btn-one-special">
+                    <a id="community-nav-classify" class="community-nav-btn-one" href="javascript:void(0)">
+                        <img src="/images/community/classify.png"/>
+                        <span>类别</span>
+                    </a>
+                    <div id="community-nav-classify-hide" class="community-nav-btn-one-special-select">
+                        <i>
+                            <img src="/images/community/up-select.png"/>
+                        </i>
+                        <div id="community-nav-classify-container">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a class="community-nav-btn-one" href="/view/comm">
+                        <img class="community-nav-btn-one-img-one" src="/images/community/find.png"/>
+                        <span>发现</span>
+                    </a>
+                </div>
+                <div class="community-nav-btn-div-special">
+                    <a class="community-nav-btn-two community-nav-btn-two-special" href="/login.html">
+                        <span>登录</span>
+                    </a>|
+                    <a class="community-nav-btn-two" href="/register.html"><span>注册</span></a>
+                </div>
+                <div class="community-nav-logout community-nav-btn-one-special community-nav-hide">
+                    <a id="community-nav-customer" class="community-nav-btn-one" href="javascript:void(0)">
+                        <img class="community-nav-btn-one-img-two" src="/images/community/customer.png"/>
+                    </a>
+                    <div id="community-nav-customer-hide" class="community-nav-btn-one-special-select">
+                        <i>
+                            <img src="/images/community/up-select.png"/>
+                        </i>
+                        <div id="community-nav-customer-container">
+                            <ul class="community-nav-loading-ul">
+                                <li id="customer-personal">
+                                    <img src="/images/community/nav-personal.png"><span>个人中心</span>
+                                </li>
+                                <li id="community-center-news">
+                                    <img src="/images/community/nav-news.png"><span>消息</span>
+                                </li>
+                                <li id="community-center">
+                                    <img src="/images/community/nav-community.png"><span>社区</span>
+                                </li>
+                                <li id="customer-order">
+                                    <img src="/images/community/nav-order.png"><span>交易记录</span>
+                                </li>
+                                <li id="customer-collection">
+                                    <img src="/images/community/nav-collection.png"><span>收藏</span>
+                                </li>
+                                <li id="customer-follow">
+                                    <img src="/images/community/nav-follow.png"><span>关注</span>
+                                </li>
+                                <li id="customer-setting">
+                                    <img src="/images/community/nav-setting.png"><span>设置</span>
+                                </li>
+                                <li id="customer-logout">
+                                    <img src="/images/community/nav-logout.png"><span>退出登录</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container community-size community-advertisement">
+    <img src="/images/community/advertisement.jpg"/></div>
+<div class="container community-size community-center">
+    <div class="community-center-one">
+        <div id="community-center-one">
+            <div class="community-center-one-top">社区中心</div>
+            <div class="community-center-one-content">
+                <div class="community-center-one-content-tip">用户</div>
+                <ul>
+                    <li><a id="community-center-join" href="javascript:void(0)">已加入</a></li>
+                    <li><a id="community-center-message" href="javascript:void(0)">我的留言</a></li>
+                    <li><a id="community-center-activity" href="javascript:void(0)">参与活动</a></li>
+                    <li><a id="community-center-setting" href="javascript:void(0)">设置</a></li>
+                </ul>
+            </div>
+            <div class="community-center-one-content">
+                <div class="community-center-one-content-tip">管理</div>
+                <ul>
+                    <li><a id="community-center-my-community" href="javascript:void(0)">社区主</a></li>
+                    <li><a id="community-center-my-bulletin" href="javascript:void(0)">发布公告</a></li>
+                    <li><a id="community-center-my-activity" href="javascript:void(0)">发布活动</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="community-center-two">
+        <div id="community-center-join-info">
+            <div class="community-center-two-tip">已加入</div>
+            <div class="community-center-two-content">
+                <div class="community-center-two-content-joined">致苏州</div>
+                <div class="community-center-two-content-joined">黄浦江之旅</div>
+                <div class="community-center-two-content-joined">周边</div>
+                <div class="community-center-two-content-joined">大连的工厂</div>
+                <div class="community-center-two-content-joined">人生近别关</div>
+                <div class="community-center-two-content-joined">沙漠风景</div>
+            </div>
+        </div>
+        <div id="community-center-message-info">
+            <div class="community-center-two-tip">留言</div>
+            <div class="community-center-two-content">
+                <div id="center-my-message">
+                    <div class="community-center-two-content-tip">暂无留言~~快去社区发表吧~~~~</div>
+                </div>
+                <div id="center-my-message-page"
+                     class="community-info-content-content-unit-comment-page-two community-center-page-adjust">
+                </div>
+            </div>
+        </div>
+        <div id="community-center-activity-info">
+            <div class="community-center-two-tip">参与活动</div>
+            <div class="community-center-two-content">
+                <table class="table">
+                    <tr>
+                        <th class="community-center-table-three-one">活动</th>
+                        <th class="community-center-table-three-two">地点</th>
+                        <th class="community-center-table-three-three">状态</th>
+                        <th class="community-center-table-three-four">方式</th>
+                        <th class="community-center-table-one-four">查看</th>
+                    </tr>
+                    <tr>
+                        <td>金秋华南会友</td>
+                        <td>苏州</td>
+                        <td>正在进行</td>
+                        <td>线下参与</td>
+                        <td><a href="javascript:void(0)">查看</a></td>
+                    </tr>
+                    <tr>
+                        <td>北京文行大会</td>
+                        <td>北京</td>
+                        <td>尚未开始</td>
+                        <td>线上</td>
+                        <td><a href="javascript:void(0)">查看</a></td>
+                    </tr>
+                    <tr>
+                        <td>内蒙沙漠之行</td>
+                        <td>呼和浩特</td>
+                        <td>已结束</td>
+                        <td>线下</td>
+                        <td><a href="javascript:void(0)">查看</a></td>
+                    </tr>
+                </table>
+                <div class="community-info-content-content-unit-comment-page-two community-center-page-adjust">
+                    <a href="javascript:void(0)"><img src="/images/community/first-1.png"></a>
+                    <a href="javascript:void(0)"><img src="/images/community/left-1.png"></a>
+                    <a href="javascript:void(0)">1</a>
+                    <a href="javascript:void(0)">2</a>
+                    <span>...</span>
+                    <a href="javascript:void(0)"><img src="/images/community/right-1.png"></a>
+                    <a href="javascript:void(0)"><img src="/images/community/last-1.png"></a>
+                    <span>共<span>5</span>页</span>
+                </div>
+            </div>
+        </div>
+        <div id="community-center-join-setting">
+            <div class="community-center-two-tip">设置</div>
+            <div class="community-center-two-content">
+                <div class="community-center-two-content-tip">暂无相关</div>
+            </div>
+        </div>
+        <div id="community-center-my-community-info">
+            <div class="community-center-two-tip">拥有社区</div>
+            <a id="center-new-community-btn" class="community-center-two-insert-community"
+               href="javascript:void(0)">申请社区</a>
+            <div class="community-center-two-content community-center-two-content-community">
+                <div class="panel-group" id="accordion">
+                    <div class="community-center-two-content-tip">暂未拥有点击申请一个吧~~</div>
+                </div>
+            </div>
+        </div>
+        <div id="community-center-my-bulletin-info">
+            <div class="community-center-two-tip">已发布公告</div>
+            <a class="community-center-two-insert-community" href="javascript:void(0)">发布公告</a>
+            <div class="community-center-two-content">
+                <table class="table">
+                    <tr>
+                        <th class="community-center-table-five-one">标题</th>
+                        <th class="community-center-table-five-two">时间</th>
+                        <th class="community-center-table-five-three">查看</th>
+                        <th class="community-center-table-five-four">删除</th>
+                    </tr>
+                    <tr>
+                        <td>国庆苏州拍摄忙碌的生活</td>
+                        <td>2018-10-11 19:02:55</td>
+                        <td><a href="javascript:void(0)">查看</a></td>
+                        <td><a href="javascript:void(0)">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>内蒙沙漠之行</td>
+                        <td>2018-11-3 19:02:55</td>
+                        <td><a href="javascript:void(0)">查看</a></td>
+                        <td><a href="javascript:void(0)">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>西藏冒险征集</td>
+                        <td>2018-9-20 16:02:55</td>
+                        <td><a href="javascript:void(0)">查看</a></td>
+                        <td><a href="javascript:void(0)">删除</a></td>
+                    </tr>
+                </table>
+                <div class="community-info-content-content-unit-comment-page-two community-center-page-adjust">
+                    <a href="javascript:void(0)"><img src="/images/community/first-1.png"></a>
+                    <a href="javascript:void(0)"><img src="/images/community/left-1.png"></a>
+                    <a href="javascript:void(0)">1</a>
+                    <a href="javascript:void(0)">2</a>
+                    <a href="javascript:void(0)"><img src="/images/community/right-1.png"></a>
+                    <a href="javascript:void(0)"><img src="/images/community/last-1.png"></a>
+                    <span>共<span>2</span>页</span>
+                </div>
+            </div>
+        </div>
+        <div id="community-center-my-activity-info" class="community-center-two-last">
+            <div class="community-center-two-tip">已发布活动</div>
+            <a class="community-center-two-insert-community" href="javascript:void(0)">发布活动</a>
+            <div class="community-center-two-content">
+                <table class="table">
+                    <div class="community-center-two-content-tip">这里什么都没有~~~</div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer-left"></div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>社区</h3></li>
+            <li><a href="" class="footer-btn">热门</a></li>
+            <li><a href="" class="footer-btn">交友</a></li>
+            <li><a href="" class="footer-btn">隐私条款</a></li>
+            <li><a href="" class="footer-btn">帮助</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>商业</h3></li>
+            <li><a href="" class="footer-btn">签约合作</a></li>
+            <li><a href="" class="footer-btn">创作分成</a></li>
+            <li><a href="" class="footer-btn">定制商业摄影</a></li>
+            <li><a href="" class="footer-btn">活动发起</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>联系我们</h3></li>
+            <li><a href="" class="footer-btn">888-8888-8888</a></li>
+            <li><a href="" class="footer-btn">yftpaper@15m.com</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>关于</h3></li>
+            <li><a href="" class="footer-btn">关于15M</a></li>
+            <li><a href="" class="footer-btn">15M工作</a></li>
+            <li><a href="" class="footer-btn">意见反馈</a></li>
+        </ul>
+    </div>
+    <div id="copyright">
+        <span>© 2018 Copyright 苏州十五兆科技摄影责任有限公司 苏ICP备14057276号-4</span>
+    </div>
+</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/community/cropper.min.js"></script>
+<script src="/js/community/qiniu.min.js"></script>
+<script src="/js/community/upload.js"></script>
+<script src="/js/community/gVerify.js"></script>
+<script src="/js/community/obj.js"></script>
+<script src="/js/community/center.js"></script>
+<script src="/js/customer/personalCenter.js"></script>
+<script src="/js/community/nav.js"></script>
+</body>
+</html>

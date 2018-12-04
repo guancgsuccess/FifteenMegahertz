@@ -1,0 +1,254 @@
+body {
+    background-color: #f1f1f1;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.community-content-one > div {
+    padding: 12px 4% 0 4%;
+    border: #cfcfcf 1px solid;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+.community-content-one-two {
+    margin-top: 10px;
+}
+
+.community-content-one-top {
+    margin-bottom: 20px;
+    padding-bottom: 6px;
+    border-bottom: silver 1px solid;
+    font-family: "微软雅黑 Light";
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.community-content-one > div > ul {
+    padding-left: 40px !important;
+    list-style-type: armenian;
+}
+
+.community-content-one-content-unit {
+    margin: 8px 0 8px 0 !important;
+    cursor: pointer;
+}
+
+.community-content-one-content-unit:hover {
+    color: #58d3fb;
+}
+
+.community-content-one-content-unit-title {
+    position: relative;
+    top: 1px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.community-content-one-content-unit-time {
+    position: relative;
+    top: 1px;
+    margin-right: 0.4%;
+    float: right;
+}
+
+.community-content-one-more {
+    display: flex;
+}
+
+.community-content-one-more > div {
+    flex: 5;
+}
+
+.community-content-one-more > a {
+    flex: 1;
+    display: block;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-family: "微软雅黑 Light";
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #858585;
+    text-align: center;
+    line-height: 30px;
+    border: #858585 2px solid;
+    border-radius: 5px;
+}
+
+.community-content-one-more > a:hover {
+    color: #5f5f5f;
+    border: #5f5f5f 2px solid;
+}
+
+.community-content-one-two-top {
+    margin-bottom: 10px;
+    font-family: "微软雅黑 Light";
+    font-size: 2rem;
+    letter-spacing: 3px;
+}
+
+.community-content-one-two-top > a {
+    margin-right: 3%;
+    color: #000000;
+}
+
+.community-content-one-two-top-selected {
+    color: #ff7300 !important;
+}
+
+.community-content-one-two-top > span > a{
+    display: none;
+    font-size: 1.4rem;
+    color: #5d5d5d;
+    letter-spacing: 0;
+}
+
+.community-content-one-two-message {
+
+}
+
+.community-content-one-two-message-unit {
+    padding: 14px 2% 14px 2%;
+    border-top: silver 1px solid;
+    display: flex;
+}
+
+.community-content-one-two-message-unit-text {
+    flex: 10;
+    position: relative;
+}
+
+.community-content-one-two-message-unit-img {
+    flex: 3;
+}
+
+.community-content-one-two-message-unit-img > img {
+    width: 100%;
+}
+
+.community-content-one-two-message-unit-content {
+    margin: 6px 4% 30px 0;
+    font-size: 2.6rem;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.community-content-one-two-message-unit-content:hover {
+    color: #3366ff;
+}
+
+.community-content-one-two-message-unit-tip {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 22px;
+    font-size: 1.4rem;
+}
+
+.community-content-one-two-message-unit-tip > span {
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+.community-content-one-two-message-unit-tip > span:hover {
+    color: #ff7300;
+}
+
+.community-content-one-two-message-unit-tip > span > img {
+    position: relative;
+    top: -3px;
+    margin-right: 0.5%;
+    width: 30px;
+    height: 30px;
+    border: silver 1px solid;
+    border-radius: 100%;
+}
+
+.community-content-one-two-message-unit-tip-time {
+    position: relative;
+    top: 1px;
+    font-size: 1.3rem;
+    color: #c0c0c0;
+    cursor: auto !important;
+}
+
+.community-content-one-two-message-unit-tip-time:hover {
+    color: #c0c0c0 !important;
+}
+
+.community-content-one-two-activity {
+    display: none;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: silver 1px solid;
+}
+
+.community-content-one-two-activity-unit {
+    flex: 1;
+    position: relative;
+    top: 0;
+    margin: 4px 1% 20px 1%;
+    min-width: 200px;
+    max-width: 206px;
+    box-shadow: 0 0 5px silver;
+    cursor: pointer;
+}
+
+.community-content-one-two-activity-unit:hover {
+    top: -4px;
+    box-shadow: 0 4px 5px silver;
+    transition: .3s;
+}
+
+.community-content-one-two-activity-img {
+
+}
+
+.community-content-one-two-activity-img > img {
+    width: 100%;
+    border-radius: 1px;
+}
+
+.community-content-one-two-activity-text {
+    padding: 12px 4% 6px 4%;
+}
+
+.community-content-one-two-activity-name {
+    margin-bottom: 14px;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.community-content-one-two-activity-tip {
+    font-size: 1.2rem;
+    color: #9a9a9a;
+}
+
+.community-content-one-two-activity-tip-end-day {
+    float: right;
+}
+
+.community-content-one-two-more {
+    display: block;
+    margin: 10px 0 10px 0;
+    line-height: 50px;
+    font-family: "微软雅黑 Light";
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #9f9f9f;
+    text-align: center;
+    border-radius: 2px;
+    background-color: #d2d2d2;
+}
+
+.community-content-one-two-more:hover {
+    color: #2e2e2e;
+}
+
+.community-footer {
+}

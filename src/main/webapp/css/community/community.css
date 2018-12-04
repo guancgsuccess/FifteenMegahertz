@@ -1,0 +1,60 @@
+body {
+    background-color: #f1f1f1;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.community-community-tip{
+
+}
+
+
+.community-community-tip-tip{
+    margin-top: 16px;
+    font-family: "UD Digi Kyokasho NK-R";
+    font-size: 5.5rem;
+}
+
+.community-community-tip-tip > img {
+    position: relative;
+    top: -5px;
+    left: 18px;
+    width: 60px;
+}
+
+.community-community-tip-tip-special{
+    width: 52px !important;
+    top: 2px !important;
+    left: -14px !important;
+}
+
+.community-community-tip-content{
+    position: relative;
+    top: -6px;
+    margin: 0 0 10px 12%;
+    font-family: "Droid Sans";
+    font-size: 3rem;
+}
+
+
+.community-community-tip-content-two{
+    position: relative;
+    top: -6px;
+    margin-left: 10%;
+}
+
+.community-community-content{
+    padding: 12px 4% 0 4%;
+    border: #cfcfcf 1px solid;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+.community-community-page{
+    margin-top: 10px !important;
+    margin-left: 0 !important;
+    padding-top: 10px;
+    border-top: silver 1px solid;
+}

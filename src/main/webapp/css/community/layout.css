@@ -1,0 +1,21 @@
+.community-size{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.community-content {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 16px;
+}
+
+.community-content-one {
+    flex: 100;
+    margin: 0 2% 0 1.2%;
+}
+
+.community-content-two {
+    flex: 38;
+    margin: 0 1.2% 0 0;
+}
+

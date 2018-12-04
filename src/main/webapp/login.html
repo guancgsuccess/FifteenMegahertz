@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员登录-15M</title>
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link rel="stylesheet" href="/css/customer/registerAndLogin.css">
+    <link rel="stylesheet" href="/css/common/message.css">
+
+</head>
+<body>
+<img src="/images/lr_bg.jpg" width="100%" height="100%"
+     style="z-index:-1;position:fixed;left:0;right:0;bottom:0;top:0">
+
+
+<div id="logContent">
+    <div class="wrap">
+        <div id="logLogo" class="logLogo logLogo15">
+            <span>登</span>  <span>录</span>
+        </div>
+        <div class="loginBox" id="loginBox">
+            <div id="tip"><span id="error-tip" style="color: red;font-size: 18px"></span></div>
+
+            <div class="clear login-box-title" id="loginBoxTitle">
+                <div class="userPwdLogin">
+                <span class="active1">
+                   <a id="pwdLogin"  onclick="userPwdLogin()">账号密码登录</a>
+                </span>
+                </div>
+                <div class="phoneLogin">
+                <span class=" active2">
+                    <a id="phoneLogin"  onclick="phoneLogin()">手机动态码登录</a>
+                </span>
+                </div>
+            </div>
+
+            <!--账号密码登录-->
+          <div class="userPwd_login" id="userPwdLogin" style="display: block;margin-top: 40px">
+                <div  class="loginDiv mt142">
+                    <input  id="userName"  placeholder="手机号/邮箱" type="text"  >
+                </div>
+
+
+                <div>
+                    <input  placeholder="密码"  type="password" id="userPwd" name="userPwd" class="mt142" >
+                </div>
+
+
+                <div class="logAgreement mt142">
+                    <div class="logAgreementBox" >
+                        <input type="checkbox" class="logAgreementCheckbox" >
+                    </div>
+                <div class="logAgreementTitle">
+                    <span>记住我</span>
+                </div>
+                <div class="forget-psw">
+                    <a href="/forgetPassword.html" target="_blank">忘记密码</a>
+                </div>
+                </div>
+
+                <div>
+                    <button class="login-button" onclick="userLogin()">登录</button>
+                </div>
+
+              <div class="outerBox2" style="margin-top: 30px">
+                  <div class="backToIndex2">
+                      <a href="/index.html">返回首页</a>
+                  </div>
+                  <div  class="to-register">
+                      <a  class="a2" href="/register.html"> 没有账号？立即注册</a>
+                  </div>
+              </div>
+            </div >
+
+
+            <!--手机验证码快捷登录-->
+          <div class="phone_login" id="userPhoneLogin" style="display: none;margin-top: 40px">
+              <div class="loginPhoneDiv mt142">
+                  <input  placeholder="手机号" type="text" id="Mobile" style="margin-top: 20px;" onmouseover="PhoneOver()" onmouseout="PhoneOut()">
+                <div class="logPhoneDiv">
+                      <span id="logPhoneSpan">
+                      <input type="button" id="PhoneButton" value="发送验证码" onclick="sendLoginMessage()">
+                      </span>
+                </div>
+              </div>
+
+              <div class="logPhoneCode">
+                  <input  placeholder="验证码" id="code" class="mt142" >
+              </div>
+
+
+              <div class="logAgreement mt142">
+                  <div class="logAgreementBox" >
+                      <input type="checkbox" class="logAgreementCheckbox" >
+                  </div>
+                  <div class="logAgreementTitle">
+                      <span>记住我</span>
+                  </div>
+                  <div class="forget-psw">
+                      <a href="" target="_blank"></a>
+                  </div>
+
+
+              <div id="loginButtonDiv">
+                  <button class="login-button" onclick="userCodeLogin()">登录</button>
+              </div>
+
+              </div>
+                  <div class="outerBox2" style="margin-top: 30px">
+                      <div class="backToIndex2">
+                          <a href="/index.html">返回首页</a>
+                      </div>
+                      <div  class="to-register">
+                          <a  class="a2" href="/register.html"> 没有账号？立即注册</a>
+                      </div>
+                  </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/customer/registerAndLogin.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/customer/jquery.cookie.js"></script>
+<script src="/js/customer/base64.js"></script>
+<script src="/js/common/message.js"></script>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</body>
+</html>

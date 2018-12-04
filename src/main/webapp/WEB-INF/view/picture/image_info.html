@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/images/Favicon.ico" />
+<title>图片详情-15M摄影</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/home/home.css" rel="stylesheet">
+<link href="/css/common/personalCenter.css" rel="stylesheet">
+<link href="/css/picture/picture_info.css" rel="stylesheet">
+<link href="/css/common/message.css" rel="stylesheet">
+<link href="/css/common/upload.css" rel="stylesheet">
+<body>
+    <div id="big-container">
+        <myupload></myupload>
+        <div class="navbar navbar-inverse">
+            <mynav></mynav>
+        </div>
+
+        <div class="container imgAndAuthor">
+            <div class="row img-info">
+                <div class="preImg col-xs-1 icon">
+                    <a href="javascript:void(0);"><div class="left-array" onclick="changeImage(this)"></div></a>
+                </div>
+                <div class="img-detail col-xs-8">
+
+                </div>
+                <div class="nextImg col-xs-1 icon">
+                    <a href="javascript:void(0);"><div class="right-array" onclick="changeImage(this)"></div></a>
+                </div>
+                <div class="author-info col-xs-2">
+                    <div class="author-msg container col-lg-12">
+
+                    </div>
+                    <div class="img-popular">
+                        <div class="look-container">
+                            <label ><span class="look-num"></span>&nbsp;&nbsp;浏览</label>
+                        </div>
+                        <div class="download-container">
+                            <label><span class="download-num"></span>&nbsp;&nbsp;购买</label>
+                        </div>
+                        <div class="comment-container">
+                            <label><span class="comment-num"></span>&nbsp;&nbsp;评论</label>
+                        </div>
+                        <div class="works-title">
+                        </div>
+                        <div class="panel page-header  category-style container">
+                            <div class="category col-md-6">
+                                类别
+                            </div>
+                            <div class="category-name col-md-6">
+                            </div>
+                        </div>
+                        <div class="detail-container">
+                        </div>
+                        <button class="btn buy col-xs-12" data-toggle="modal" onclick="buy()">我想购买</button>
+                        <button class="btn btn-success btn-lg like col-md-5" onclick="like(this)" value="false"><span class="like-status">喜欢❤</span>&nbsp;|&nbsp;<span class="like-count">0</span></button>
+                        <span class="col-md-2"></span>
+                            <button class="btn btn-success btn-lg collection col-md-5" onclick="collection(this)" value="false"><span class="collect-status">收藏★</span>&nbsp;|&nbsp;<span class="collection-count">0</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comments-container container center-block">
+            <div class="row">
+                <div class="send-meg col-md-12">
+                    <textarea id="comment-text" placeholder="回复楼主...(评论内容不能超过70字!)" class="form-control" rows="5">
+                    </textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 send-btn">
+                    <button class="btn btn-success btn-lg send" onclick="sendComment()">发送</button>
+                </div>
+            </div>
+        </div>
+        <div class=" title container">
+            <h2>评论区</h2>
+        </div>
+        <div class="review-container container center-block"></div>
+        <div class="navbar navbar-inverse">
+            <myfooter></myfooter>
+        </div>
+    </div>
+    <!--下载模态框-->
+    <div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        确认购买吗?
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pay-remain">
+
+                    </div>
+                    <div class="pay-need">下载当前作品所需积分: <span class="image-score"></span>&nbsp;&nbsp;积分</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">放弃下载
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="downLoad()">
+                        确认下载
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--回复模态框-->
+    <div class="modal fade" id="reviewOther" tabindex="-1" role="dialog" aria-labelledby="reviewModalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="reviewModalTitle">
+                        回复
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="review-other-text" placeholder="" class="form-control" rows="5"></textarea>
+                    <input type="hidden" id="review2Id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="sendReview()">
+                        发送
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/picture/picture_info.js"></script>
+<script src="/js/common/message.js"></script>
+<script src="/js/upload/plupload.full.min.js"></script>
+<script src="/js/upload/qiniu.min.js"></script>
+<script src="/js/upload/upload.js"></script>
+<script type="application/javascript">
+    let ajax=null;
+    let imageId=null;
+    let custId=null;
+    let authorId=null;
+    let imageIds=null;
+    let count=0;
+    let sumCount=0;
+    let storage=window.sessionStorage;
+    if(window.XMLHttpRequest){
+        ajax=new XMLHttpRequest();
+    }else{
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    window.onload=function () {
+        imageId=storage.id;
+        loadImageIdList(imageId);
+        loadImageInfo(imageId);
+    };
+    //切换上一页或下一页
+    function changeImage(ele) {
+        if(ele.className==="right-array"){
+            if(count===sumCount){
+                $.message({
+                    message:'已经是最后一页啦!',
+                    type:'info'
+                });
+            }else{
+                imageId=imageIds[++count];
+                storage.id=imageId;
+                loadImageInfo(imageId);
+            }
+
+        }
+        else{
+            if(count===0){
+                $.message({
+                    message:'已经是第一页啦!',
+                    type:'info'
+                });
+            }else{
+                imageId=imageIds[--count];
+                storage.id=imageId;
+                loadImageInfo(imageId);
+            }
+
+        }
+
+
+    }
+    //查询该图片的作者的所有作品的ID
+    function loadImageIdList(imageId){
+        ajax.open("GET","/image/get/idList/"+imageId,false);
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                let jsText=JSON.parse(ajax.responseText);
+                imageIds=jsText.data.imageIdList;
+                sumCount=imageIds.length-1;
+            }
+        };
+        ajax.send(null);
+    }
+    //跳转到个人中心
+    function goPersonalCenter(custId) {
+        storage.setItem("custId",custId)
+        window.open('/view/personal');
+    }
+
+    //加载图片详细信息
+    function loadImageInfo(imageId) {
+        ajax.open("GET","/image/get/"+imageId,true);
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                let jsText=JSON.parse(ajax.responseText);
+                custId=jsText.data.custId;
+                authorId=jsText.data.authorId;
+                let imageContainer=document.getElementsByClassName("img-detail")[0];
+                imageContainer.style.background="url("+jsText.data.imageInfo.nocomprePath+")";
+                let followDiv="";//动态展示是否已关注
+                if(jsText.data.custId===jsText.data.authorId){
+                    followDiv="";
+                }else{
+                    if(jsText.data.isFollowed===true){
+                        followDiv="<button onclick='unfollow("+jsText.data.authorId+")' class='btn btn-success'>已关注</button>";
+                    }else {
+                        followDiv="<button onclick='follow("+jsText.data.authorId+")' class='btn btn-success'>+关注</button>";
+                    }
+                }
+                document.getElementsByClassName("author-msg")[0].innerHTML="<div class='row'><a href='javascript:goPersonalCenter("+authorId+")' class='col-lg-3'>" +
+                    "                            <div class='author-profile' style='background: url("+jsText.data.authorProfile+")'>" +
+                    "                            </div>" +
+                    "                        </a>" +
+                    "                        <div class='name-follow col-lg-6'>" +
+                    "                            <a class='name' href='#'>" +jsText.data.authorNick+
+                    "                            </a>" +
+                    "                            <div class='follow'>" +
+                    "                                <span>"+jsText.data.followerCount+"</span>名追随者" +
+                    "                            </div>" +
+                    "                        </div>" +
+                    "                        <div class='following col-lg-3'>" +followDiv +
+                    "                        </div></div>";
+                document.getElementsByClassName("look-num")[0].innerHTML=jsText.data.imageInfo.imageClicks;
+                document.getElementsByClassName("download-num")[0].innerHTML=jsText.data.imageInfo.imageDownloads;
+                document.getElementsByClassName("comment-num")[0].innerHTML=jsText.data.commentCount;
+                document.getElementsByClassName("works-title")[0].innerText="《"+jsText.data.imageInfo.imageName+"》";
+                document.getElementsByClassName("category-name")[0].innerText=jsText.data.categoryName;
+                let date=new Date(jsText.data.imageInfo.imageUploadTime);
+                let uploadTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+                document.getElementsByClassName("detail-container")[0].innerHTML="<div class='img-detail-info'>" +
+                    "                                品牌：<span>"+jsText.data.imageInfo.cameraBrand+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                型号：<span>"+jsText.data.imageInfo.cameraModel+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                焦距：<span>"+jsText.data.imageInfo.cameraFocalLenth+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                光圈：<span>"+jsText.data.imageInfo.cameraAperture+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                ISO：<span>"+jsText.data.imageInfo.cameraIso+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                曝光补偿：<span>"+jsText.data.imageInfo.cameraExposureTime+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                亮度：<span>"+jsText.data.imageInfo.imageBrightness+"</span>" +
+                    "                            </div>" +
+                    "                            <div class='img-detail-info'>" +
+                    "                                上传时间：<span>"+uploadTime+"</span>" +
+                    "                            </div>";
+                if(jsText.data.isLiked){
+                    document.getElementsByClassName("like-status")[0].innerText="已喜欢❤";
+                }else{
+                    document.getElementsByClassName("like-status")[0].innerText="喜欢❤";
+                }
+                document.getElementsByClassName("like-count")[0].innerText=jsText.data.imageInfo.imageLikes;
+                document.getElementsByClassName("like")[0].value=jsText.data.isLiked;
+
+                if(jsText.data.isCollected){
+                    document.getElementsByClassName("collect-status")[0].innerText="已收藏★";
+                }else {
+                    document.getElementsByClassName("collect-status")[0].innerText="收藏★";
+                }
+                document.getElementsByClassName("collection-count")[0].innerText=jsText.data.imageInfo.imageCollections;
+                document.getElementsByClassName("collection")[0].value=jsText.data.isCollected;
+
+
+
+                //积分
+                document.getElementsByClassName("image-score")[0].innerText=jsText.data.imageInfo.imagePrice;
+                document.getElementsByClassName("pay-remain")[0].innerHTML="您的账户剩余积分:<span class=\"cust-credits\">"+jsText.data.custCredits+"</span>&nbsp;&nbsp;积分 <a href='javascript:goPersonalCenter("+jsText.data.custId+")' class=\"btn btn-default\">前去充值</a>";
+
+                let review=document.getElementsByClassName("review-container")[0];
+                review.innerHTML="";
+                if(jsText.data.commentInfo.length===0){
+                    review.innerHTML="<h4>暂无评论信息!</h4>";
+                }else {
+                    for(let i in jsText.data.commentInfo){
+                        let reviewDate=new Date(jsText.data.commentInfo[i].commentTime);
+                        let date=reviewDate.getFullYear()+"-"+(reviewDate.getMonth()+1)+"-"+reviewDate.getDate()+" "+reviewDate.getHours()+":"+reviewDate.getMinutes()+":"+reviewDate.getSeconds();
+                        let reviewLink="";
+                        if(jsText.data.commentInfo[i].fromId!==custId){
+                            reviewLink="<span class='review-span' onclick='reviewOther(this,"+jsText.data.commentInfo[i].fromId+")'>回复</span>";
+                        }
+                        let row="<div class='row'>" +
+                            "                <div class='review-item col-md-12 '>" +
+                            "                    <a href='javascript:goPersonalCenter("+jsText.data.commentInfo[i].fromId+")' >" +
+                            "                        <div class='author-profile review-author' style='background: url("+jsText.data.commentInfo[i].fromProfile+")'>" +
+                            "                        </div>" +
+                            "                    </a>" +
+                            "                    <div class='content'>" +
+                            "                        <div class='nick-name'>"+
+                            jsText.data.commentInfo[i].fromNick+
+                            "                            <span class='review-time'>"+date+"</span>" +
+                            "                        </div>" +
+                            "                        <div class='review-content'>" +
+                            "                            <span class='label label-success'> @ <span>"+jsText.data.commentInfo[i].toNick+"</span>:</span>"+jsText.data.commentInfo[i].commentContent+reviewLink +
+                            "                        </div>" +
+                            "                    </div>" +
+                            "                </div>" +
+                            "    </div>";
+                        review.innerHTML+=row;
+                    }
+                }
+            }
+        };
+        ajax.send(null);
+    }
+    //点击回复别人触发事件
+    function reviewOther(obj,fromId) {
+        ajax.open("GET","/customer/isLogin",true);
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                let jsText=JSON.parse(ajax.responseText);
+                if(jsText.status===4){
+                    $.message({
+                        message:jsText.msg,
+                        type:'warning'
+                    });
+                }else {
+                    let toName=obj.parentNode.parentNode.childNodes[1].childNodes[0];
+                    document.getElementById("review-other-text").setAttribute("placeholder","回复@"+toName.nodeValue.trim()+"....(回复内容不能超过70字!)");
+                    document.getElementById("review2Id").value=fromId;
+                    $('#reviewOther').modal();
+                }
+            }
+        };
+        ajax.send(null);
+
+    }
+    //发送回复
+    function sendReview() {
+        let text=document.getElementById("review-other-text").value;
+        let review2Id=document.getElementById("review2Id").value;
+        if(text.length>70){
+            $.message({
+                message:'字数不能超过70字!请重新输入',
+                type:'error'
+            });
+        }else if(text.length===0){
+            $.message({
+                message:'内容不能为空!',
+                type:'error'
+            });
+        }else{
+            document.getElementById("review-other-text").value="";
+            ajax.open("POST","/image/comment/save",true);
+            ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            let formData="comment="+text+"&custId="+custId+"&authorId="+review2Id+"&imageId="+imageId;
+            ajax.onreadystatechange=function () {
+                if(ajax.readyState===4&&ajax.status===200){
+                    if(ajax.responseText==="NeedLogin"){
+                        $.message({
+                            message:'请先登录!',
+                            type:'error'
+                        });
+                    }else {
+                        let jsText=JSON.parse(ajax.responseText);
+                        if(jsText.status===1){
+                            $.message({
+                                message:jsText.msg,
+                                type:'success'
+                            });
+                            $('#reviewOther').modal('hide');
+                            loadImageInfo(imageId);
+                        }else {
+                            $.message({
+                                message:jsText.msg,
+                                type:'warning'
+                            });
+                        }
+                    }
+                }
+            };
+            ajax.send(formData);
+        }
+    }
+    //发送评论
+    function sendComment() {
+        let text=document.getElementById("comment-text").value;
+        if(text.length>70){
+            $.message({
+                message:'字数不能超过70字!请重新输入',
+                type:'error'
+            });
+        }else if(text.length===0){
+            $.message({
+                message:'内容不能为空!',
+                type:'error'
+            });
+        }else{
+            document.getElementById("comment-text").value="";
+            ajax.open("POST","/image/comment/save",true);
+            ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            let formData="comment="+text+"&custId="+custId+"&authorId="+authorId+"&imageId="+imageId;
+            ajax.onreadystatechange=function () {
+                if(ajax.readyState===4&&ajax.status===200){
+                    if(ajax.responseText==="NeedLogin"){
+                        $.message({
+                            message:'请先登录',
+                            type:'error'
+                        });
+                    }else {
+                        let jsText=JSON.parse(ajax.responseText);
+                        if(jsText.status===1){
+                            $.message({
+                                message:jsText.msg,
+                                type:'success'
+                            });
+                            loadImageInfo(imageId);
+                        }else {
+                            $.message({
+                                message:jsText.msg,
+                                type:'warning'
+                            });
+                        }
+                    }
+
+                }
+            };
+            ajax.send(formData);
+        }
+    }
+    //关注
+    function follow(authorId) {
+        let formData="authorId="+authorId;
+        ajax.open("POST","/customer/follow/save",true);
+        ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                if(ajax.responseText==="NeedLogin"){
+                    $.message({
+                        message:"请先登录!",
+                        type:'error'
+                    });
+                }else {
+                    let jsText=JSON.parse(ajax.responseText);
+                    if(jsText.status===1){
+                        $.message({
+                            message:jsText.msg,
+                            type:'success'
+                        });
+                        loadImageInfo(imageId);
+                    }else{
+                        $.message({
+                            message:jsText.msg,
+                            type:'error'
+                        });
+                    }
+                }
+
+            }
+        };
+        ajax.send(formData);
+    }
+    //取消关注
+    function unfollow(authorId) {
+        ajax.open("DELETE","/customer/follow/delete/"+authorId,true);
+        ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                if(ajax.responseText==="NeedLogin"){
+                    $.message({
+                        message:"身份认证失效,请重新登录!",
+                        type:'warning'
+                    });
+                }else {
+                    let jsText=JSON.parse(ajax.responseText);
+                    if(jsText.status===1){
+                        $.message({
+                            message:jsText.msg,
+                            type:'success'
+                        });
+                        loadImageInfo(imageId);
+                    }else{
+                        $.message({
+                            message:jsText.msg,
+                            type:'error'
+                        });
+                    }
+                }
+
+            }
+        };
+        ajax.send(null);
+    }
+    //购买下载模态框的显示
+    function buy(){
+        ajax.open("GET","/customer/isLogin",true);
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                let jsText=JSON.parse(ajax.responseText);
+                if(jsText.status===4){
+                    $.message({
+                        message:jsText.msg,
+                        type:'error'
+                    });
+                }else if(jsText.status===3) {
+                    $('#pay').modal();
+                }
+            }
+        };
+        ajax.send(null);
+
+    }
+    //下载
+    function downLoad() {
+        let credit=parseInt(document.getElementsByClassName("cust-credits")[0].innerText);
+        let price=parseInt(document.getElementsByClassName("image-score")[0].innerText);
+        if(credit<price){
+            $.message({
+                message:"账户积分不足!",
+                type:'error'
+            });
+        }else{
+            ajax.open("POST","/image/order/save",true);
+            ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            let formData="imageId="+imageId+"&custId="+custId;
+            ajax.onreadystatechange=function () {
+                if(ajax.readyState===4&&ajax.status===200){
+                    if(ajax.responseText==="NeedLogin"){
+                        $.message({
+                            message:"请先登录!",
+                            type:'error'
+                        });
+                    }else {
+                        let jsText = JSON.parse(ajax.responseText);
+                        if (jsText.status === 1 ||jsText.status === 2) {
+                            $.message({
+                                message: jsText.msg,
+                                type: 'success'
+                            });
+                            $('#pay').modal('hide');
+                            loadImageInfo(imageId);
+                            window.location=jsText.data.imageUrl+"?attname="+jsText.data.imageName+".jpg";
+                        }else {
+                            $.message({
+                                message: jsText.msg,
+                                type: 'error'
+                            });
+                        }
+                    }
+                }
+            };
+            ajax.send(formData);
+        }
+
+    }
+    //喜欢
+    function like(ele) {
+        let formData="imageId="+imageId;
+        if(ele.value==="false"){
+            ajax.open("POST","/customer/like/save",true);
+            ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            ajax.onreadystatechange=doLikeProcess;
+            ajax.send(formData);
+        }else {
+            ajax.open("DELETE","/customer/like/delete/"+imageId,true);
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            ajax.onreadystatechange=doLikeProcess;
+            ajax.send(null);
+        }
+
+    }
+    //渲染喜欢按钮
+    function doLikeProcess() {
+        if(ajax.readyState===4&&ajax.status===200){
+            if(ajax.responseText==="NeedLogin"){
+                $.message({
+                    message:"请先登录!",
+                    type:'error'
+                });
+            }else {
+                let jsText=JSON.parse(ajax.responseText);
+                if(jsText.status===1){
+                    $.message({
+                        message:jsText.msg,
+                        type:'success'
+                    });
+                    loadImageInfo(imageId);
+                }else {
+                    $.message({
+                        message:jsText.msg,
+                        type:'warning'
+                    });
+                }
+            }
+        }
+    }
+    //收藏
+    function collection(ele) {
+        let formData="imageId="+imageId;
+        if(ele.value==="false"){
+            ajax.open("POST","/customer/collect/save",true);
+            ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            ajax.onreadystatechange=doCollectionProcess;
+            ajax.send(formData);
+        }else {
+            ajax.open("DELETE","/customer/collect/delete/"+imageId,true);
+            ajax.setRequestHeader("x-requested-with","XMLHttpRequest");
+            ajax.onreadystatechange=doCollectionProcess;
+            ajax.send(null);
+        }
+    }
+    //渲染收藏按钮
+    function doCollectionProcess() {
+        if(ajax.readyState===4&&ajax.status===200){
+            if(ajax.responseText==="NeedLogin"){
+                $.message({
+                    message:"请先登录!",
+                    type:'error'
+                });
+            }else {
+                let jsText=JSON.parse(ajax.responseText);
+                if(jsText.status===1){
+                    $.message({
+                        message:jsText.msg,
+                        type:'success'
+                    });
+                    loadImageInfo(imageId);
+                }else {
+                    $.message({
+                        message:jsText.msg,
+                        type:'warning'
+                    });
+                }
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

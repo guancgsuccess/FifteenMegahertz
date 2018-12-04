@@ -1,0 +1,9 @@
+.community-advertisement {
+    margin-top: 12px;
+}
+
+.community-advertisement > img {
+    margin: 0 1.2% 0 1.2%;
+    width: 97.6%;
+    border-radius: 2px;
+}

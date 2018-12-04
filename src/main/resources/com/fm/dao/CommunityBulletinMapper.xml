@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CommunityBulletinDao">
+    <cache type="com.fm.cache.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.fm.entity.CommunityBulletin">
+        <id column="bulletin_id" jdbcType="INTEGER" property="bulletinId"/>
+        <result column="bulletin_title" jdbcType="VARCHAR" property="bulletinTitle"/>
+        <result column="bulletin_create_time" jdbcType="TIMESTAMP" property="bulletinCreateTime"/>
+        <result column="cust_id" jdbcType="INTEGER" property="custId"/>
+        <result column="blank_1" jdbcType="VARCHAR" property="blank1"/>
+        <result column="blank_2" jdbcType="VARCHAR" property="blank2"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fm.entity.CommunityBulletin">
+        <result column="bulletin_content" jdbcType="LONGVARCHAR" property="bulletinContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    bulletin_id, bulletin_title, bulletin_create_time, cust_id, blank_1, blank_2
+  </sql>
+    <sql id="Blob_Column_List">
+    bulletin_content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_bulletin
+        where bulletin_id = #{bulletinId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from community_bulletin
+    where bulletin_id = #{bulletinId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fm.entity.CommunityBulletin">
+    insert into community_bulletin (bulletin_id, bulletin_title, bulletin_create_time, 
+      cust_id, blank_1, blank_2, 
+      bulletin_content)
+    values (#{bulletinId,jdbcType=INTEGER}, #{bulletinTitle,jdbcType=VARCHAR}, #{bulletinCreateTime,jdbcType=TIMESTAMP}, 
+      #{custId,jdbcType=INTEGER}, #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}, 
+      #{bulletinContent,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fm.entity.CommunityBulletin">
+        insert into community_bulletin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bulletinId != null">
+                bulletin_id,
+            </if>
+            <if test="bulletinTitle != null">
+                bulletin_title,
+            </if>
+            <if test="bulletinCreateTime != null">
+                bulletin_create_time,
+            </if>
+            <if test="custId != null">
+                cust_id,
+            </if>
+            <if test="blank1 != null">
+                blank_1,
+            </if>
+            <if test="blank2 != null">
+                blank_2,
+            </if>
+            <if test="bulletinContent != null">
+                bulletin_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bulletinId != null">
+                #{bulletinId,jdbcType=INTEGER},
+            </if>
+            <if test="bulletinTitle != null">
+                #{bulletinTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="bulletinCreateTime != null">
+                #{bulletinCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="custId != null">
+                #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                #{blank2,jdbcType=VARCHAR},
+            </if>
+            <if test="bulletinContent != null">
+                #{bulletinContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CommunityBulletin">
+        update community_bulletin
+        <set>
+            <if test="bulletinTitle != null">
+                bulletin_title = #{bulletinTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="bulletinCreateTime != null">
+                bulletin_create_time = #{bulletinCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="custId != null">
+                cust_id = #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                blank_1 = #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                blank_2 = #{blank2,jdbcType=VARCHAR},
+            </if>
+            <if test="bulletinContent != null">
+                bulletin_content = #{bulletinContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where bulletin_id = #{bulletinId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fm.entity.CommunityBulletin">
+    update community_bulletin
+    set bulletin_title = #{bulletinTitle,jdbcType=VARCHAR},
+      bulletin_create_time = #{bulletinCreateTime,jdbcType=TIMESTAMP},
+      cust_id = #{custId,jdbcType=INTEGER},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR},
+      bulletin_content = #{bulletinContent,jdbcType=LONGVARCHAR}
+    where bulletin_id = #{bulletinId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.fm.entity.CommunityBulletin">
+    update community_bulletin
+    set bulletin_title = #{bulletinTitle,jdbcType=VARCHAR},
+      bulletin_create_time = #{bulletinCreateTime,jdbcType=TIMESTAMP},
+      cust_id = #{custId,jdbcType=INTEGER},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where bulletin_id = #{bulletinId,jdbcType=INTEGER}
+  </update>
+    <!-- 查询总记录数 -->
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from community_bulletin
+    </select>
+    <!-- 查询近一个月发布的公告信息 -->
+    <select id="selectCurrentOneMonthNewCommBulletin" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_bulletin
+        where bulletin_create_time > date_sub(now(),interval 30 day)
+    </select>
+    <!-- 分页查询公告信息 -->
+    <select id="selectCommunityBulletinByPage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_bulletin
+        order by bulletin_create_time desc
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

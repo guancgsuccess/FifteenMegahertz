@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link rel="stylesheet" href="/css/active/activedetail.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/active/upload.css">
+    <link rel="stylesheet" href="/css/common/message.css">
+    <link href="/css/common/upload.css" rel="stylesheet">
+    <link href="/css/common/personalCenter.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/active/activedetail.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/common/message.js"></script>
+    <title>比赛详情</title>
+</head>
+<body>
+<div id="big-container">
+    <myupload></myupload>
+    <mynav></mynav>
+</div>
+<div id="banner_image"></div><!--banner_image结束-->
+<div class="title">
+   <div class="category-list">
+       <ul>
+           <li><a class="active_detail" style="color:inherit" onclick="changepage1(),activeDetail()">活动介绍</a></li>
+           <li><a class="active_detail" onclick="changepage2(),allImage(1)">全部作品</a></li>
+           <li><a class="active_detail" onclick="changepage3(),clearAuthor(),allAuthor(1)">全部作者</a></li>
+       </ul>
+   </div><!--category-list结束-->
+<!--模态框-->
+   <div class="publish_button">
+       <a class="btn btn-success" style="background-color: #56cb8f;border: 1px solid #56cb8f;width: 184px;height: 60px;line-height: 50px;font-size: 16px" onclick="turnUpload()">发布作品</a>
+       <div class="modal fade" id="item_upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                           &times;
+                       </button>
+                   </div>
+                   <div class="modal-body container" >
+                       <div class="row">
+                           <div class="item_left col-xs-6" id="container">
+                               <span>选择作品</span>
+                               <div id="imgs"></div>
+                           </div>
+                           <div class="col-xs-1"></div>
+                           <div class="item_right col-xs-5">
+                               <span>从左侧个人主页图片中选择图片参加比赛</span>
+                               <div id="preview"></div>
+                               <button class="item_upload btn btn-success col-lg-12 btn-lg" onclick="upload1()">发布作品</button>
+                           </div>
+                           </div>
+                       </div>
+                   </div>
+               </div><!-- /.modal-content -->
+           </div><!-- /.modal -->
+       </div><!--publish_button结束-->
+</div><!--title结束-->
+
+<div id="all_author" class="all_author"></div>
+<div id="load_more" class="load_more"></div>
+<div id="active_content" class="active_content"></div>
+<div id="main" class="main"></div>
+<div id="page" class="page"></div>
+<script src="/js/vue.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/upload/plupload.full.min.js"></script>
+<script src="/js/upload/qiniu.min.js"></script>
+<script src="/js/upload/upload.js"></script>
+
+<script>
+var xhr = null;
+var storage=window.sessionStorage;
+var itemId=storage.itemId;
+var itemStatus=storage.itemStatus;
+
+if(window.XMLHttpRequest){
+    xhr = new XMLHttpRequest();
+}else {
+    xhr = new ActiveXObject('Microsoft.XMLHTTP');
+}
+//页码一开始加载比赛详情
+window.onload=function(){
+    xhr.open("GET","/item/getItemDetail/"+itemId,true);
+    xhr.onreadystatechange=success;
+    xhr.send();
+
+    function success() {
+        if(xhr.readyState==4 && xhr.status==200){
+            var sr = JSON.parse(xhr.responseText);
+            var itemDetail = sr.data;
+            $("#main").removeClass("main");
+            $("#page").removeClass("page");
+
+            document.getElementById("active_content").innerHTML = "<div class=\"time\">\n" +
+                "        <p style='font-weight: 700'>征稿时间</p>\n" +
+                "        <span style='font-size: 16px;'>"+ itemDetail.itemCreateTime +" ~ "+ itemDetail.itemEndTime +"</span>\n" +
+                "    </div>\n" +
+                "    <div class=\"award\">\n" +
+                "        <p>奖项设置</p>\n" +
+                "        <span style='font-weight: 700'>征稿主题:</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemTopic +"</span>\n" +
+                "        <span style='font-weight: 700'>参赛规则:</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemRuler +"</span>\n" +
+                "        <span style='font-weight: 700'>奖励设置：</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemPrize +"</span>\n" +
+                "        <span style='font-weight: 700'>参赛要求:</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemInfo +"</span>\n" +
+                "    </div>"
+            document.getElementById("banner_image").innerHTML = "<div id=\"banner\" style=\" background-image: url(" + itemDetail.itemImgPath + ")\"></div>\n"
+        }
+    }
+}
+//加载比赛详情
+function activeDetail() {
+    xhr.open("GET", "/item/getItemDetail/"+itemId, true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sr = JSON.parse(xhr.responseText);
+            var itemDetail = sr.data;
+            document.getElementById("active_content").innerHTML = "";
+            document.getElementById("all_author").innerHTML = "";
+            document.getElementById("main").innerHTML = "";
+            document.getElementById("page").innerHTML = "";
+            document.getElementById("load_more").innerHTML = "";
+            $("#main").removeClass("main");
+            $("#page").removeClass("page");
+            $("#load_more").removeClass("load_more");
+            $("#main").hide();
+            document.getElementById("active_content").innerHTML = "<div class=\"time\">\n" +
+                "        <p style='font-weight: 700'>征稿时间</p>\n" +
+                "        <span style='font-size: 16px;'>"+ itemDetail.itemCreateTime +" ~ "+ itemDetail.itemEndTime +"</span>\n" +
+                "    </div>\n" +
+                "    <div class=\"award\">\n" +
+                "        <p>奖项设置</p>\n" +
+                "        <span style='font-weight: 700'>征稿主题:</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemTopic +"</span>\n" +
+                "        <span style='font-weight: 700'>参赛规则:</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemRuler +"</span>\n" +
+                "        <span style='font-weight: 700'>奖励设置：</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemPrize +"</span>\n" +
+                "        <span style='font-weight: 700'>参赛要求:</span>\n" +
+                "        <span class='item_content'>"+ itemDetail.itemInfo +"</span>\n" +
+                "    </div>"
+            document.getElementById("banner_image").innerHTML = "<div id=\"banner\" style=\" background-image: url(" + itemDetail.itemImgPath + ")\"></div>\n"
+        }
+    }
+}
+//加载全部比赛图片
+function allImage(currentPage) {
+    //防止输入页码小于1
+    if (currentPage < 1) {
+        $.message({
+            message: '请输入正确页数!',
+            type: 'error'
+        });
+    } else {
+        xhr.open("GET", "/item/itemImage/getAllImage/" + currentPage + "/" + itemId, true);
+        xhr.onreadystatechange = success;
+        xhr.send();
+
+        function success() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var sr = JSON.parse(xhr.responseText);
+                var pageInfo = sr.data.pageModel;
+                storage.currentPageImage = currentPage;
+                //防止输入页码大于总页数
+                if (currentPage > pageInfo[0].totalPages && pageInfo[0].totalPages!=0) {
+                    $.message({
+                        message: '请输入正确页数!',
+                        type: 'error'
+                    });
+                } else {
+                    document.getElementById("active_content").innerHTML = "";
+                    document.getElementById("all_author").innerHTML = "";
+                    document.getElementById("main").innerHTML = "";
+                    document.getElementById("load_more").innerHTML = "";
+                    $("#load_more").removeClass("load_more");
+                    $("#main").addClass("main");
+                    $("#page").addClass("page");
+                    $("#main").show();
+                    //遍历加载图片
+                    for (var i = 0; i < pageInfo[0].imgList.length; i++) {
+                        document.getElementById("main").innerHTML += "<div class='box'>" +
+                            "        <div class='wrapper'>" +
+                            "            <a href='javascript:goDetail("+pageInfo[0].imgList[i].imageId+");' class='pic'><img class='inner-pic' src='" + pageInfo[0].imgList[i].path + "' /></a>" +
+                            "        </div>" +
+                            "    </div>"
+                        document.getElementsByClassName("box")[i].style.width = document.body.offsetWidth / 4 + "px";
+                        document.getElementsByClassName("inner-pic")[i].onload = function () {
+                            waterFall("main", "box");
+                        }
+                    }
+                    //根据当前页码加载页码导航栏
+                    if(pageInfo[0].totalPages==0){
+                        document.getElementById("main").innerHTML = "<img style='margin:50px 740px' src=\"/images/not-found.png\">"+"<p style='text-align: center;font-size: 20px;color: #a0b1c1;letter-spacing: 2px;'>Sorry,暂无内容</p>"
+                        document.getElementById("page").innerHTML = "";
+                    }else if (currentPage == 1 && pageInfo[0].totalPages==1) {
+                        document.getElementById("page").innerHTML = "    <div id=\"page_count\"></div>\n" +
+                            "        <div class=\"jump\">\n" +
+                            "            <span>到第</span><input id=\"page_code\" type=\"text\"><span>页</span>\n" +
+                            "            <button onclick=\"allImage(document.getElementById('page_code').value)\">确定</button>\n" +
+                            "        </div>"
+                    } else if(currentPage == 1){
+                        document.getElementById("page").innerHTML = "    <div id=\"page_count\"></div>\n" +
+                            "    <a id=\"after\" onclick=\"allImage(++storage.currentPageImage)\">下一页</a>" +
+                            "        <div class=\"jump\">\n" +
+                            "            <span>到第</span><input id=\"page_code\" type=\"text\"><span>页</span>\n" +
+                            "            <button onclick=\"allImage(document.getElementById('page_code').value)\">确定</button>\n" +
+                            "        </div>"
+                    }
+                    else if (currentPage == pageInfo[0].totalPages) {
+                        document.getElementById("page").innerHTML = "    <a id=\"befor\" onclick=\"allImage(--storage.currentPageImage)\">上一页</a>\n" +
+                            "    <div id=\"page_count\"></div>" +
+                            "        <div class=\"jump\">\n" +
+                            "            <span>到第</span><input id=\"page_code\" type=\"text\"><span>页</span>\n" +
+                            "            <button onclick=\"allImage(document.getElementById('page_code').value)\">确定</button>\n" +
+                            "        </div>"
+                    } else {
+                        document.getElementById("page").innerHTML = "    <a id=\"befor\" onclick=\"allImage(--storage.currentPageImage)\">上一页</a>\n" +
+                            "    <div id=\"page_count\"></div>\n" +
+                            "    <a id=\"after\" onclick=\"allImage(++storage.currentPageImage)\">下一页</a>" +
+                            "        <div class=\"jump\">\n" +
+                            "            <span>到第</span><input id=\"page_code\" type=\"text\"><span>页</span>\n" +
+                            "            <button onclick=\"allImage(document.getElementById('page_code').value)\">确定</button>\n" +
+                            "        </div>"
+                    }
+
+                    document.getElementById("page_count").innerHTML = "";
+                    if (pageInfo[0].totalPages <= 10) {
+                        for (var j = 1; j <= pageInfo[0].totalPages; j++) {
+                            document.getElementById("page_count").innerHTML += "<div class=\"page_router\"><a class=\"page_num\" onclick=\"allImage(" + j + ")\">" + j + "</a></div>"
+                        }
+                    } else {
+                        for (var j = 1; j <= 9; j++) {
+                            document.getElementById("page_count").innerHTML += "<div class=\"page_router\"><a class=\"page_num\" onclick=\"allImage(" + j + ")\">" + j + "</a></div>"
+                        }
+                        document.getElementById("page_count").innerHTML += "<div class=\"page_router\"><a class=\"page_num\">...</a></div>"
+                    }
+                    if (currentPage >= 10) {
+                        document.getElementsByClassName("page_num")[9].style.cssText = "background: #64c896!important;color: white";
+                    }
+                    document.getElementsByClassName("page_num")[currentPage - 1].style.cssText = "background: #64c896!important;color: white";
+                    setTimeout("waterFall('main','box')", 100);
+                }
+            }
+        }
+    }
+}
+//打开作品详情页面
+function goDetail(id) {
+    storage.id=id;
+    window.open('/view/image_info');
+}
+//清空页面div内容
+function clearAuthor() {
+    document.getElementById("all_author").innerHTML = "";
+}
+//跳转到个人中心
+function goPersonalCenter(custId) {
+    storage.setItem("custId",custId)
+    window.open('/view/personal');
+    event.stopPropagation();
+}
+//加载全部作者
+function allAuthor(currentPage){
+    xhr.open("GET", "/item/itemImage/getAllAuthor/" + currentPage + "/" + itemId,true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var result = JSON.parse(xhr.responseText);
+            var storage = window.sessionStorage;
+            var pageModel = result.data.pageModel;
+            var authorInfo = pageModel.authorList;
+            storage.currentPageAuthor=currentPage;
+            document.getElementById("active_content").innerHTML = "";
+            document.getElementById("main").innerHTML = "";
+            document.getElementById("page").innerHTML = "";
+            $("#main").removeClass("main");
+            $("#page").removeClass("page");
+            $("#load_more").addClass("load_more");
+            $("#main").hide();
+
+            if (authorInfo.length == 0) {
+                document.getElementById("all_author").innerHTML = "<img style='margin:50px 450px' src=\"/images/not-found.png\">"+"<p style='text-align: center;font-size: 20px;color: #a0b1c1;letter-spacing: 2px;'>Sorry,暂无内容</p>"
+            } else {
+                for (var i = 0; i < authorInfo.length; i++) {
+                    var count = (currentPage-1)*pageModel.pageSize+i;
+                    document.getElementById("all_author").innerHTML += "<div class=\"author_detail\">\n" +
+                        "    <div class=\"user\">\n" +
+                        "        <div class=\"user_photo\">\n" +
+                        "            <a href='javascript:goPersonalCenter("+authorInfo[i].authorId+")'><img src=\"" + authorInfo[i].authorProfile + "\" width=\"140\" height=\"140\"></a>\n" +
+                        "        </div><!--user_photo结束-->\n" +
+                        "        <div class=\"user_info\">\n" +
+                        "            <p>" + authorInfo[i].authorNick + "</p>\n" +
+                        "            <span>" + authorInfo[i].authorIntro + "</span>\n" +
+                        "            <div class=\"follow\"></div>\n" +
+                        "        </div><!--user_info结束-->\n" +
+                        "    </div><!--user结束-->\n" +
+                        "\n" +
+                        "    <div class=\"author_images\">\n" +
+                        "    </div><!--images结束-->\n" +
+                        "</div><!--author_detail结束-->"
+                    for (var j = 0; j < authorInfo[i].imgPathList.length; j++) {
+                        var imgs = document.getElementsByClassName("author_images");
+                        imgs[count].innerHTML += "<div class='author_image'><a href='javascript:goDetail("+authorInfo[i].imgPathList[j].imageId+");'><img src=\"" + authorInfo[i].imgPathList[j].path + "-item" + "\" width=\"240\" height=\"140\"></a></div>"
+                    }
+                    if(authorInfo[i].custId==authorInfo[i].authorId){
+                        document.getElementsByClassName("follow")[count].innerHTML="";
+                    }else{
+                        if(authorInfo[i].isFollow==true){
+                            document.getElementsByClassName("follow")[count].innerHTML="<button onclick='unfollow("+authorInfo[i].authorId+")' class='follow_btn'>已关注</button>";
+                        }else {
+                            document.getElementsByClassName("follow")[count].innerHTML="<button onclick='follow("+authorInfo[i].authorId+")' class='follow_btn'>关注</button>";
+                        }
+                    }
+                }
+                if(currentPage==pageModel.totalPages){
+                    document.getElementById("load_more").innerHTML = "<a>暂无更多</a>"
+                }else {
+                    document.getElementById("load_more").innerHTML = "<a onclick=\"allAuthor(++storage.currentPageAuthor)\">加载更多</a>"
+                }
+            }
+        }
+    }
+}
+//关注
+function follow(authorId) {
+    let formData="authorId="+authorId;
+    xhr.open("POST","/customer/follow/save",true);
+    xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+    xhr.setRequestHeader("x-requested-with","XMLHttpRequest");
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState===4&&xhr.status===200){
+            if(xhr.responseText==="NeedLogin"){
+                $.message({
+                    message:"请先登录!",
+                    type:'error'
+                });
+            }else {
+                let jsText=JSON.parse(xhr.responseText);
+                if(jsText.status===1){
+                    $.message({
+                        message:jsText.msg,
+                        type:'success'
+                    });
+                    clearAuthor();
+                    allAuthor(1);
+                }else{
+                    $.message({
+                        message:jsText.msg,
+                        type:'error'
+                    });
+                }
+            }
+
+        }
+    };
+    xhr.send(formData);
+}
+//取消关注
+function unfollow(authorId) {
+    xhr.open("DELETE","/customer/follow/delete/"+authorId,true);
+    xhr.setRequestHeader("x-requested-with","XMLHttpRequest");
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState===4&&xhr.status===200){
+            if(xhr.responseText==="NeedLogin"){
+                $.message({
+                    message:"身份认证失效,请重新登录!",
+                    type:'warning'
+                });
+            }else {
+                let jsText=JSON.parse(xhr.responseText);
+                if(jsText.status===1){
+                    $.message({
+                        message:jsText.msg,
+                        type:'success'
+                    });
+                    clearAuthor();
+                    allAuthor(1);
+                }else{
+                    $.message({
+                        message:jsText.msg,
+                        type:'error'
+                    });
+                }
+            }
+
+        }
+    };
+    xhr.send(null);
+}
+//验证用户是否登录
+function turnUpload() {
+    xhr.open("GET","/customer/isLogin",true);
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState==4&&xhr.status===200){
+            let jsText=JSON.parse(xhr.responseText);
+            if(jsText.status==4){
+                $.message({
+                    message: jsText.msg,
+                    type: 'error'
+                });
+            }else {
+                allMyImg();
+                $("#item_upload").modal();
+            }
+        }
+    };
+    xhr.send(null);
+}
+//加载用户可以参加比赛的图片
+function allMyImg() {
+    xhr.open("GET", "/image/itemImage/getMyImage/" + itemId, true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sr = JSON.parse(xhr.responseText);
+            var allMyImg = sr.data.myImageMap;
+
+            if (allMyImg.length == 0) {
+                document.getElementById("imgs").innerHTML = "<img style='margin:50px 100px' src=\"/images/not-found.png\">"+"<p style='text-align: center;font-size: 20px;color: #a0b1c1;letter-spacing: 2px;'>Sorry,暂无可以参加活动的历史作品</p>"
+            } else {
+                document.getElementById("imgs").innerHTML = "";
+                for (var i = 0; i < allMyImg.length; i++) {
+                    document.getElementById("imgs").innerHTML += "<div style='border-radius: 10px' class=\"itemImg\">\n" +
+                        "    <img style='border-radius: 10px' id='" + allMyImg[i].imageId + "' src=\"" + allMyImg[i].path + "-add_item" + "\" width=\"250\" height=\"250\" onclick=\"showImg(this)\">\n" +
+                        "</div>"
+                }
+            }
+        }
+    }
+}
+//显示用户选择参加比赛的图片
+function showImg(img) {
+    storage.imageId=img.id;
+    document.getElementById("preview").innerHTML = "<img style='border-radius: 10px' id='view' src=\"\" width=\"250\" height=\"250\">"
+    document.getElementById("view").src=img.src;
+}
+//上传用户参加比赛的图片
+function upload1() {
+    var previewImg = document.getElementById("preview");
+    if(previewImg.innerHTML==""){
+        $.message({
+            message: '请选择图片!',
+            type: 'error'
+        });
+    }else if(itemStatus==0){
+        $.message({
+            message: '该活动已结束!',
+            type: 'error'
+        });
+    } else {
+        xhr.open("POST","/item/itemImage/save",true);
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.setRequestHeader("x-requested-with","XMLHttpRequest");
+        xhr.onreadystatechange = success;
+        xhr.send("imageId="+storage.imageId+"&itemId="+itemId);
+    }
+
+    function success() {
+        if(xhr.readyState==4 && xhr.status==200){
+            var result = JSON.parse(xhr.responseText);
+            if(xhr.responseText=="NeedLogin"){
+                $.message({
+                    message: '身份失效,请重新登录!',
+                    type: 'error'
+                });
+            }else if(result==true){
+                $.message({
+                    message: '发布成功!',
+                    type: 'success'
+                });
+                $("#item_upload").modal('hide');
+                allImage(1);
+                changepage2();
+                document.getElementById("preview").innerHTML = "";
+            }else {
+                $.message({
+                    message: '发布失败!',
+                    type: 'error'
+                });
+            }
+        }
+    }
+}
+//瀑布流布局
+function waterFall(main, box) {
+
+    var main = document.getElementById(main);
+    var boxs = main.getElementsByClassName(box);
+    var boxWidth =document.body.clientWidth/4; //获取每个数据块的宽度
+    var cols = 4; //计算列数
+    var heightArr = []; //定义一个存放 top 值的数组
+
+    for(var i = 0; i < boxs.length; i++) {
+        var boxHeight = boxs[i].offsetHeight;
+        if(i < cols) { //第一行
+            heightArr.push(boxs[i].offsetHeight);
+            boxs[i].style.top = '0px';
+            boxs[i].style.left = i * boxWidth +'px';
+        } else {
+            //求出最矮盒子的高度
+            var minBoxHeight = Math.min.apply(this, heightArr);
+            //求出最矮盒子的索引
+            var minBoxIndex = getIndex(minBoxHeight, heightArr);
+            boxs[i].style.top = minBoxHeight + 'px'; //顶部间距即最矮盒子的高度
+            boxs[i].style.left = minBoxIndex * boxWidth +'px';
+            //关键:更新最矮盒子的高度
+            heightArr[minBoxIndex] += boxHeight;
+        }
+        document.getElementById("main").style.height=Math.max.apply({},heightArr)+50+"px";
+    }
+}
+//求出最矮盒子的索引
+function getIndex(val, arr) {
+    for(var i in arr) {
+        if(val == arr[i]) {
+            return i;
+        }
+    }
+}
+</script>
+</body>
+</html>

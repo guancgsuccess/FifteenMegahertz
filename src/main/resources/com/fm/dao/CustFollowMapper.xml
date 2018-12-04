@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CustFollowDao">
+
+  <resultMap id="BaseResultMap" type="com.fm.entity.CustFollow">
+    <id column="follower_id" jdbcType="INTEGER" property="followerId" />
+    <id column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="cust_label" jdbcType="VARCHAR" property="custLabel" />
+    <result column="blank_1" jdbcType="VARCHAR" property="blank1" />
+    <result column="blank_2" jdbcType="VARCHAR" property="blank2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    follower_id, cust_id, cust_label, blank_1, blank_2
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.CustFollowExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cust_follow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fm.entity.CustFollowKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cust_follow
+    where follower_id = #{followerId,jdbcType=INTEGER}
+      and cust_id = #{custId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fm.entity.CustFollowKey">
+    delete from cust_follow
+    where follower_id = #{followerId,jdbcType=INTEGER}
+      and cust_id = #{custId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.CustFollowExample">
+    delete from cust_follow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.CustFollow">
+    insert into cust_follow (follower_id, cust_id)
+    values (#{followerId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.CustFollow">
+    insert into cust_follow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="followerId != null">
+        follower_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="custLabel != null">
+        cust_label,
+      </if>
+      <if test="blank1 != null">
+        blank_1,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="followerId != null">
+        #{followerId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="custLabel != null">
+        #{custLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="blank1 != null">
+        #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.CustFollowExample" resultType="java.lang.Long">
+    select count(*) from cust_follow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cust_follow
+    <set>
+      <if test="record.followerId != null">
+        follower_id = #{record.followerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custLabel != null">
+        cust_label = #{record.custLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank1 != null">
+        blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank2 != null">
+        blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cust_follow
+    set follower_id = #{record.followerId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      cust_label = #{record.custLabel,jdbcType=VARCHAR},
+      blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      blank_2 = #{record.blank2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CustFollow">
+    update cust_follow
+    <set>
+      <if test="custLabel != null">
+        cust_label = #{custLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="blank1 != null">
+        blank_1 = #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        blank_2 = #{blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where follower_id = #{followerId,jdbcType=INTEGER}
+      and cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.CustFollow">
+    update cust_follow
+    set cust_label = #{custLabel,jdbcType=VARCHAR},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where follower_id = #{followerId,jdbcType=INTEGER}
+      and cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+</mapper>

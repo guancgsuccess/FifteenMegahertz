@@ -1,0 +1,408 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    width: 100%;
+}
+
+#top{
+    width: 100%;
+    height: 450px;
+}
+
+#show{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.images {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.images img{
+    width: 100%;
+    height: 550px;
+    position:absolute;
+}
+
+.images div{
+    width: 60%;
+    height: 100px;
+    left: 20%;
+    top: 225px;
+    position: absolute;
+    text-align: center;
+}
+
+.show-span{
+    font-size: 40px;
+    color: white;
+    letter-spacing: 11px;
+}
+
+#show-btn{
+    display: block;
+    width: 100px;
+    border: 0;
+    margin: 15px auto 0 auto;
+    padding: 10px 5px 10px 5px;
+    background-color: #0a67fb;
+    outline: none;
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+}
+
+#tab{
+    width: 100%;
+    height: 9px;
+    position: absolute;
+    top: 520px;
+}
+
+#tab ul{
+    width: 55px;
+    height: 9px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto 0 auto;
+}
+
+#tab ul li{
+    float: left;
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin-left: 10px;
+    border-radius: 3px;
+    border: white 1px solid;
+    cursor: pointer;
+}
+
+.tab-bg{
+    background-color: white;
+}
+
+/*导航栏*/
+.nav-bg-1{
+    background: rgba(255,255,255,0.8);
+}
+
+.nav-bg-2{
+    background-color: white;
+}
+
+
+/*介绍*/
+#introduce{
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+}
+
+#introduce h2{
+    color: #525558;
+    font-size: 32px;
+    margin-bottom: 20px;
+    letter-spacing: 5px;
+}
+
+#introduce span{
+    color: #525558;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+/*内容*/
+#content{
+    width: 100%;
+    margin-top: 60px;
+}
+
+#choice{
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+}
+
+#choice ul{
+    width: 380px;
+    margin: 0 auto 20px auto;
+}
+
+#choice ul li{
+    list-style: none;
+    float: left;
+    display: inline-block;
+    font-size: 30px;
+    width: 170px;
+    text-align: center;
+    line-height: 40px;
+    font-family: "楷体";
+    cursor: pointer;
+}
+
+#img{
+    margin-right: 10px;
+    color: grey;
+}
+
+#set{
+    margin-left: 10px;
+    color: grey;
+}
+
+#img:hover{
+    color: black;
+}
+
+
+.choice-color{
+    padding: 5px 10px 5px 16px;
+    border-radius: 20px;
+    background-color: grey;
+    color: white;
+}
+
+
+.img-portrait{
+    position: absolute;
+    left: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    border: white 1px solid;
+}
+
+.img-name{
+    position: absolute;
+    left: 60px;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+.show-img{
+    position: relative;
+    left: 18px;
+    top: 18px;
+    width: 89.1%;
+    height: 370px;
+    background-size: 100%;
+    box-shadow: 6px 6px 1px rgb(228, 225, 225),12px 12px 1px rgba(228, 228, 228, 0.8);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.show-img div{
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: rgba(96,96,96,0.5);
+    text-align: center;
+    color: #fff0d5;
+    line-height: 22px;
+    font-size: 12px;
+}
+
+.show-content{
+    position: relative;
+    width: 92.3%;
+    height: 80px;
+    margin: 40px auto 13px auto;
+    background-color: white;
+    box-shadow: 0 0 5px white;
+    border-radius: 5px;
+}
+
+
+
+#load-more{
+    margin: 50px 18px;
+    width: calc(100% - 36px);
+    width: -webkit-calc(100% - 36px);
+    height: 48px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.02);
+    text-align: center;
+    line-height: 48px;
+    font-size: 18px;
+    color: rgba(0,0,0,.5);
+    cursor: pointer;
+    margin-top: 60px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    border: 1px solid rgba(0,0,0,.05);
+    letter-spacing: 1px;
+}
+
+/*其他*/
+#other{
+    width: 100%;
+    margin-top: 70px;
+}
+
+.other-div{
+    width: 100%;
+    height: 400px;
+    margin-bottom: 40px;
+}
+
+.show-img-left1{
+    width: 36%;
+    height: 350px;
+    margin-left: 7%;
+    margin-right: 6%;
+    float: left;
+    background: url("/images/home/active.jpg") 50%;
+}
+.show-img-left2{
+    width: 36%;
+    height: 350px;
+    margin-left: 7%;
+    margin-right: 6%;
+    float: left;
+    background: url("/images/home/customize.jpg") 50%;
+
+}
+
+.show-text-left{
+    width: 45%;
+    height: 350px;
+    float: left;
+}
+
+.show-text-left span{
+    font-family: "微软雅黑";
+    font-size: 32px;
+    color: #525558;
+    display: inline-block;
+    margin: 120px 0 20px 0;
+    letter-spacing: 2px;
+}
+
+.show-text-left p{
+    font-size: 18px;
+    color: #525558;
+    text-indent: 2em;
+    letter-spacing: 1px;
+}
+
+.other-btn{
+    border: 0;
+    display: inline-block;
+    width: 100px;
+    height: 36px;
+    font-size: 16px;
+    line-height: 36px;
+    text-align: center;
+    background-size: cover;
+    cursor: pointer;
+    outline: none;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    color: #0099e5;
+}
+
+.other-btn:hover{
+    opacity: 0.8;
+}
+
+.show-text-right{
+    width: 45%;
+    height: 350px;
+    float: left;
+    margin-left: 9%;
+    margin-right: 4%;
+}
+
+.show-img-right{
+    width: 36%;
+    height: 350px;
+    float: left;
+    background: url("/images/home/community.jpg") no-repeat;
+}
+
+.show-text-right span{
+    font-family: "微软雅黑", serif;
+    font-size: 32px;
+    color: #525558;
+    display: inline-block;
+    margin: 120px 0 20px 0;
+    letter-spacing: 2px;
+}
+
+.show-text-right p{
+    font-size: 18px;
+    color: #525558;
+    text-indent: 2em;
+    letter-spacing: 1px;
+}
+
+footer{
+    background-color: black;
+}
+
+#footer-left{
+    width: 10%;
+    height: 246px;
+    float: left;
+}
+
+.footer-bottom{
+    float: left;
+    width: 20%;
+    height: 246px;
+}
+
+.footer-ul{
+    margin: 50px 0 0 25%;
+}
+
+.first-li{
+    margin-bottom: 20px;
+}
+
+.footer-ul li{
+    list-style: none;
+}
+
+.footer-ul li h3{
+    color: white;
+}
+
+.footer-btn{
+    font-size: 12px;
+    color: darkgray;
+}
+
+.footer-btn:hover{
+    color: white;
+}
+
+#copyright{
+    clear: both;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
+#copyright span{
+    font-size: 10px;
+    color: darkgray;
+}

@@ -1,0 +1,257 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#shoot-order-container{
+    width: 1200px;
+    height: 800px;
+    border-radius: 10px;
+    box-shadow:0 6px 30px 0 rgba(0,0,0,0.1);
+    margin: 30px auto 43px;
+    display: flex;
+    background: #fff;
+}
+
+.user-nav{
+    width: 200px;
+    min-height: 800px;
+    background: #f6fafa;
+    position: relative;
+}
+
+.user-nav .user-header{
+    padding: 30px 0 10px;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.user-nav .user-header .avator{
+    width: 73px;
+    height: 73px;
+    border-radius: 50%;
+    background: #f1f1f1;
+    overflow: hidden;
+    margin-bottom: 25px;
+    background: 50% 0;
+    background-size: cover;
+}
+
+.user-nav .user-header .balance{
+    text-align: center;
+    color: #000;
+    margin-bottom: 25px;
+}
+
+.user-nav .user-header .balance p{
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.user-nav .user-header .balance div{
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.user-nav .nav-list{
+    width: 100%;
+    margin: 15px 0;
+    list-style: none;
+}
+
+.user-nav .nav-list .item{
+    height: 46px;
+    text-align:center;
+    line-height: 46px;
+    color: #9c9c9c;
+    background: transparent;
+    cursor: pointer;
+}
+
+.user-nav .nav-list .item.isActive{
+    background: rgba(151, 151, 151, 0.1);
+    cursor: auto;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.content{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px 36px;
+}
+
+.tab-content{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.tab-content .tab-item{
+    text-align: center;
+    font-size: 18px;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.tab-content .tab-item.tab-item-font{
+    font-weight: 800;
+}
+
+.tab-line{
+    margin: 15px 0;
+    border-bottom: 1px solid #e8e8e8;
+    position: relative;
+    z-index: -11;
+}
+
+.tab-box .orderList{
+    border-right: 0;
+    border-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    flex: 1;
+    max-width: 100%;
+    font-size: 14px;
+    color: #606266;
+    background-color: #fff;
+}
+
+.table-header-wrapper{
+    height: 50px;
+}
+
+.shoot-has-gutter{
+    color: #676565;
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    float: left;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.shoot-has-gutter .cell{
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 23px;
+    height: 100%;
+    margin-left: 75px;
+}
+
+.shoot-has-gutter .cell>div{
+    width:100%;
+    height: 100%;
+}
+
+.table-empty-block{
+    min-height: 60px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-empty-text{
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    color: #676565;
+}
+
+.table-empty-text1{
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    color: #676565;
+}
+
+.shoot-th{
+    width: 180px;
+}
+
+.has-gutter-ul1{
+    height: 60px;
+}
+
+.table-empty-text2{
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    color: #676565;
+}
+
+.has-gutter-ul2{
+    height: 60px;
+}
+
+.has-gutter-body{
+    color: #676565;
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    float: left;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.has-gutter-body:hover{
+    background: rgba(151, 151, 151, 0.1);
+}
+
+.has-gutter-body .cell{
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: 55px;
+}
+
+.has-gutter-body .cell.line{
+    line-height: 50px;
+}
+
+.has-gutter-body .cell>div{
+    width:100%;
+    height: 100%;
+}
+
+.cell-div{
+    width:100%;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    cursor: pointer;
+}
+
+.cell-div:hover{
+    color: #ff9a00;
+}
+
+.pay{
+    line-height: 50px;
+}
+
+.pay>a{
+    text-decoration: none;
+    color: #676565;
+}
+
+.pay>a:hover{
+    color: #ff9a00;
+}
+
+
+
+
+
+
+
+
+
+
+
+

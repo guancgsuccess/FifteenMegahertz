@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.MessageDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.common.Message">
+    <id column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="from_id" jdbcType="INTEGER" property="fromId" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
+    <result column="from_profile" jdbcType="VARCHAR" property="fromProfile" />
+    <result column="to_id" jdbcType="INTEGER" property="toId" />
+    <result column="message_text" jdbcType="VARCHAR" property="messageText" />
+    <result column="message_time" jdbcType="TIMESTAMP" property="messageTime" />
+    <result column="message_status" jdbcType="INTEGER" property="messageStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    message_id, from_id, from_name, from_profile, to_id, message_text, message_time, 
+    message_status
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.common.MessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.common.MessageExample">
+    delete from message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.common.Message">
+    insert into message (message_id, from_id, from_name, 
+      from_profile, to_id, message_text, 
+      message_time, message_status)
+    values (#{messageId,jdbcType=INTEGER}, #{fromId,jdbcType=INTEGER}, #{fromName,jdbcType=VARCHAR}, 
+      #{fromProfile,jdbcType=VARCHAR}, #{toId,jdbcType=INTEGER}, #{messageText,jdbcType=VARCHAR}, 
+      #{messageTime,jdbcType=TIMESTAMP}, #{messageStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.common.Message">
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="fromId != null">
+        from_id,
+      </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
+      <if test="fromProfile != null">
+        from_profile,
+      </if>
+      <if test="toId != null">
+        to_id,
+      </if>
+      <if test="messageText != null">
+        message_text,
+      </if>
+      <if test="messageTime != null">
+        message_time,
+      </if>
+      <if test="messageStatus != null">
+        message_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="fromId != null">
+        #{fromId,jdbcType=INTEGER},
+      </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromProfile != null">
+        #{fromProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="toId != null">
+        #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="messageText != null">
+        #{messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTime != null">
+        #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageStatus != null">
+        #{messageStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.common.MessageExample" resultType="java.lang.Long">
+    select count(*) from message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update message
+    <set>
+      <if test="record.messageId != null">
+        message_id = #{record.messageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromId != null">
+        from_id = #{record.fromId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromName != null">
+        from_name = #{record.fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromProfile != null">
+        from_profile = #{record.fromProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toId != null">
+        to_id = #{record.toId,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageText != null">
+        message_text = #{record.messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageTime != null">
+        message_time = #{record.messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.messageStatus != null">
+        message_status = #{record.messageStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update message
+    set message_id = #{record.messageId,jdbcType=INTEGER},
+      from_id = #{record.fromId,jdbcType=INTEGER},
+      from_name = #{record.fromName,jdbcType=VARCHAR},
+      from_profile = #{record.fromProfile,jdbcType=VARCHAR},
+      to_id = #{record.toId,jdbcType=INTEGER},
+      message_text = #{record.messageText,jdbcType=VARCHAR},
+      message_time = #{record.messageTime,jdbcType=TIMESTAMP},
+      message_status = #{record.messageStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.common.Message">
+    update message
+    <set>
+      <if test="fromId != null">
+        from_id = #{fromId,jdbcType=INTEGER},
+      </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromProfile != null">
+        from_profile = #{fromProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="toId != null">
+        to_id = #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="messageText != null">
+        message_text = #{messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTime != null">
+        message_time = #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageStatus != null">
+        message_status = #{messageStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.common.Message">
+    update message
+    set from_id = #{fromId,jdbcType=INTEGER},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      from_profile = #{fromProfile,jdbcType=VARCHAR},
+      to_id = #{toId,jdbcType=INTEGER},
+      message_text = #{messageText,jdbcType=VARCHAR},
+      message_time = #{messageTime,jdbcType=TIMESTAMP},
+      message_status = #{messageStatus,jdbcType=INTEGER}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusByCustId" parameterType="Integer">
+    update message set message_status=1 where to_id=#{custId} and message_status=0
+  </update>
+</mapper>

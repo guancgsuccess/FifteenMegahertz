@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ImageDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.Image">
+    <id column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="image_keyword" jdbcType="VARCHAR" property="imageKeyword" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="image_name" jdbcType="VARCHAR" property="imageName" />
+    <result column="image_clicks" jdbcType="INTEGER" property="imageClicks" />
+    <result column="image_collections" jdbcType="INTEGER" property="imageCollections" />
+    <result column="image_likes" jdbcType="INTEGER" property="imageLikes" />
+    <result column="image_downloads" jdbcType="INTEGER" property="imageDownloads" />
+    <result column="image_is_free" jdbcType="INTEGER" property="imageIsFree" />
+    <result column="image_status" jdbcType="INTEGER" property="imageStatus" />
+    <result column="camera_focal_lenth" jdbcType="VARCHAR" property="cameraFocalLenth" />
+    <result column="camera_aperture" jdbcType="VARCHAR" property="cameraAperture" />
+    <result column="camera_iso" jdbcType="VARCHAR" property="cameraIso" />
+    <result column="camera_exposure_time" jdbcType="VARCHAR" property="cameraExposureTime" />
+    <result column="image_upload_time" jdbcType="TIMESTAMP" property="imageUploadTime" />
+    <result column="image_price" jdbcType="INTEGER" property="imagePrice" />
+    <result column="compre_path" jdbcType="VARCHAR" property="comprePath" />
+    <result column="nocompre_path" jdbcType="VARCHAR" property="nocomprePath" />
+    <result column="image_brightness" jdbcType="VARCHAR" property="imageBrightness" />
+    <result column="blank_2" jdbcType="VARCHAR" property="blank2" />
+    <result column="camera_brand" jdbcType="VARCHAR" property="cameraBrand" />
+    <result column="camera_model" jdbcType="VARCHAR" property="cameraModel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    image_id, cust_id, image_keyword, category_id, image_name, image_clicks, image_collections, 
+    image_likes, image_downloads, image_is_free, image_status, camera_focal_lenth, camera_aperture, 
+    camera_iso, camera_exposure_time, image_upload_time, image_price, compre_path, nocompre_path, 
+    image_brightness, blank_2, camera_brand, camera_model
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ImageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ImageExample">
+    delete from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.Image">
+    insert into image (image_id, cust_id, image_keyword, 
+      category_id, image_name, image_clicks, 
+      image_collections, image_likes, image_downloads, 
+      image_is_free, image_status, camera_focal_lenth, 
+      camera_aperture, camera_iso, camera_exposure_time, 
+      image_upload_time, image_price, compre_path, 
+      nocompre_path, image_brightness, blank_2, 
+      camera_brand, camera_model)
+    values (#{imageId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{imageKeyword,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{imageName,jdbcType=VARCHAR}, #{imageClicks,jdbcType=INTEGER}, 
+      #{imageCollections,jdbcType=INTEGER}, #{imageLikes,jdbcType=INTEGER}, #{imageDownloads,jdbcType=INTEGER}, 
+      #{imageIsFree,jdbcType=INTEGER}, #{imageStatus,jdbcType=INTEGER}, #{cameraFocalLenth,jdbcType=VARCHAR}, 
+      #{cameraAperture,jdbcType=VARCHAR}, #{cameraIso,jdbcType=VARCHAR}, #{cameraExposureTime,jdbcType=VARCHAR}, 
+      #{imageUploadTime,jdbcType=TIMESTAMP}, #{imagePrice,jdbcType=INTEGER}, #{comprePath,jdbcType=VARCHAR}, 
+      #{nocomprePath,jdbcType=VARCHAR}, #{imageBrightness,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}, 
+      #{cameraBrand,jdbcType=VARCHAR}, #{cameraModel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.Image">
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="imageKeyword != null">
+        image_keyword,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="imageName != null">
+        image_name,
+      </if>
+      <if test="imageClicks != null">
+        image_clicks,
+      </if>
+      <if test="imageCollections != null">
+        image_collections,
+      </if>
+      <if test="imageLikes != null">
+        image_likes,
+      </if>
+      <if test="imageDownloads != null">
+        image_downloads,
+      </if>
+      <if test="imageIsFree != null">
+        image_is_free,
+      </if>
+      <if test="imageStatus != null">
+        image_status,
+      </if>
+      <if test="cameraFocalLenth != null">
+        camera_focal_lenth,
+      </if>
+      <if test="cameraAperture != null">
+        camera_aperture,
+      </if>
+      <if test="cameraIso != null">
+        camera_iso,
+      </if>
+      <if test="cameraExposureTime != null">
+        camera_exposure_time,
+      </if>
+      <if test="imageUploadTime != null">
+        image_upload_time,
+      </if>
+      <if test="imagePrice != null">
+        image_price,
+      </if>
+      <if test="comprePath != null">
+        compre_path,
+      </if>
+      <if test="nocomprePath != null">
+        nocompre_path,
+      </if>
+      <if test="imageBrightness != null">
+        image_brightness,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+      <if test="cameraBrand != null">
+        camera_brand,
+      </if>
+      <if test="cameraModel != null">
+        camera_model,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageKeyword != null">
+        #{imageKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="imageName != null">
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageClicks != null">
+        #{imageClicks,jdbcType=INTEGER},
+      </if>
+      <if test="imageCollections != null">
+        #{imageCollections,jdbcType=INTEGER},
+      </if>
+      <if test="imageLikes != null">
+        #{imageLikes,jdbcType=INTEGER},
+      </if>
+      <if test="imageDownloads != null">
+        #{imageDownloads,jdbcType=INTEGER},
+      </if>
+      <if test="imageIsFree != null">
+        #{imageIsFree,jdbcType=INTEGER},
+      </if>
+      <if test="imageStatus != null">
+        #{imageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cameraFocalLenth != null">
+        #{cameraFocalLenth,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraAperture != null">
+        #{cameraAperture,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraIso != null">
+        #{cameraIso,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExposureTime != null">
+        #{cameraExposureTime,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUploadTime != null">
+        #{imageUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagePrice != null">
+        #{imagePrice,jdbcType=INTEGER},
+      </if>
+      <if test="comprePath != null">
+        #{comprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="nocomprePath != null">
+        #{nocomprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageBrightness != null">
+        #{imageBrightness,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraBrand != null">
+        #{cameraBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraModel != null">
+        #{cameraModel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ImageExample" resultType="java.lang.Long">
+    select count(*) from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update image
+    <set>
+      <if test="record.imageId != null">
+        image_id = #{record.imageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageKeyword != null">
+        image_keyword = #{record.imageKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageName != null">
+        image_name = #{record.imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageClicks != null">
+        image_clicks = #{record.imageClicks,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageCollections != null">
+        image_collections = #{record.imageCollections,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageLikes != null">
+        image_likes = #{record.imageLikes,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageDownloads != null">
+        image_downloads = #{record.imageDownloads,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageIsFree != null">
+        image_is_free = #{record.imageIsFree,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageStatus != null">
+        image_status = #{record.imageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.cameraFocalLenth != null">
+        camera_focal_lenth = #{record.cameraFocalLenth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraAperture != null">
+        camera_aperture = #{record.cameraAperture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraIso != null">
+        camera_iso = #{record.cameraIso,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraExposureTime != null">
+        camera_exposure_time = #{record.cameraExposureTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageUploadTime != null">
+        image_upload_time = #{record.imageUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imagePrice != null">
+        image_price = #{record.imagePrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.comprePath != null">
+        compre_path = #{record.comprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nocomprePath != null">
+        nocompre_path = #{record.nocomprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageBrightness != null">
+        image_brightness = #{record.imageBrightness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank2 != null">
+        blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraBrand != null">
+        camera_brand = #{record.cameraBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraModel != null">
+        camera_model = #{record.cameraModel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update image
+    set image_id = #{record.imageId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      image_keyword = #{record.imageKeyword,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      image_name = #{record.imageName,jdbcType=VARCHAR},
+      image_clicks = #{record.imageClicks,jdbcType=INTEGER},
+      image_collections = #{record.imageCollections,jdbcType=INTEGER},
+      image_likes = #{record.imageLikes,jdbcType=INTEGER},
+      image_downloads = #{record.imageDownloads,jdbcType=INTEGER},
+      image_is_free = #{record.imageIsFree,jdbcType=INTEGER},
+      image_status = #{record.imageStatus,jdbcType=INTEGER},
+      camera_focal_lenth = #{record.cameraFocalLenth,jdbcType=VARCHAR},
+      camera_aperture = #{record.cameraAperture,jdbcType=VARCHAR},
+      camera_iso = #{record.cameraIso,jdbcType=VARCHAR},
+      camera_exposure_time = #{record.cameraExposureTime,jdbcType=VARCHAR},
+      image_upload_time = #{record.imageUploadTime,jdbcType=TIMESTAMP},
+      image_price = #{record.imagePrice,jdbcType=INTEGER},
+      compre_path = #{record.comprePath,jdbcType=VARCHAR},
+      nocompre_path = #{record.nocomprePath,jdbcType=VARCHAR},
+      image_brightness = #{record.imageBrightness,jdbcType=VARCHAR},
+      blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      camera_brand = #{record.cameraBrand,jdbcType=VARCHAR},
+      camera_model = #{record.cameraModel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.Image">
+    update image
+    <set>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageKeyword != null">
+        image_keyword = #{imageKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="imageName != null">
+        image_name = #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageClicks != null">
+        image_clicks = #{imageClicks,jdbcType=INTEGER},
+      </if>
+      <if test="imageCollections != null">
+        image_collections = #{imageCollections,jdbcType=INTEGER},
+      </if>
+      <if test="imageLikes != null">
+        image_likes = #{imageLikes,jdbcType=INTEGER},
+      </if>
+      <if test="imageDownloads != null">
+        image_downloads = #{imageDownloads,jdbcType=INTEGER},
+      </if>
+      <if test="imageIsFree != null">
+        image_is_free = #{imageIsFree,jdbcType=INTEGER},
+      </if>
+      <if test="imageStatus != null">
+        image_status = #{imageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cameraFocalLenth != null">
+        camera_focal_lenth = #{cameraFocalLenth,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraAperture != null">
+        camera_aperture = #{cameraAperture,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraIso != null">
+        camera_iso = #{cameraIso,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExposureTime != null">
+        camera_exposure_time = #{cameraExposureTime,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUploadTime != null">
+        image_upload_time = #{imageUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagePrice != null">
+        image_price = #{imagePrice,jdbcType=INTEGER},
+      </if>
+      <if test="comprePath != null">
+        compre_path = #{comprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="nocomprePath != null">
+        nocompre_path = #{nocomprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageBrightness != null">
+        image_brightness = #{imageBrightness,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        blank_2 = #{blank2,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraBrand != null">
+        camera_brand = #{cameraBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraModel != null">
+        camera_model = #{cameraModel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.Image" >
+    update image
+    set cust_id = #{custId,jdbcType=INTEGER},
+      image_keyword = #{imageKeyword,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      image_name = #{imageName,jdbcType=VARCHAR},
+      image_clicks = #{imageClicks,jdbcType=INTEGER},
+      image_collections = #{imageCollections,jdbcType=INTEGER},
+      image_likes = #{imageLikes,jdbcType=INTEGER},
+      image_downloads = #{imageDownloads,jdbcType=INTEGER},
+      image_is_free = #{imageIsFree,jdbcType=INTEGER},
+      image_status = #{imageStatus,jdbcType=INTEGER},
+      camera_focal_lenth = #{cameraFocalLenth,jdbcType=VARCHAR},
+      camera_aperture = #{cameraAperture,jdbcType=VARCHAR},
+      camera_iso = #{cameraIso,jdbcType=VARCHAR},
+      camera_exposure_time = #{cameraExposureTime,jdbcType=VARCHAR},
+      image_upload_time = #{imageUploadTime,jdbcType=TIMESTAMP},
+      image_price = #{imagePrice,jdbcType=INTEGER},
+      compre_path = #{comprePath,jdbcType=VARCHAR},
+      nocompre_path = #{nocomprePath,jdbcType=VARCHAR},
+      image_brightness = #{imageBrightness,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR},
+      camera_brand = #{cameraBrand,jdbcType=VARCHAR},
+      camera_model = #{cameraModel,jdbcType=VARCHAR}
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateClicksIncrementByPrimaryKey" parameterType="hashmap">
+    update image set image_clicks=image_clicks+#{increment} where image_id=#{imageId}
+  </update>
+  <select id="selectKeyWordLike" parameterType="String" resultType="java.util.HashMap">
+    SELECT image_keyword,image_name from image where image_keyword like CONCAT(CONCAT('%', #{keyword}), '%') or image_name like CONCAT(CONCAT('%', #{keyword}), '%')
+  </select>
+
+  <select id="selectImages" parameterType="com.fm.entity.Image" resultMap="BaseResultMap">
+    select *
+    from image
+    limit 0,4
+  </select>
+
+  <select id="getImages" parameterType="com.fm.entity.Image" resultMap="BaseResultMap">
+    select *
+    from image
+    order by image_clicks desc
+    limit 0,5
+  </select>
+
+  <select id="selectCustomerByCategoryIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from image_category
+    where category_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item.categoryId,jdbcType=INTEGER}
+    </foreach>
+  </select>
+
+  <select id="selectImageByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from image
+    where image_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item.imageId,jdbcType=INTEGER}
+    </foreach>
+  </select>
+
+  <insert id="insertReturnId" keyProperty="imageId" useGeneratedKeys="true" parameterType="com.fm.entity.Image">
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="imageKeyword != null">
+        image_keyword,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="imageName != null">
+        image_name,
+      </if>
+      <if test="imageClicks != null">
+        image_clicks,
+      </if>
+      <if test="imageCollections != null">
+        image_collections,
+      </if>
+      <if test="imageLikes != null">
+        image_likes,
+      </if>
+      <if test="imageDownloads != null">
+        image_downloads,
+      </if>
+      <if test="imageIsFree != null">
+        image_is_free,
+      </if>
+      <if test="imageStatus != null">
+        image_status,
+      </if>
+      <if test="cameraFocalLenth != null">
+        camera_focal_lenth,
+      </if>
+      <if test="cameraAperture != null">
+        camera_aperture,
+      </if>
+      <if test="cameraIso != null">
+        camera_iso,
+      </if>
+      <if test="cameraExposureTime != null">
+        camera_exposure_time,
+      </if>
+      <if test="imageUploadTime != null">
+        image_upload_time,
+      </if>
+      <if test="imagePrice != null">
+        image_price,
+      </if>
+      <if test="comprePath != null">
+        compre_path,
+      </if>
+      <if test="nocomprePath != null">
+        nocompre_path,
+      </if>
+      <if test="imageBrightness != null">
+        image_brightness,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+      <if test="cameraBrand != null">
+        camera_brand,
+      </if>
+      <if test="cameraModel != null">
+        camera_model,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageKeyword != null">
+        #{imageKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="imageName != null">
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="imageClicks != null">
+        #{imageClicks,jdbcType=INTEGER},
+      </if>
+      <if test="imageCollections != null">
+        #{imageCollections,jdbcType=INTEGER},
+      </if>
+      <if test="imageLikes != null">
+        #{imageLikes,jdbcType=INTEGER},
+      </if>
+      <if test="imageDownloads != null">
+        #{imageDownloads,jdbcType=INTEGER},
+      </if>
+      <if test="imageIsFree != null">
+        #{imageIsFree,jdbcType=INTEGER},
+      </if>
+      <if test="imageStatus != null">
+        #{imageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cameraFocalLenth != null">
+        #{cameraFocalLenth,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraAperture != null">
+        #{cameraAperture,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraIso != null">
+        #{cameraIso,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExposureTime != null">
+        #{cameraExposureTime,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUploadTime != null">
+        #{imageUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagePrice != null">
+        #{imagePrice,jdbcType=INTEGER},
+      </if>
+      <if test="comprePath != null">
+        #{comprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="nocomprePath != null">
+        #{nocomprePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageBrightness != null">
+        #{imageBrightness,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraBrand != null">
+        #{cameraBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraModel != null">
+        #{cameraModel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

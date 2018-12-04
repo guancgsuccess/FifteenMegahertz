@@ -1,0 +1,235 @@
+.community-content-two > div {
+    margin-bottom: 20px;
+    padding: 0 3% 0 3%;
+    border-top: #ff0900 2px solid;
+    border-radius: 2px;
+}
+
+.community-content-two-personal {
+
+}
+
+.community-content-two-personal-message {
+    padding: 10px 3% 0 3%;
+    border-radius: 2px;
+    background-color: #d4d4d4;
+}
+
+.community-content-two-personal-profile-tip {
+    margin: 0 0 10px 5px;
+    font-size: 2.1rem;
+    letter-spacing: 3px;
+}
+
+.community-content-two-personal-profile {
+    margin: 0 auto 0 auto;
+    width: 110px;
+    height: 110px;
+    border: #b6b6b6 1px solid;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.community-content-two-personal-profile > img {
+    width: 100%;
+}
+
+.community-content-two-personal-message-some {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.community-content-two-personal-nick {
+    font-family: "微软雅黑 Light";
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.community-content-two-personal-nick:hover {
+    color: #0a67fb;
+}
+
+.community-content-two-personal-level {
+    margin-left: 10px;
+    font-family: "UD Digi Kyokasho NK-R";
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #ffb800;
+}
+
+.community-content-two-personal-intro {
+    margin: 2px auto 0 auto;
+    width: 90%;
+    font-family: "微软雅黑 Light";
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    text-align: center;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.community-content-two-personal-tip {
+    margin-left: 10px;
+    margin-top: 16px;
+    font-family: "微软雅黑 Light";
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.community-content-two-personal-community {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3px 5% 12px 5%;
+}
+
+.community-content-two-personal-community-unit {
+    flex: 1;
+    margin: 2px 1% 2px 1%;
+    padding: 0 6px;
+    min-width: 50px;
+    max-width: 68px;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 20px;
+    border: #c7c7c7 1px solid;
+    border-radius: 3px;
+    background-color: #ffffff;
+    cursor: pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.community-content-two-personal-community-unit:hover {
+    color: #ff9900;
+    border: #ff9900 1px solid;
+}
+
+.community-content-two-enter {
+
+}
+
+.community-content-two-enter-content {
+    padding: 10px 3% 6px 3%;
+    border-radius: 2px;
+    background-color: #d4d4d4;
+}
+
+.community-content-two-enter-content-top {
+    margin: 0 0 6px 5px;
+    font-size: 2.1rem;
+    letter-spacing: 3px;
+}
+
+.community-content-two-enter-content-content {
+    margin: 0 14px 6px 14px;
+}
+
+.community-content-two-enter-content-content > div {
+    margin: 4px 4%;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.community-content-two-enter-content-content > div > img{
+    position: relative;
+    top: -1px;
+    margin-right: 3%;
+    width: 20px;
+}
+
+
+.community-content-two-enter-content-content > div:hover {
+    font-weight: 600;
+}
+
+.community-content-two-recommend {
+
+}
+
+.community-content-two-recommend-content {
+    padding: 10px 3% 6px 3%;
+    border-radius: 2px;
+    background-color: #d4d4d4;
+}
+
+.community-content-two-recommend-content-top {
+    margin: 0 0 20px 5px;
+    font-size: 2.1rem;
+    letter-spacing: 3px;
+}
+
+.community-content-two-recommend-content > ul {
+    padding-left: 12%;
+    list-style-type: lower-greek;
+}
+
+.community-content-two-recommend-content > ul > li {
+    margin: 5px 0 5px 0;
+}
+
+.community-content-two-recommend-content-name {
+    font-family: 微软雅黑;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.community-content-two-recommend-content-name:hover {
+    color: #0a67fb;
+}
+
+.community-content-two-recommend-content-label {
+    margin-left: 38%;
+    margin-right: 2%;
+    max-width: 110px;
+    font-size: 1.2rem;
+    color: #888888;
+    text-align: right;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.community-content-two-classify {
+
+}
+
+.community-content-two-classify-content {
+    padding: 10px 3% 6px 3%;
+    border-radius: 2px;
+    background-color: #d4d4d4;
+}
+
+.community-content-two-classify-content-top {
+    margin: 0 0 6px 5px;
+    font-size: 2.1rem;
+    letter-spacing: 3px;
+}
+
+.community-content-two-classify-content-classify {
+    padding: 0 3% 8px 3%;
+    word-wrap: break-word;
+}
+
+.community-content-two-classify-content-classify-unit {
+    display: inline-block;
+    margin-top: 3px;
+    margin-right: 3px;
+    padding: 4px 20px;
+    border: silver 1px solid;
+    background-color: #d9f4fb;
+    cursor: pointer;
+}
+
+.community-content-two-classify-content-classify-unit:hover {
+    background-color: #99d1d2;
+}

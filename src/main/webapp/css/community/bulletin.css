@@ -1,0 +1,48 @@
+body {
+    background-color: #f1f1f1;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.community-bulletin-content {
+    margin: 0 auto;
+    width: 88%;
+}
+
+.community-bulletin-content-title {
+    margin: 40px 0 10px 0;
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.community-bulletin-content-content {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    text-indent: 2em;
+    line-height: 26px;
+}
+
+.community-bulletin-content-tip {
+    margin-top: 20px;
+}
+
+.community-bulletin-content-tip > span {
+    color: #757575;
+}
+
+.community-bulletin-content-tip-one {
+    cursor: pointer;
+}
+
+.community-bulletin-content-tip-one:hover {
+    color: #212121;
+    font-weight: 600;
+}
+
+.community-bulletin-content-tip-two {
+    float: right;
+    margin-right: 2.4%;
+}

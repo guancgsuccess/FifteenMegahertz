@@ -1,0 +1,52 @@
+footer{
+    background-color: black;
+}
+
+#footer-left{
+    width: 10%;
+    height: 246px;
+    float: left;
+}
+
+.footer-bottom{
+    float: left;
+    width: 20%;
+    height: 246px;
+}
+
+.footer-ul{
+    margin: 50px 0 0 25%;
+}
+
+.first-li{
+    margin-bottom: 20px;
+}
+
+.footer-ul li{
+    list-style: none;
+}
+
+.footer-ul li h3{
+    color: white;
+}
+
+.footer-btn{
+    font-size: 12px;
+    color: darkgray;
+}
+
+.footer-btn:hover{
+    color: #fff;
+}
+
+#copyright{
+    clear: both;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
+#copyright span{
+    font-size: 10px;
+    color: darkgray;
+}

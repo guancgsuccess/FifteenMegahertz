@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员注册-15M</title>
+    <link rel="shortcut icon" href="images/Favicon.ico" />
+    <link rel="stylesheet" href="/css/customer/registerAndLogin.css">
+    <link rel="stylesheet" href="/css/common/message.css">
+
+</head>
+<body>
+<img src="/images/lr_bg.jpg" width="100%" height="100%"
+     style="z-index:-1;position:fixed;left:0;right:0;bottom:0;top:0">
+
+
+<div id="regContent">
+    <div class="wrap">
+        <div id="regLogo" class="regLogo regLogo15">
+            <span>注</span> <span>册</span>
+        </div>
+
+
+        <div class="regMobileDiv mt141">
+                <input  placeholder="手机号" type="text" id="Mobile" onmouseover="PhoneOver()" onmouseout="PhoneOut()">
+                <span id="regPhoneSpan" >
+                <input type="button" id="PhoneButton" value="发送验证码" onclick="sendRegisterMessage()">
+                </span>
+        </div>
+
+
+
+        <div>
+            <input  placeholder="验证码" id="code" class="mt141" onmouseover="codeOver()" onmouseout="codeOut()"  >
+        </div>
+
+
+
+
+
+        <div>
+            <input  placeholder="密码" id="password1" type="password" class="mt141" onmouseover="pwd1Over()" onmouseout="pwd1Out()" >
+        </div>
+
+
+
+
+        <div>
+            <input  placeholder="再次输入密码" id="password2" type="password" class="mt141"  onmouseover="pwd2Over()" onmouseout="pwd2Out()">
+        </div>
+
+
+
+     <div id="regAgreement">
+        <div id="regAgreementBox">
+            <input type="checkbox" id="regAgreementCheckbox" checked="checked">
+        </div>
+
+         <div id="regAgreementTitle">
+            <span>
+                同意
+            </span>
+            <a href="">《平台服务条款》</a>
+        </div>
+        </div>
+
+        <div id="regButtonBox">
+            <button  id="regButton" onclick="userRegister()">注册</button>
+        </div>
+
+
+        <div id="outerBox1">
+        <div id="backToIndex1">
+            <a href="/index.html">返回首页</a>
+        </div>
+        <div  id="to-login1">
+            <a  id="a2" href="/login.html"> 已有账号？立即登录</a>
+        </div>
+        </div>
+    </div>
+
+</div>
+<script src="/js/customer/registerAndLogin.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/common/message.js"></script>
+</body>
+</html>

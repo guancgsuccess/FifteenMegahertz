@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CommunityMembersDao">
+    <cache type="com.fm.cache.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.fm.entity.CommunityMembers">
+        <id column="community_id" jdbcType="INTEGER" property="communityId"/>
+        <id column="cust_id" jdbcType="INTEGER" property="custId"/>
+        <result column="cust_status" jdbcType="INTEGER" property="custStatus"/>
+        <result column="blank_1" jdbcType="VARCHAR" property="blank1"/>
+        <result column="blank_2" jdbcType="VARCHAR" property="blank2"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    community_id, cust_id, cust_status, blank_1, blank_2
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="com.fm.entity.CommunityMembersKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_members
+        where community_id = #{communityId,jdbcType=INTEGER}
+        and cust_id = #{custId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.fm.entity.CommunityMembersKey">
+    delete from community_members
+    where community_id = #{communityId,jdbcType=INTEGER}
+      and cust_id = #{custId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fm.entity.CommunityMembers">
+    insert into community_members (community_id, cust_id, cust_status, 
+      blank_1, blank_2)
+    values (#{communityId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{custStatus,jdbcType=INTEGER}, 
+      #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fm.entity.CommunityMembers">
+        insert into community_members
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="communityId != null">
+                community_id,
+            </if>
+            <if test="custId != null">
+                cust_id,
+            </if>
+            <if test="custStatus != null">
+                cust_status,
+            </if>
+            <if test="blank1 != null">
+                blank_1,
+            </if>
+            <if test="blank2 != null">
+                blank_2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="communityId != null">
+                #{communityId,jdbcType=INTEGER},
+            </if>
+            <if test="custId != null">
+                #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="custStatus != null">
+                #{custStatus,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                #{blank2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CommunityMembers">
+        update community_members
+        <set>
+            <if test="custStatus != null">
+                cust_status = #{custStatus,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                blank_1 = #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                blank_2 = #{blank2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where community_id = #{communityId,jdbcType=INTEGER}
+        and cust_id = #{custId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fm.entity.CommunityMembers">
+    update community_members
+    set cust_status = #{custStatus,jdbcType=INTEGER},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where community_id = #{communityId,jdbcType=INTEGER}
+      and cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+    <!-- 查询该社区全部用户 -->
+    <select id="selectAllCountByCommunityId" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*)
+        from community_members
+        where community_id = #{communityId,jdbcType=INTEGER}
+        <if test="customerStatus != null">
+            and cust_status = #{customerStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!-- 分页查询社区用户 -->
+    <select id="selectCommunityMemberByCommunityId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_members
+        where community_id = #{communityId,jdbcType=INTEGER}
+        <if test="customerStatus != null">
+            and cust_status = #{customerStatus,jdbcType=INTEGER}
+        </if>
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!-- 根据用户id查询社区集合 -->
+    <select id="selectCommunityByCustomerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_members
+        where cust_id = #{customerId,javaType=INTEGER}
+    </select>
+</mapper>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link rel="stylesheet" href="/css/active/active.css">
+    <link href="/css/common/personalCenter.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/common/upload.css" rel="stylesheet">
+    <link href="/css/common/message.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/active/active.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/common/message.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>比赛页面</title>
+</head>
+<body>
+<div id="big-container">
+    <myupload></myupload>
+    <mynav></mynav>
+</div>
+<div class="category-list">
+    <div class="nav_list">
+            <a class="nav_list_active" style="color: white" onclick="changepage1(),allActive()">全部活动</a>
+            <a class="nav_list_active" onclick="changepage2(),nowActive()">正在进行</a>
+            <a class="nav_list_active" onclick="changepage3(),endActive()">已经结束</a>
+    </div><!--nav_list结束-->
+</div><!--category-list结束-->
+
+<div id="activity_list"></div><!--activity_list结束-->
+
+<script src="/js/vue.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/upload/plupload.full.min.js"></script>
+<script src="/js/upload/qiniu.min.js"></script>
+<script src="/js/upload/upload.js"></script>
+<script>
+var xhr = null;
+if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+} else {
+    xhr = new ActiveXObject('Microsoft.XMLHTTP');
+}
+//页码一开始加载全部比赛
+window.onload=function () {
+    xhr.open("GET","/item/getAllItem",true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sr = JSON.parse(xhr.responseText);
+            var allActive = sr.data.allActive;
+            for (var i = 0; i < allActive.length; i++) {
+                document.getElementById("activity_list").innerHTML += "<div class=\"card\">\n" +
+                    "\n" +
+                    "        <a href=\"javascript:jump2detail("+ allActive[i].itemId+","+allActive[i].itemStatus +")\"><div class=\"picture\" style=\"background-image: url(" + allActive[i].itemImgPath + ")\"></div></a>\n\n" +
+                    "        <div class=\"content\">\n" +
+                    "            <span class=\"title\">" + allActive[i].itemName + "</span>\n" +
+                    "            <div class=\"award\">\n" +
+                    "                <div class=\"award_img\">\n" +
+                    "                    <img src=\"/images/active/award.jpg\" height=\"18\" width=\"18\">\n" +
+                    "                    <span>" + allActive[i].itemPrize + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--award结束-->\n" +
+                    "\n" +
+                    "            <div class=\"time\">\n" +
+                    "                <div class=\"time_img\">\n" +
+                    "                <img src=\"/images/active/time.jpg\" height=\"18\" width=\"18\"></a>\n" +
+                    "                    <span>" + allActive[i].itemTime + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--time结束-->\n" +
+                    "\n" +
+                    "            <a class=\"look\" href=\"javascript:jump2detail("+ allActive[i].itemId+","+allActive[i].itemStatus +")\">立即查看</a>\n" +
+                    "        </div><!--content结束-->\n" +
+                    "    </div><!--card结束-->"
+            }
+        }
+    }
+}
+//加载全部比赛
+function allActive() {
+    xhr.open("GET", "/item/getAllItem", true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sr = JSON.parse(xhr.responseText);
+            var allActive = sr.data.allActive;
+            document.getElementById("activity_list").innerHTML = "";
+            for (var i = 0; i < allActive.length; i++) {
+                document.getElementById("activity_list").innerHTML += "<div class=\"card\">\n" +
+                    "\n" +
+                    "        <a href=\"javascript:jump2detail("+ allActive[i].itemId+","+allActive[i].itemStatus +")\"><div class=\"picture\" style=\"background-image: url(" + allActive[i].itemImgPath + ")\"></div></a>\n\n" +
+                    "        <div class=\"content\">\n" +
+                    "            <span class=\"title\">" + allActive[i].itemName + "</span>\n" +
+                    "            <div class=\"award\">\n" +
+                    "                <div class=\"award_img\">\n" +
+                    "                    <img src=\"/images/active/award.jpg\" height=\"18\" width=\"18\">\n" +
+                    "                    <span>" + allActive[i].itemPrize + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--award结束-->\n" +
+                    "\n" +
+                    "            <div class=\"time\">\n" +
+                    "                <div class=\"time_img\">\n" +
+                    "                <img src=\"/images/active/time.jpg\" height=\"18\" width=\"18\"></a>\n" +
+                    "                    <span>" + allActive[i].itemTime + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--time结束-->\n" +
+                    "\n" +
+                    "            <a class=\"look\" href=\"javascript:jump2detail("+ allActive[i].itemId+","+allActive[i].itemStatus +")\">立即查看</a>\n" +
+                    "        </div><!--content结束-->\n" +
+                    "    </div><!--card结束-->"
+            }
+        }
+    }
+}
+//加载正在进行的比赛
+function nowActive() {
+
+    xhr.open("GET", "/item/getNowItem", true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sr = JSON.parse(xhr.responseText);
+            var nowActive = sr.data.nowActive;
+            document.getElementById("activity_list").innerHTML = "";
+
+            for (var i = 0; i < nowActive.length; i++) {
+                document.getElementById("activity_list").innerHTML += "    <div class=\"card\">\n" +
+                    "\n" +
+                    "        <a href=\"javascript:jump2detail("+ nowActive[i].itemId+","+nowActive[i].itemStatus +")\"><div class=\"picture\" style=\" background-image: url(" + nowActive[i].itemImgPath + ")\"></div></a>\n" +
+                    "\n" +
+                    "        <div class=\"content\">\n" +
+                    "            <span class=\"title\">" + nowActive[i].itemName + "</span>\n" +
+                    "            <div class=\"award\">\n" +
+                    "                <div class=\"award_img\">\n" +
+                    "                    <img src=\"/images/active/award.jpg\" height=\"18\" width=\"18\">\n" +
+                    "                    <span>" + nowActive[i].itemPrize + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--award结束-->\n" +
+                    "\n" +
+                    "            <div class=\"time\">\n" +
+                    "                <div class=\"time_img\">\n" +
+                    "                    <img src=\"/images/active/time.jpg\" height=\"18\" width=\"18\">\n" +
+                    "                    <span>"+ nowActive[i].itemTime +"</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--time结束-->\n" +
+                    "\n" +
+                    "            <a class=\"look\" href=\"javascript:jump2detail("+ nowActive[i].itemId+","+nowActive[i].itemStatus +")\">立即查看</a>\n" +
+                    "        </div><!--content结束-->\n" +
+                    "    </div><!--card结束-->"
+            }
+        }
+    }
+}
+//加载已经结束的比赛
+function endActive() {
+    xhr.open("GET", "/item/getEndItem", true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sr = JSON.parse(xhr.responseText);
+            var endActive = sr.data.endActive;
+            document.getElementById("activity_list").innerHTML = "";
+            for (var i = 0; i < endActive.length; i++) {
+                document.getElementById("activity_list").innerHTML += "    <div class=\"card\">\n" +
+                    "\n" +
+                    "        <a href=\"javascript:jump2detail("+ endActive[i].itemId+","+endActive[i].itemStatus +")\"><div class=\"picture\" style=\" background-image: url(" + endActive[i].itemImgPath + ")\"></div></a>\n" +
+                    "\n" +
+                    "        <div class=\"content\">\n" +
+                    "            <span class=\"title\">" + endActive[i].itemName + "</span>\n" +
+                    "            <div class=\"award\">\n" +
+                    "                <div class=\"award_img\">\n" +
+                    "                    <img src=\"/images/active/award.jpg\" height=\"18\" width=\"18\">\n" +
+                    "                    <span>" + endActive[i].itemPrize + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--award结束-->\n" +
+                    "\n" +
+                    "            <div class=\"time\">\n" +
+                    "                <div class=\"time_img\">\n" +
+                    "                    <img src=\"/images/active/time.jpg\" height=\"18\" width=\"18\">\n" +
+                    "                    <span>" + endActive[i].itemTime + "</span>\n" +
+                    "                </div>\n" +
+                    "            </div><!--time结束-->\n" +
+                    "\n" +
+                    "            <a class=\"look\" href=\"javascript:jump2detail("+ endActive[i].itemId+","+endActive[i].itemStatus +")\">立即查看</a>\n" +
+                    "        </div><!--content结束-->\n" +
+                    "    </div><!--card结束-->"
+            }
+        }
+    }
+}
+//跳转到比赛详情页面
+function jump2detail(itemId,itemStatus) {
+    var storage = window.sessionStorage;
+    storage.itemId = itemId;
+    storage.itemStatus=itemStatus;
+    storage.currentPageImage=1;
+    storage.currentPageAuthor=1;
+    storage.imageId = 1;
+    window.location.href="/view/activedetail";
+}
+</script>
+</body>
+</html>

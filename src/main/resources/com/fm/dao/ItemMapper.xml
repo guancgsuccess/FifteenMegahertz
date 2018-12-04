@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ItemDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.Item">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_topic" jdbcType="VARCHAR" property="itemTopic" />
+    <result column="item_create_time" jdbcType="TIMESTAMP" property="itemCreateTime" />
+    <result column="item_end_time" jdbcType="TIMESTAMP" property="itemEndTime" />
+    <result column="item_info" jdbcType="VARCHAR" property="itemInfo" />
+    <result column="item_ruler" jdbcType="VARCHAR" property="itemRuler" />
+    <result column="item_prize" jdbcType="VARCHAR" property="itemPrize" />
+    <result column="item_img_path" jdbcType="VARCHAR" property="itemImgPath" />
+    <result column="item_status" jdbcType="INTEGER" property="itemStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    item_id, item_name, item_topic, item_create_time, item_end_time, item_info, item_ruler, 
+    item_prize, item_img_path, item_status
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ItemExample">
+    delete from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.Item">
+    insert into item (item_id, item_name, item_topic, 
+      item_create_time, item_end_time, item_info, 
+      item_ruler, item_prize, item_img_path, 
+      item_status)
+    values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemTopic,jdbcType=VARCHAR}, 
+      #{itemCreateTime,jdbcType=TIMESTAMP}, #{itemEndTime,jdbcType=TIMESTAMP}, #{itemInfo,jdbcType=VARCHAR}, 
+      #{itemRuler,jdbcType=VARCHAR}, #{itemPrize,jdbcType=VARCHAR}, #{itemImgPath,jdbcType=VARCHAR}, 
+      #{itemStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.Item">
+    insert into item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemTopic != null">
+        item_topic,
+      </if>
+      <if test="itemCreateTime != null">
+        item_create_time,
+      </if>
+      <if test="itemEndTime != null">
+        item_end_time,
+      </if>
+      <if test="itemInfo != null">
+        item_info,
+      </if>
+      <if test="itemRuler != null">
+        item_ruler,
+      </if>
+      <if test="itemPrize != null">
+        item_prize,
+      </if>
+      <if test="itemImgPath != null">
+        item_img_path,
+      </if>
+      <if test="itemStatus != null">
+        item_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTopic != null">
+        #{itemTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCreateTime != null">
+        #{itemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemEndTime != null">
+        #{itemEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemInfo != null">
+        #{itemInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemRuler != null">
+        #{itemRuler,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrize != null">
+        #{itemPrize,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImgPath != null">
+        #{itemImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="itemStatus != null">
+        #{itemStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ItemExample" resultType="java.lang.Long">
+    select count(*) from item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update item
+    <set>
+      <if test="record.itemId != null">
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemName != null">
+        item_name = #{record.itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemTopic != null">
+        item_topic = #{record.itemTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemCreateTime != null">
+        item_create_time = #{record.itemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.itemEndTime != null">
+        item_end_time = #{record.itemEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.itemInfo != null">
+        item_info = #{record.itemInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemRuler != null">
+        item_ruler = #{record.itemRuler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemPrize != null">
+        item_prize = #{record.itemPrize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemImgPath != null">
+        item_img_path = #{record.itemImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemStatus != null">
+        item_status = #{record.itemStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update item
+    set item_id = #{record.itemId,jdbcType=INTEGER},
+      item_name = #{record.itemName,jdbcType=VARCHAR},
+      item_topic = #{record.itemTopic,jdbcType=VARCHAR},
+      item_create_time = #{record.itemCreateTime,jdbcType=TIMESTAMP},
+      item_end_time = #{record.itemEndTime,jdbcType=TIMESTAMP},
+      item_info = #{record.itemInfo,jdbcType=VARCHAR},
+      item_ruler = #{record.itemRuler,jdbcType=VARCHAR},
+      item_prize = #{record.itemPrize,jdbcType=VARCHAR},
+      item_img_path = #{record.itemImgPath,jdbcType=VARCHAR},
+      item_status = #{record.itemStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.Item">
+    update item
+    <set>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTopic != null">
+        item_topic = #{itemTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCreateTime != null">
+        item_create_time = #{itemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemEndTime != null">
+        item_end_time = #{itemEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemInfo != null">
+        item_info = #{itemInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemRuler != null">
+        item_ruler = #{itemRuler,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrize != null">
+        item_prize = #{itemPrize,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImgPath != null">
+        item_img_path = #{itemImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="itemStatus != null">
+        item_status = #{itemStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.Item">
+    update item
+    set item_name = #{itemName,jdbcType=VARCHAR},
+      item_topic = #{itemTopic,jdbcType=VARCHAR},
+      item_create_time = #{itemCreateTime,jdbcType=TIMESTAMP},
+      item_end_time = #{itemEndTime,jdbcType=TIMESTAMP},
+      item_info = #{itemInfo,jdbcType=VARCHAR},
+      item_ruler = #{itemRuler,jdbcType=VARCHAR},
+      item_prize = #{itemPrize,jdbcType=VARCHAR},
+      item_img_path = #{itemImgPath,jdbcType=VARCHAR},
+      item_status = #{itemStatus,jdbcType=INTEGER}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+</mapper>

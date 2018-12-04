@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>15M摄影</title>
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link type="text/css" href="/css/home/home.css" rel="stylesheet">
+    <link type="text/css" href="/css/common/personalCenter.css" rel="stylesheet">
+    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/common/upload.css" rel="stylesheet">
+    <link href="/css/common/message.css" rel="stylesheet">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        #box img {
+            width:100%;
+            display: block;
+        }
+
+        .item {
+
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="big-container">
+    <myupload></myupload>
+    <div id="top">
+        <div id="show">
+            <div class="images" style="background: url('/images/home/show-1.jpg') no-repeat center center;background-size: cover;"></div>
+            <div class="images" style="background: url('/images/home/show-2.jpg') no-repeat center center;background-size: cover;"></div>
+            <div class="images" style="background: url('/images/home/show-3.jpg') no-repeat center center;background-size: cover;">
+                <div>
+                    &nbsp;
+                    <span class="show-span">15M摄影</span>
+                    <br>
+                    <a href="/view/sign" id="show-btn">加入我们</a>
+                </div>
+            </div>
+        </div>
+        <div id="tab">
+            <ul>
+                <li class="tab-bg"></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <mynav style="background-color:rgba(0,0,0,0)"></mynav>
+    </div>
+
+    <div id="introduce">
+        <h2>最好的照片，由你选择</h2>
+        <span>获得灵感，分享你最好的照片，一起探寻创造难以置信的摄影艺术</span>
+    </div>
+        <div id="other">
+            <div class="other-div">
+                <div class="show-img-left1">
+                </div>
+                <div class="show-text-left">
+                    <span>热门活动</span>
+                    <br>
+                    <p>东方传统色彩起源于对自然的认知，城市中人工造物的颜色，在自然面前永远会感到羞赧。 《了不起的村落》第2季在自然中寻找这些被忽视的东方色彩，拾起散落在这片大陆上的美好。希望你能够加入我们这一次的寻色之旅，探索并记录你眼中与色彩相关的一切事物、美景。</p>
+                    <br>
+                    <input class="other-btn" type="button" value="立即参加" onclick="window.location.href='/view/active'">
+                </div>
+            </div>
+            <div class="other-div">
+                <div class="show-text-right">
+                    <span>摄影社区</span>
+                    <br>
+                    <p>国内最大的摄影师互动社区，超过500万摄影爱好者在此学习交流,快来加入吧!</p>
+                    <br>
+                    <input class="other-btn" type="button" value="立即进入" onclick="window.location.href='/view/comm'">
+                </div>
+                <div class="show-img-right">
+                </div>
+            </div>
+            <div class="other-div">
+                <div class="show-img-left2">
+                </div>
+                <div class="show-text-left">
+                    <span>定制摄影</span>
+                    <br>
+                    <p>门户签约摄影师独家为你打造你的专属写真,记录美好时光!</p>
+                    <br>
+                    <input class="other-btn" type="button" value="立即探索" onclick="window.location.href='/view/all'">
+                </div>
+            </div>
+        </div>
+    <div id="content">
+        <div id="choice" class="center-block">
+            <span class="choice-color">热门推荐</span>
+        </div>
+        <div id="box">
+
+        </div>
+    </div>
+    <div>
+        <div id='load-more'><a href="/view/all_image">发现更多</a></div>
+        <myfooter></myfooter>
+    </div>
+
+
+    </div>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/home/home.js"></script>
+    <script type="text/javascript" src="js/home/nav.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/common/common.js"></script>
+    <script src="js/upload/plupload.full.min.js"></script>
+    <script src="js/upload/qiniu.min.js"></script>
+    <script src="js/common/message.js"></script>
+    <script src="js/upload/upload.js"></script>
+    <script type="application/javascript">
+        let ajax=null;
+        let currentPage=0;
+        let totalPage=0;
+        if(window.XMLHttpRequest){
+            ajax=new XMLHttpRequest();
+        }else{
+            ajax=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        let currentUrl=null;
+        window.onload=function () {
+            currentUrl="/image/get/0/0/4/1";
+            loadTopImage(currentUrl);
+        };
+        function loadTopImage(url) {
+            let imageDiv=document.getElementById("box");
+            ajax.open("GET",url,true);
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState === 4 && ajax.status === 200) {
+                    let jsText = JSON.parse(ajax.responseText);
+                    for (let i in jsText.data.pageModel.modelList) {
+                        imageDiv.innerHTML+="<div class='item'><a href='javascript:goDetail("+jsText.data.pageModel.modelList[i].imageId+")' ><img class='inner-pic' src='"+jsText.data.pageModel.modelList[i].imageCompressPath+"'></a></div>";
+                        document.getElementsByClassName("inner-pic")[i].onload = function () {
+                            waterFall();
+                        }
+                    }
+                    totalPage=jsText.data.pageModel.totalPages;
+                    currentPage=jsText.data.pageModel.currentPageCode;
+                    if(totalPage!==currentPage){
+                        currentUrl="image/get/0/0/4/"+(parseInt(jsText.data.pageModel.currentPageCode)+1);
+                    }
+                }
+                setTimeout("waterFall()",1000)
+
+            };
+            ajax.send(null);
+        }
+
+        function goDetail(id) {
+            let storage=window.sessionStorage;
+            storage.id=id;
+            window.open('/view/image_info');
+        }
+        let box = document.getElementById('box');
+        let items = box.children;
+        // 布局函数 定义每一列之间的间隙 为10像素
+        function waterFall() {
+            // 1- 确定列数  = 页面的宽度 / 图片的宽度
+            var pageWidth = getClient().width;
+            var itemWidth = pageWidth/4-10;
+            $("#box img").css("width",itemWidth+"px");
+            var columns = 4;
+            //parseInt(pageWidth / (itemWidth + 10))
+            var arr = [];
+            for (var i = 0; i < items.length; i++) {
+                if (i < columns) {
+                    // 2- 确定第一行
+                    items[i].style.top = 0;
+                    items[i].style.left = (itemWidth + 10) * i + 'px';
+                    arr.push(items[i].offsetHeight);
+                } else {
+                    // 其他行
+                    // 3- 找到数组中最小高度  和 它的索引
+                    var minHeight = arr[0];
+                    var index = 0;
+                    for (var j = 0; j < arr.length; j++) {
+                        if (minHeight > arr[j]) {
+                            minHeight = arr[j];
+                            index = j;
+                        }
+                    }
+                    // 4- 设置下一行的第一个盒子位置
+                    // top值就是最小列的高度 + gap
+                    items[i].style.top = arr[index] + 10 + 'px';
+                    // left值就是最小列距离左边的距离
+                    items[i].style.left = items[index].offsetLeft + 'px';
+                    // 5- 修改最小列的高度
+                    // 最小列的高度 = 当前自己的高度 + 拼接过来的高度 + 间隙的高度
+                    arr[index] = arr[index] + items[i].offsetHeight + 10;
+                }
+            }
+            var maxHeight = Math.max.apply(null, arr);
+            box.style.height = maxHeight + 'px';
+        }
+        window.onscroll = function() {
+            if(items.length!==0){
+                if (getClient().height + getScrollTop() >= items[items.length - 1].offsetTop) {
+                    if(currentPage!==totalPage){
+                        loadTopImage(currentUrl);
+                    }
+                }
+            }
+
+        };
+        // 页面尺寸改变时实时触发
+        window.onresize = function() {
+            waterFall();
+        };
+        // clientWidth 处理兼容性
+        function getClient() {
+            return {
+                width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+            }
+        }
+        // scrollTop兼容性处理
+        function getScrollTop() {
+            return window.pageYOffset || document.documentElement.scrollTop;
+        }
+    </script>
+
+</body>
+</html>
+

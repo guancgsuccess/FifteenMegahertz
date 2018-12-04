@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ImageCommentDao">
+
+  <resultMap id="BaseResultMap" type="com.fm.entity.ImageComment">
+    <id column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="cust_from_id" jdbcType="INTEGER" property="custFromId" />
+    <result column="cust_to_id" jdbcType="INTEGER" property="custToId" />
+    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+    <result column="comment_create_time" jdbcType="TIMESTAMP" property="commentCreateTime" />
+    <result column="comment_status" jdbcType="INTEGER" property="commentStatus" />
+    <result column="blank_1" jdbcType="VARCHAR" property="blank1" />
+    <result column="blank_2" jdbcType="VARCHAR" property="blank2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    comment_id, image_id, cust_from_id, cust_to_id, comment_content, comment_create_time, 
+    comment_status, blank_1, blank_2
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ImageCommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from image_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ImageCommentExample">
+    delete from image_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.ImageComment">
+    insert into image_comment (comment_id, image_id, cust_from_id, 
+      cust_to_id, comment_content, comment_create_time
+      )
+    values (null, #{imageId,jdbcType=INTEGER}, #{custFromId,jdbcType=INTEGER},
+      #{custToId,jdbcType=INTEGER}, #{commentContent,jdbcType=VARCHAR}, #{commentCreateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.ImageComment">
+    insert into image_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="custFromId != null">
+        cust_from_id,
+      </if>
+      <if test="custToId != null">
+        cust_to_id,
+      </if>
+      <if test="commentContent != null">
+        comment_content,
+      </if>
+      <if test="commentCreateTime != null">
+        comment_create_time,
+      </if>
+      <if test="commentStatus != null">
+        comment_status,
+      </if>
+      <if test="blank1 != null">
+        blank_1,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="custFromId != null">
+        #{custFromId,jdbcType=INTEGER},
+      </if>
+      <if test="custToId != null">
+        #{custToId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCreateTime != null">
+        #{commentCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="blank1 != null">
+        #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ImageCommentExample" resultType="java.lang.Long">
+    select count(*) from image_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update image_comment
+    <set>
+      <if test="record.commentId != null">
+        comment_id = #{record.commentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageId != null">
+        image_id = #{record.imageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custFromId != null">
+        cust_from_id = #{record.custFromId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custToId != null">
+        cust_to_id = #{record.custToId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentContent != null">
+        comment_content = #{record.commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentCreateTime != null">
+        comment_create_time = #{record.commentCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commentStatus != null">
+        comment_status = #{record.commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.blank1 != null">
+        blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank2 != null">
+        blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update image_comment
+    set comment_id = #{record.commentId,jdbcType=INTEGER},
+      image_id = #{record.imageId,jdbcType=INTEGER},
+      cust_from_id = #{record.custFromId,jdbcType=INTEGER},
+      cust_to_id = #{record.custToId,jdbcType=INTEGER},
+      comment_content = #{record.commentContent,jdbcType=VARCHAR},
+      comment_create_time = #{record.commentCreateTime,jdbcType=TIMESTAMP},
+      comment_status = #{record.commentStatus,jdbcType=INTEGER},
+      blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      blank_2 = #{record.blank2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.ImageComment">
+    update image_comment
+    <set>
+      <if test="imageId != null">
+        image_id = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="custFromId != null">
+        cust_from_id = #{custFromId,jdbcType=INTEGER},
+      </if>
+      <if test="custToId != null">
+        cust_to_id = #{custToId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCreateTime != null">
+        comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentStatus != null">
+        comment_status = #{commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="blank1 != null">
+        blank_1 = #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        blank_2 = #{blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.ImageComment">
+    update image_comment
+    set image_id = #{imageId,jdbcType=INTEGER},
+      cust_from_id = #{custFromId,jdbcType=INTEGER},
+      cust_to_id = #{custToId,jdbcType=INTEGER},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+      comment_status = #{commentStatus,jdbcType=INTEGER},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

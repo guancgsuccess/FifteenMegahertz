@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>社区公告</title>
+    <link rel="icon" href="/images/Favicon.ico" type="img/x-ico"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/community/bulletin.css">
+    <link rel="stylesheet" href="/css/community/layout.css">
+    <link rel="stylesheet" href="/css/community/main-top.css">
+    <link rel="stylesheet" href="/css/community/main-right.css">
+    <link rel="stylesheet" href="/css/community/nav.css">
+    <link rel="stylesheet" href="/css/community/footer.css">
+</head>
+<body>
+<nav class="community-nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 community-nav-logo"><a href="/">
+                <img src="/images/community/logo-black.png"/>
+            </a></div>
+            <div class="col-md-4 community-nav-search">
+                <div class="community-nav-search-content">
+                    <img id="community-nav-search-img" src="/images/community/search-1.png"/>
+                    <input id="community-nav-search" type="text" placeholder="搜索">
+                </div>
+                <div id="community-nav-search-hide" class="community-nav-search-tip"></div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 community-nav-btn">
+                <div>
+                    <a class="community-nav-btn-one" href="/">
+                        <img src="/images/community/index.png"/>
+                        <span>首页</span>
+                    </a>
+                </div>
+                <div class="community-nav-btn-one-special">
+                    <a id="community-nav-classify" class="community-nav-btn-one" href="javascript:void(0)">
+                        <img src="/images/community/classify.png"/>
+                        <span>类别</span>
+                    </a>
+                    <div id="community-nav-classify-hide" class="community-nav-btn-one-special-select">
+                        <i>
+                            <img src="/images/community/up-select.png"/>
+                        </i>
+                        <div id="community-nav-classify-container">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a class="community-nav-btn-one" href="/view/comm">
+                        <img class="community-nav-btn-one-img-one" src="/images/community/find.png"/>
+                        <span>发现</span>
+                    </a>
+                </div>
+                <div class="community-nav-btn-div-special">
+                    <a class="community-nav-btn-two community-nav-btn-two-special" href="/login.html">
+                        <span>登录</span>
+                    </a>|
+                    <a class="community-nav-btn-two" href="/register.html"><span>注册</span></a>
+                </div>
+                <div class="community-nav-logout community-nav-btn-one-special community-nav-hide">
+                    <a id="community-nav-customer" class="community-nav-btn-one" href="javascript:void(0)">
+                        <img class="community-nav-btn-one-img-two" src="/images/community/customer.png"/>
+                    </a>
+                    <div id="community-nav-customer-hide" class="community-nav-btn-one-special-select">
+                        <i>
+                            <img src="/images/community/up-select.png"/>
+                        </i>
+                        <div id="community-nav-customer-container">
+                            <ul class="community-nav-loading-ul">
+                                <li id="customer-personal">
+                                    <img src="/images/community/nav-personal.png"><span>个人中心</span>
+                                </li>
+                                <li id="community-center-news">
+                                    <img src="/images/community/nav-news.png"><span>消息</span>
+                                </li>
+                                <li id="community-center">
+                                    <img src="/images/community/nav-community.png"><span>社区</span>
+                                </li>
+                                <li id="customer-order">
+                                    <img src="/images/community/nav-order.png"><span>交易记录</span>
+                                </li>
+                                <li id="customer-collection">
+                                    <img src="/images/community/nav-collection.png"><span>收藏</span>
+                                </li>
+                                <li id="customer-follow">
+                                    <img src="/images/community/nav-follow.png"><span>关注</span>
+                                </li>
+                                <li id="customer-setting">
+                                    <img src="/images/community/nav-setting.png"><span>设置</span>
+                                </li>
+                                <li id="customer-logout">
+                                    <img src="/images/community/nav-logout.png"><span>退出登录</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container community-size community-advertisement">
+    <img src="/images/community/advertisement.jpg"/></div>
+<div class="container community-size community-content">
+    <div class="community-content-one">
+        <div class="community-bulletin-content"></div>
+    </div>
+    <div class="community-content-two">
+        <div class="community-content-two-personal">
+            <div class="community-content-two-personal-message">
+                <div class="community-content-two-personal-profile-tip">
+                    我的社区
+                </div>
+                <div id="community-right-personal">
+
+                </div>
+                <div class="community-content-two-personal-tip">已加入：</div>
+                <div id="community-right-customer-community" class="community-content-two-personal-community">
+
+                </div>
+            </div>
+        </div>
+        <div class="community-content-two-enter">
+            <div class="community-content-two-enter-content">
+                <div class="community-content-two-enter-content-top">
+                    快速入口
+                </div>
+                <div class="community-content-two-enter-content-content">
+                    <div id="community-community"><img src="/images/community/right-to.png">全部社区</div>
+                    <div id="community-center-message"><img src="/images/community/right-to.png">消息</div>
+                    <div id="community-community-add"><img src="/images/community/right-to.png">申请社区</div>
+                    <div id="community-bulletin-add"><img src="/images/community/right-to.png">发布公告</div>
+                    <div id="community-center-setting"><img src="/images/community/right-to.png">设置</div>
+                </div>
+            </div>
+        </div>
+        <div class="community-content-two-recommend">
+            <div class="community-content-two-recommend-content">
+                <div class="community-content-two-recommend-content-top">社区推荐</div>
+                <ul id="community-right-community">
+
+                </ul>
+            </div>
+        </div>
+        <div class="community-content-two-classify">
+            <div class="community-content-two-classify-content">
+                <div class="community-content-two-classify-content-top">寻找社区</div>
+                <div id="community-right-classify" class="community-content-two-classify-content-classify">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer-left"></div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>社区</h3></li>
+            <li><a href="" class="footer-btn">热门</a></li>
+            <li><a href="" class="footer-btn">交友</a></li>
+            <li><a href="" class="footer-btn">隐私条款</a></li>
+            <li><a href="" class="footer-btn">帮助</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>商业</h3></li>
+            <li><a href="" class="footer-btn">签约合作</a></li>
+            <li><a href="" class="footer-btn">创作分成</a></li>
+            <li><a href="" class="footer-btn">定制商业摄影</a></li>
+            <li><a href="" class="footer-btn">活动发起</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>联系我们</h3></li>
+            <li><a href="" class="footer-btn">888-8888-8888</a></li>
+            <li><a href="" class="footer-btn">yftpaper@15m.com</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul class="footer-ul">
+            <li class="first-li"><h3>关于</h3></li>
+            <li><a href="" class="footer-btn">关于15M</a></li>
+            <li><a href="" class="footer-btn">15M工作</a></li>
+            <li><a href="" class="footer-btn">意见反馈</a></li>
+        </ul>
+    </div>
+    <div id="copyright">
+        <span>© 2018 Copyright 苏州十五兆科技摄影责任有限公司 苏ICP备14057276号-4</span>
+    </div>
+</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/community/obj.js"></script>
+<script src="/js/customer/personalCenter.js"></script>
+<script src="/js/community/bulletin.js"></script>
+<script src="/js/community/main-right.js"></script>
+<script src="/js/community/nav.js"></script>
+</body>
+</html>

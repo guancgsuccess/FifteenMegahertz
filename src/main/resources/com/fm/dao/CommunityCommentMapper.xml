@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CommunityCommentDao">
+    <cache type="com.fm.cache.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.fm.entity.CommunityComment">
+        <id column="comment_id" jdbcType="INTEGER" property="commentId"/>
+        <result column="message_id" jdbcType="INTEGER" property="messageId"/>
+        <result column="super_comment_id" jdbcType="INTEGER" property="superCommentId"/>
+        <result column="cust_id" jdbcType="INTEGER" property="custId"/>
+        <result column="comment_create_time" jdbcType="TIMESTAMP" property="commentCreateTime"/>
+        <result column="comment_content" jdbcType="VARCHAR" property="commentContent"/>
+        <result column="comment_status" jdbcType="INTEGER" property="commentStatus"/>
+        <result column="blank1" jdbcType="VARCHAR" property="blank1"/>
+        <result column="blank2" jdbcType="VARCHAR" property="blank2"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    comment_id, message_id, super_comment_id, cust_id, comment_create_time, comment_content, 
+    comment_status, blank1, blank2
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_comment
+        where comment_id = #{commentId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from community_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fm.entity.CommunityComment">
+    insert into community_comment (comment_id, message_id, super_comment_id, 
+      cust_id, comment_create_time, comment_content, 
+      comment_status, blank1, blank2
+      )
+    values (#{commentId,jdbcType=INTEGER}, #{messageId,jdbcType=INTEGER}, #{superCommentId,jdbcType=INTEGER}, 
+      #{custId,jdbcType=INTEGER}, #{commentCreateTime,jdbcType=TIMESTAMP}, #{commentContent,jdbcType=VARCHAR}, 
+      #{commentStatus,jdbcType=INTEGER}, #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fm.entity.CommunityComment">
+        insert into community_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">
+                comment_id,
+            </if>
+            <if test="messageId != null">
+                message_id,
+            </if>
+            <if test="superCommentId != null">
+                super_comment_id,
+            </if>
+            <if test="custId != null">
+                cust_id,
+            </if>
+            <if test="commentCreateTime != null">
+                comment_create_time,
+            </if>
+            <if test="commentContent != null">
+                comment_content,
+            </if>
+            <if test="commentStatus != null">
+                comment_status,
+            </if>
+            <if test="blank1 != null">
+                blank1,
+            </if>
+            <if test="blank2 != null">
+                blank2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">
+                #{commentId,jdbcType=INTEGER},
+            </if>
+            <if test="messageId != null">
+                #{messageId,jdbcType=INTEGER},
+            </if>
+            <if test="superCommentId != null">
+                #{superCommentId,jdbcType=INTEGER},
+            </if>
+            <if test="custId != null">
+                #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="commentCreateTime != null">
+                #{commentCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentContent != null">
+                #{commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="commentStatus != null">
+                #{commentStatus,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                #{blank2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CommunityComment">
+        update community_comment
+        <set>
+            <if test="messageId != null">
+                message_id = #{messageId,jdbcType=INTEGER},
+            </if>
+            <if test="superCommentId != null">
+                super_comment_id = #{superCommentId,jdbcType=INTEGER},
+            </if>
+            <if test="custId != null">
+                cust_id = #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="commentCreateTime != null">
+                comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentContent != null">
+                comment_content = #{commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="commentStatus != null">
+                comment_status = #{commentStatus,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                blank1 = #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                blank2 = #{blank2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where comment_id = #{commentId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fm.entity.CommunityComment">
+    update community_comment
+    set message_id = #{messageId,jdbcType=INTEGER},
+      super_comment_id = #{superCommentId,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER},
+      comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      comment_status = #{commentStatus,jdbcType=INTEGER},
+      blank1 = #{blank1,jdbcType=VARCHAR},
+      blank2 = #{blank2,jdbcType=VARCHAR}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+    <!-- 查询信息的评论数量 -->
+    <select id="selectCommentCountByMessageId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from community_comment
+    where comment_status = 1
+    and message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+    <!-- 查询信息的评论 -->
+    <select id="selectCommentByMessageId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_comment
+        where comment_status = 1
+        and message_id = #{messageId,jdbcType=INTEGER}
+        order by comment_create_time
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!-- 查询信息的评论 -->
+    <select id="selectAllCommentByMessageId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_comment
+        where comment_status = 1
+        and message_id = #{messageId,jdbcType=INTEGER}
+    </select>
+    <!-- 查询某条评论的衍生评论 -->
+    <select id="selectCommentBySuperCommentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community_comment
+        where super_comment_id = #{superCommentId,jdbcType=INTEGER}
+    </select>
+    <!-- 修改评论信息状态码 -->
+    <update id="updateCommentStatusByMessId" parameterType="java.util.Map">
+        update community_comment
+        <set>
+            comment_status = #{commentStatus,jdbcType=INTEGER},
+        </set>
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

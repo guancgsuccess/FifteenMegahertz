@@ -1,0 +1,27 @@
+.community-info-content-content-unit-comment-page-two {
+    flex: 3;
+    margin: 5px 0 0 0;
+    text-align: right;
+}
+
+.community-info-content-content-unit-comment-page-two > a {
+    margin-left: 3px;
+    font-size: 10px;
+    color: #000000;
+}
+
+.community-info-content-content-unit-comment-page-two > a:hover {
+    color: #5fb6ff;
+}
+
+.community-info-content-content-unit-comment-page-two > span {
+    margin-left: 3px;
+    font-size: 10px;
+    color: #616161;
+}
+
+.community-info-content-content-unit-comment-page-two img {
+    position: relative;
+    top: -1px;
+    width: 10px;
+}

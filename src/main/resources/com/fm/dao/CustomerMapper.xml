@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CustomerDao">
+
+  <resultMap id="BaseResultMap" type="com.fm.entity.Customer">
+    <id column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="cust_nick" jdbcType="VARCHAR" property="custNick" />
+    <result column="cust_password" jdbcType="VARCHAR" property="custPassword" />
+    <result column="cust_intro" jdbcType="VARCHAR" property="custIntro" />
+    <result column="cust_phone" jdbcType="VARCHAR" property="custPhone" />
+    <result column="cust_credits" jdbcType="INTEGER" property="custCredits" />
+    <result column="range_exp" jdbcType="INTEGER" property="rangeExp" />
+    <result column="range_level" jdbcType="INTEGER" property="rangeLevel" />
+    <result column="cust_status" jdbcType="INTEGER" property="custStatus" />
+    <result column="cust_profile" jdbcType="VARCHAR" property="custProfile" />
+    <result column="cust_name" jdbcType="VARCHAR" property="custName" />
+    <result column="cust_gender" jdbcType="INTEGER" property="custGender" />
+    <result column="cust_age" jdbcType="INTEGER" property="custAge" />
+    <result column="cust_email" jdbcType="VARCHAR" property="custEmail" />
+    <result column="cust_province" jdbcType="VARCHAR" property="custProvince" />
+    <result column="cust_city" jdbcType="VARCHAR" property="custCity" />
+    <result column="cust_is_sign" jdbcType="INTEGER" property="custIsSign" />
+    <result column="cust_createtime" jdbcType="TIMESTAMP" property="custCreatetime" />
+    <result column="cust_update_time" jdbcType="TIMESTAMP" property="custUpdateTime" />
+    <result column="blank_1" jdbcType="VARCHAR" property="blank1" />
+    <result column="blank_2" jdbcType="VARCHAR" property="blank2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cust_id, cust_nick, cust_password, cust_intro, cust_phone, cust_credits, range_exp, 
+    range_level, cust_status, cust_profile, cust_name, cust_gender, cust_age, cust_email, 
+    cust_province, cust_city, cust_is_sign, cust_createtime, cust_update_time, blank_1, 
+    blank_2
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.CustomerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.CustomerExample">
+    delete from customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.Customer">
+    insert into customer (cust_id, cust_nick, cust_password, 
+      cust_intro, cust_phone, cust_credits, 
+      range_exp, range_level, cust_status, 
+      cust_profile, cust_name, cust_gender, 
+      cust_age, cust_email, cust_province, 
+      cust_city, cust_is_sign, cust_createtime, 
+      cust_update_time, blank_1, blank_2
+      )
+    values (#{custId,jdbcType=INTEGER}, #{custNick,jdbcType=VARCHAR}, #{custPassword,jdbcType=VARCHAR}, 
+      #{custIntro,jdbcType=VARCHAR}, #{custPhone,jdbcType=VARCHAR}, #{custCredits,jdbcType=INTEGER}, 
+      #{rangeExp,jdbcType=INTEGER}, #{rangeLevel,jdbcType=INTEGER}, #{custStatus,jdbcType=INTEGER}, 
+      #{custProfile,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{custGender,jdbcType=INTEGER}, 
+      #{custAge,jdbcType=INTEGER}, #{custEmail,jdbcType=VARCHAR}, #{custProvince,jdbcType=VARCHAR}, 
+      #{custCity,jdbcType=VARCHAR}, #{custIsSign,jdbcType=INTEGER}, #{custCreatetime,jdbcType=TIMESTAMP}, 
+      #{custUpdateTime,jdbcType=TIMESTAMP}, #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.Customer">
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="custNick != null">
+        cust_nick,
+      </if>
+      <if test="custPassword != null">
+        cust_password,
+      </if>
+      <if test="custIntro != null">
+        cust_intro,
+      </if>
+      <if test="custPhone != null">
+        cust_phone,
+      </if>
+      <if test="custCredits != null">
+        cust_credits,
+      </if>
+      <if test="rangeExp != null">
+        range_exp,
+      </if>
+      <if test="rangeLevel != null">
+        range_level,
+      </if>
+      <if test="custStatus != null">
+        cust_status,
+      </if>
+      <if test="custProfile != null">
+        cust_profile,
+      </if>
+      <if test="custName != null">
+        cust_name,
+      </if>
+      <if test="custGender != null">
+        cust_gender,
+      </if>
+      <if test="custAge != null">
+        cust_age,
+      </if>
+      <if test="custEmail != null">
+        cust_email,
+      </if>
+      <if test="custProvince != null">
+        cust_province,
+      </if>
+      <if test="custCity != null">
+        cust_city,
+      </if>
+      <if test="custIsSign != null">
+        cust_is_sign,
+      </if>
+      <if test="custCreatetime != null">
+        cust_createtime,
+      </if>
+      <if test="custUpdateTime != null">
+        cust_update_time,
+      </if>
+      <if test="blank1 != null">
+        blank_1,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="custNick != null">
+        #{custNick,jdbcType=VARCHAR},
+      </if>
+      <if test="custPassword != null">
+        #{custPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="custIntro != null">
+        #{custIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="custPhone != null">
+        #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custCredits != null">
+        #{custCredits,jdbcType=INTEGER},
+      </if>
+      <if test="rangeExp != null">
+        #{rangeExp,jdbcType=INTEGER},
+      </if>
+      <if test="rangeLevel != null">
+        #{rangeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="custStatus != null">
+        #{custStatus,jdbcType=INTEGER},
+      </if>
+      <if test="custProfile != null">
+        #{custProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGender != null">
+        #{custGender,jdbcType=INTEGER},
+      </if>
+      <if test="custAge != null">
+        #{custAge,jdbcType=INTEGER},
+      </if>
+      <if test="custEmail != null">
+        #{custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="custProvince != null">
+        #{custProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="custCity != null">
+        #{custCity,jdbcType=VARCHAR},
+      </if>
+      <if test="custIsSign != null">
+        #{custIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="custCreatetime != null">
+        #{custCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custUpdateTime != null">
+        #{custUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blank1 != null">
+        #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.CustomerExample" resultType="java.lang.Long">
+    select count(*) from customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update customer
+    <set>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custNick != null">
+        cust_nick = #{record.custNick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custPassword != null">
+        cust_password = #{record.custPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custIntro != null">
+        cust_intro = #{record.custIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custPhone != null">
+        cust_phone = #{record.custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custCredits != null">
+        cust_credits = #{record.custCredits,jdbcType=INTEGER},
+      </if>
+      <if test="record.rangeExp != null">
+        range_exp = #{record.rangeExp,jdbcType=INTEGER},
+      </if>
+      <if test="record.rangeLevel != null">
+        range_level = #{record.rangeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.custStatus != null">
+        cust_status = #{record.custStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.custProfile != null">
+        cust_profile = #{record.custProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null">
+        cust_name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custGender != null">
+        cust_gender = #{record.custGender,jdbcType=INTEGER},
+      </if>
+      <if test="record.custAge != null">
+        cust_age = #{record.custAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.custEmail != null">
+        cust_email = #{record.custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custProvince != null">
+        cust_province = #{record.custProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custCity != null">
+        cust_city = #{record.custCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custIsSign != null">
+        cust_is_sign = #{record.custIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="record.custCreatetime != null">
+        cust_createtime = #{record.custCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.custUpdateTime != null">
+        cust_update_time = #{record.custUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.blank1 != null">
+        blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank2 != null">
+        blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update customer
+    set cust_id = #{record.custId,jdbcType=INTEGER},
+      cust_nick = #{record.custNick,jdbcType=VARCHAR},
+      cust_password = #{record.custPassword,jdbcType=VARCHAR},
+      cust_intro = #{record.custIntro,jdbcType=VARCHAR},
+      cust_phone = #{record.custPhone,jdbcType=VARCHAR},
+      cust_credits = #{record.custCredits,jdbcType=INTEGER},
+      range_exp = #{record.rangeExp,jdbcType=INTEGER},
+      range_level = #{record.rangeLevel,jdbcType=INTEGER},
+      cust_status = #{record.custStatus,jdbcType=INTEGER},
+      cust_profile = #{record.custProfile,jdbcType=VARCHAR},
+      cust_name = #{record.custName,jdbcType=VARCHAR},
+      cust_gender = #{record.custGender,jdbcType=INTEGER},
+      cust_age = #{record.custAge,jdbcType=INTEGER},
+      cust_email = #{record.custEmail,jdbcType=VARCHAR},
+      cust_province = #{record.custProvince,jdbcType=VARCHAR},
+      cust_city = #{record.custCity,jdbcType=VARCHAR},
+      cust_is_sign = #{record.custIsSign,jdbcType=INTEGER},
+      cust_createtime = #{record.custCreatetime,jdbcType=TIMESTAMP},
+      cust_update_time = #{record.custUpdateTime,jdbcType=TIMESTAMP},
+      blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      blank_2 = #{record.blank2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.Customer">
+    update customer
+    <set>
+      <if test="custNick != null">
+        cust_nick = #{custNick,jdbcType=VARCHAR},
+      </if>
+      <if test="custPassword != null">
+        cust_password = #{custPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="custIntro != null">
+        cust_intro = #{custIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="custPhone != null">
+        cust_phone = #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custCredits != null">
+        cust_credits = #{custCredits,jdbcType=INTEGER},
+      </if>
+      <if test="rangeExp != null">
+        range_exp = #{rangeExp,jdbcType=INTEGER},
+      </if>
+      <if test="rangeLevel != null">
+        range_level = #{rangeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="custStatus != null">
+        cust_status = #{custStatus,jdbcType=INTEGER},
+      </if>
+      <if test="custProfile != null">
+        cust_profile = #{custProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        cust_name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGender != null">
+        cust_gender = #{custGender,jdbcType=INTEGER},
+      </if>
+      <if test="custAge != null">
+        cust_age = #{custAge,jdbcType=INTEGER},
+      </if>
+      <if test="custEmail != null">
+        cust_email = #{custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="custProvince != null">
+        cust_province = #{custProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="custCity != null">
+        cust_city = #{custCity,jdbcType=VARCHAR},
+      </if>
+      <if test="custIsSign != null">
+        cust_is_sign = #{custIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="custCreatetime != null">
+        cust_createtime = #{custCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custUpdateTime != null">
+        cust_update_time = #{custUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blank1 != null">
+        blank_1 = #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        blank_2 = #{blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.Customer">
+    update customer
+    set cust_nick = #{custNick,jdbcType=VARCHAR},
+      cust_password = #{custPassword,jdbcType=VARCHAR},
+      cust_intro = #{custIntro,jdbcType=VARCHAR},
+      cust_phone = #{custPhone,jdbcType=VARCHAR},
+      cust_credits = #{custCredits,jdbcType=INTEGER},
+      range_exp = #{rangeExp,jdbcType=INTEGER},
+      range_level = #{rangeLevel,jdbcType=INTEGER},
+      cust_status = #{custStatus,jdbcType=INTEGER},
+      cust_profile = #{custProfile,jdbcType=VARCHAR},
+      cust_name = #{custName,jdbcType=VARCHAR},
+      cust_gender = #{custGender,jdbcType=INTEGER},
+      cust_age = #{custAge,jdbcType=INTEGER},
+      cust_email = #{custEmail,jdbcType=VARCHAR},
+      cust_province = #{custProvince,jdbcType=VARCHAR},
+      cust_city = #{custCity,jdbcType=VARCHAR},
+      cust_is_sign = #{custIsSign,jdbcType=INTEGER},
+      cust_createtime = #{custCreatetime,jdbcType=TIMESTAMP},
+      cust_update_time = #{custUpdateTime,jdbcType=TIMESTAMP},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  <update id="updateCreditsByPrimaryKey" parameterType="hashmap">
+    update customer set cust_credits=cust_credits+#{money} where cust_id=#{custId}
+  </update>
+  <update id="updateExpByPrimaryKey" parameterType="hashmap">
+    update customer set range_exp=#{exp} where cust_id=#{custId}
+  </update>
+  <update id="updateLevelByPrimaryKey" parameterType="Integer">
+    update customer set range_level=range_level+1 where cust_id=#{custId}
+  </update>
+
+  <update id="updatePwdByEmail" parameterType="hashmap">
+    update customer set cust_password=#{pwd} where cust_email=#{mail}
+  </update>
+
+  <select id="selectCustomerByCustomerIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from customer
+    where cust_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item.custId,jdbcType=INTEGER}
+    </foreach>
+  </select>
+</mapper>

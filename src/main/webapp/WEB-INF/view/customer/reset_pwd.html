@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link rel="stylesheet" href="/css/customer/forgetPassword.css">
+    <link rel="stylesheet" href="/css/common/message.css">
+    <title>重置密码</title>
+    <style type="text/css">
+        #sessionId{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div  class="forget-password">
+    <input type="hidden" id="sessionId"/>
+    <input id="pwd1" placeholder="新密码" type="password" class="border-normal" style="margin-top: 30px;"><br>
+    <input id="pwd2" placeholder="重复新密码" type="password" class="border-normal" style="margin-top: 30px;"><br>
+    <button onclick="update()">确定</button>
+</div>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/common/message.js"></script>
+<script>
+    function update() {
+        let pwd1=document.getElementById("pwd1");
+        let pwd2=document.getElementById("pwd2");
+        if(pwd1.value==""||pwd2.value==""){
+            $.message({
+               message:'请填写完整!',
+               type:'error'
+            });
+        }else {
+            if(pwd1.value!==pwd2.value){
+                $.message({
+                    message:'两次密码不一致,请重新输入!',
+                    type:'error'
+                });
+            }else {
+                let ajax=null;
+                let token=window.location.href.substring(window.location.href.lastIndexOf("token")).substring(6);
+                if(window.XMLHttpRequest){
+                    ajax=new XMLHttpRequest();
+                }else{
+                    ajax=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                let formData="token="+token+"&pwd="+pwd2.value;
+                ajax.open("POST","/customer/mail/updatePwd",true);
+                ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+                ajax.onreadystatechange=function () {
+                    if(ajax.readyState===4&&ajax.status===200){
+                        let jsText=JSON.parse(ajax.responseText);
+                        if(jsText.status===1){
+                            $.message({
+                                message:jsText.msg+"3秒后自动跳转!",
+                                type:'success'
+                            });
+                            setTimeout("window.location='/login.html'",3000);
+                        }else {
+                            $.message({
+                                message:jsText.msg,
+                                type:'error'
+                            });
+                        }
+                    }
+                };
+                ajax.send(formData);
+            }
+        }
+    }
+</script>
+</body>
+</html>

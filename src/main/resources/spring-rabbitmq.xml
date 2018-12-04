@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd" >
+
+    <!--1、配置连接工厂, 如果不配置host, port, username, passowrd, 则按默认值localhost:5672, guest/guest-->
+    <!--<connection-factory id="connectionFactory" />-->
+    <rabbit:connection-factory id="cachingConnectionFactory"
+                        host="localhost"
+                        port="5672"
+                        username="guest"
+                        password="guest" />
+
+    <!--2、配置队列queue, Exchange, 以及将他们结合在一起的binding-->
+    <!--在queue以及exchange中, 有一个重要的属性durable, 默认为true, 可以防止宕机后数据丢失。-->
+    <!--在listener-container中, 有acknowledge属性, 默认为auto, 即消费者成功处理消息后必须有个应答, 如果消费者程序发生异常或者宕机, 消息会被重新放回队列-->
+    <rabbit:admin connection-factory="cachingConnectionFactory" />
+
+    <rabbit:queue id="userForgetEmailQueue" name="user.forget.email" durable="true" />  <!--durable默认为true-->
+
+    <!--标准的AMQP Exchange有4种: Direct, Topic, Headers, Fanout, 根据实际需要选择。-->
+    <!--Direct: 如果消息的routing key与bingding的routing key直接匹配的话, 消息将会路由到该队列上。-->
+    <!--Topic: 如果消息的routing key与bingding的routing key符合通配符匹配的话, 消息将会路由到该队列上。-->
+    <!--Headers: 如果消息参数表中的头信息和值都与binding参数表中相匹配, 消息将会路由到该队列上。-->
+    <!--Fanout: 不管消息的routing key和参数表的头信息/值是什么, 消息将会路由到该队列上。-->
+    <rabbit:direct-exchange name="user.forget.email.exchange" durable="true">
+        <rabbit:bindings>
+            <rabbit:binding queue="user.forget.email" />     <!--默认的routing key与队列的名称相同-->
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--3、配置RabbitTemplate发送消息-->
+    <rabbit:template id="rabbitTemplate"
+              connection-factory="cachingConnectionFactory" />
+
+    <!--4、配置监听器容器和监听器来接收消息-->
+    <bean id="emailHander" class="com.fm.rabbitmq.EmailHander" />
+    <!--concurrency: 初始化监听器容器时, 并发消费者的数目.-->
+    <!--max-concurrency: 并发消费者的最大数目.-->
+    <!--prefetch: 一次最多可以发送给同一个消费者的消息数目.-->
+    <rabbit:listener-container connection-factory="cachingConnectionFactory">
+        <rabbit:listener ref="emailHander"
+                  method="sendEmailToUserHandler"
+                  queues="userForgetEmailQueue" />
+    </rabbit:listener-container>
+
+</beans>

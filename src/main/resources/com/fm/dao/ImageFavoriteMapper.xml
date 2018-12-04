@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ImageFavoriteDao">
+
+  <resultMap id="BaseResultMap" type="com.fm.entity.ImageFavorite">
+    <id column="favorite_id" jdbcType="INTEGER" property="favoriteId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="favorite_status" jdbcType="INTEGER" property="favoriteStatus" />
+    <result column="blank1" jdbcType="VARCHAR" property="blank1" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    favorite_id, cust_id, image_id, favorite_status, blank1
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ImageFavoriteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from image_favorite
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_favorite
+    where favorite_id = #{favoriteId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image_favorite
+    where favorite_id = #{favoriteId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ImageFavoriteExample">
+    delete from image_favorite
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.ImageFavorite">
+    insert into image_favorite (cust_id, image_id)
+    values (#{custId,jdbcType=INTEGER}, #{imageId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.ImageFavorite">
+    insert into image_favorite
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="favoriteId != null">
+        favorite_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="favoriteStatus != null">
+        favorite_status,
+      </if>
+      <if test="blank1 != null">
+        blank1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="favoriteId != null">
+        #{favoriteId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteStatus != null">
+        #{favoriteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="blank1 != null">
+        #{blank1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ImageFavoriteExample" resultType="java.lang.Long">
+    select count(*) from image_favorite
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update image_favorite
+    <set>
+      <if test="record.favoriteId != null">
+        favorite_id = #{record.favoriteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageId != null">
+        image_id = #{record.imageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.favoriteStatus != null">
+        favorite_status = #{record.favoriteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.blank1 != null">
+        blank1 = #{record.blank1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update image_favorite
+    set favorite_id = #{record.favoriteId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      image_id = #{record.imageId,jdbcType=INTEGER},
+      favorite_status = #{record.favoriteStatus,jdbcType=INTEGER},
+      blank1 = #{record.blank1,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.ImageFavorite">
+    update image_favorite
+    <set>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null">
+        image_id = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteStatus != null">
+        favorite_status = #{favoriteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="blank1 != null">
+        blank1 = #{blank1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where favorite_id = #{favoriteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.ImageFavorite">
+    update image_favorite
+    set cust_id = #{custId,jdbcType=INTEGER},
+      image_id = #{imageId,jdbcType=INTEGER},
+      favorite_status = #{favoriteStatus,jdbcType=INTEGER},
+      blank1 = #{blank1,jdbcType=VARCHAR}
+    where favorite_id = #{favoriteId,jdbcType=INTEGER}
+  </update>
+</mapper>

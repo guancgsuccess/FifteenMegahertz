@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ItemImageDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.ItemImage">
+    <id column="competition_id" jdbcType="INTEGER" property="competitionId" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="image_popularity" jdbcType="INTEGER" property="imagePopularity" />
+  </resultMap>
+  <select id="queryCustIdByItemId" parameterType="map" resultType="java.util.HashMap">
+    SELECT DISTINCT cust_id
+    FROM item_image
+    where item_id=#{itemId}
+    limit #{start},#{size}
+  </select>
+  <select id="queryCustCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+     SELECT count(DISTINCT cust_id)
+     FROM item_image
+     where item_id=#{itemId}
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    competition_id, item_id, cust_id, image_id, image_popularity
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ItemImageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from item_image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from item_image
+    where competition_id = #{competitionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from item_image
+    where competition_id = #{competitionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ItemImageExample">
+    delete from item_image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.ItemImage">
+    insert into item_image (competition_id, item_id, cust_id, 
+      image_id, image_popularity)
+    values (#{competitionId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, 
+      #{imageId,jdbcType=INTEGER}, #{imagePopularity,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.ItemImage">
+    insert into item_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="competitionId != null">
+        competition_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="imagePopularity != null">
+        image_popularity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="competitionId != null">
+        #{competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="imagePopularity != null">
+        #{imagePopularity,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ItemImageExample" resultType="java.lang.Long">
+    select count(*) from item_image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update item_image
+    <set>
+      <if test="record.competitionId != null">
+        competition_id = #{record.competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemId != null">
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageId != null">
+        image_id = #{record.imageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imagePopularity != null">
+        image_popularity = #{record.imagePopularity,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update item_image
+    set competition_id = #{record.competitionId,jdbcType=INTEGER},
+      item_id = #{record.itemId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      image_id = #{record.imageId,jdbcType=INTEGER},
+      image_popularity = #{record.imagePopularity,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.ItemImage">
+    update item_image
+    <set>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null">
+        image_id = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="imagePopularity != null">
+        image_popularity = #{imagePopularity,jdbcType=INTEGER},
+      </if>
+    </set>
+    where competition_id = #{competitionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.ItemImage">
+    update item_image
+    set item_id = #{itemId,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER},
+      image_id = #{imageId,jdbcType=INTEGER},
+      image_popularity = #{imagePopularity,jdbcType=INTEGER}
+    where competition_id = #{competitionId,jdbcType=INTEGER}
+  </update>
+</mapper>

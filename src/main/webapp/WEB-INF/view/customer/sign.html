@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link type="text/css" href="/css/customer/sign.css" rel="stylesheet">
+    <link type="text/css" href="/css/common/message.css" rel="stylesheet">
+    <title>签约</title>
+</head>
+<body>
+<div class="title">成为15M商业供稿人</div>
+
+<div class="step">
+    <div class="step_content">
+        <span>申请须知</span>
+        <div class="dividing"></div>
+    </div><!--step_content结束-->
+    <div class="step_content">
+        <span>完善身份信息</span>
+        <div class="dividing"></div>
+    </div><!--step_content结束-->
+    <div class="step_content">
+        <span>等待审核</span>
+    </div><!--step_content结束-->
+</div><!--step结束-->
+<div id="step_detail"></div><!--step_detail结束-->
+
+<script>
+var xhr = null;
+var step = document.getElementsByClassName("step_content");
+
+if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+} else {
+    xhr = new ActiveXObject('Microsoft.XMLHTTP');
+}
+//根据用户签约状态加载页面
+window.onload=function() {
+    xhr.open("GET", "/customer/verify/getVerifyStatus", true);
+    xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            if (xhr.responseText === "NeedLogin") {
+                $.message({
+                    message: '请先登录!',
+                    type: 'error'
+                });
+            } else {
+                var result = JSON.parse(xhr.responseText);
+                if (result.data.verifyStatus == 2) {
+                    step[2].style.cssText = "color:#fff";
+                    document.getElementById("step_detail").innerHTML = "    <div class=\"img\">\n" +
+                        "        <img src=\"/images/sign/success.png\" width=\"150\" height=\"150\">\n" +
+                        "    </div>\n" +
+                        "    <div class=\"img_tip\">\n" +
+                        "        <span>申请已提交,请等待审核!</span>\n" +
+                        "    </div>\n" +
+                        "    <a class=\"back\" href=\"/index.html\">返回</a>"
+                } else if (result.data.verifyStatus == 1) {
+                    step[2].style.cssText = "color:#fff";
+                    document.getElementById("step_detail").innerHTML = "    <div class=\"img\">\n" +
+                        "        <img src=\"/images/sign/success.png\" width=\"150\" height=\"150\">\n" +
+                        "    </div>\n" +
+                        "    <div class=\"img_tip\">\n" +
+                        "        <span>审核已通过,勿重复提交!</span>\n" +
+                        "    </div>\n" +
+                        "    <a class=\"back\" href=\"/index.html\">返回</a>"
+                } else {
+                    step[0].style.cssText = "color:#fff";
+                    document.getElementById("step_detail").innerHTML = " <div class=\"step_detail_title\">申请须知</div>\n" +
+                        "    <div class=\"tips\">· 作品中不可以出现LOGO、商标</div>\n" +
+                        "    <div class=\"tips\">· 作品中不可以出现未取得可用于转售用途授权的商业字体</div>\n" +
+                        "    <div class=\"tips\">· 作品中可辨认面孔的人物必须拥有正确的人物肖像权协议</div>\n" +
+                        "    <div class=\"tips\">· 作品中如涉及物产的图片，必须拥有正确的物产权协议</div>\n" +
+                        "    <div class=\"authDocument\">《肖像授权书下载》</div>\n" +
+                        "    <div class=\"authDocument\">《物产权协议下载》</div>\n" +
+                        "    <label><div class=\"agree\"><input id=\"checkbox\" type=\"checkbox\" onclick=\"change(this)\">\n" +
+                        "        <div id=\"hook\"></div>\n" +
+                        "    </div></label>\n" +
+                        "    <div class=\"agree_content\">我已阅读并同意<span>《拍信供稿者协议》</span></div>\n" +
+                        "    <a onclick=\"step2()\">下一步</a>"
+                }
+            }
+        }
+    }
+}
+//完善身份信息
+function step2() {
+    xhr.open("GET","/customer/verify/getRangeLevel",true);
+    xhr.onreadystatechange = success;
+    xhr.send();
+
+    function success() {
+        if(xhr.readyState==4 && xhr.status==200){
+            if(xhr.responseText==="NeedLogin") {
+                $.message({
+                    message: '身份失效,请重新登录!',
+                    type: 'error'
+                });
+            }else{
+                var checkbox = document.getElementById("checkbox");
+                var result = JSON.parse(xhr.responseText);
+                var rangeLevel = result.data.rangeLevel;
+                if(checkbox.checked && rangeLevel>19){
+                    step[0].style.cssText = "color: hsla(0,0%,100%,.6)";
+                    step[1].style.cssText = "color:#fff";
+                    document.getElementById("step_detail").innerHTML = "    <div class=\"step_detail_title\">完善身份信息</div>\n" +
+                        "        <label>姓名：</label><input class=\"form_content\" type=\"text\" name=\"custName\"><br>\n" +
+                        "        <label>邮箱：</label><input class=\"form_content\" type=\"text\" name=\"custAge\"><br>\n" +
+                        "<div id='distpicker'>"+
+                        "   <label>省份：</label><select data-province=\"---- 选择省 ----\" class=\"form_content\"></select><br>\n" +
+                        "   <label>城市：</label><select data-city=\"---- 选择市 ----\" class=\"form_content\"></select><br>\n" +
+                        "   <label>地区：</label><select data-district=\"---- 选择区 ----\" class=\"form_content\"></select><br>\n" +
+                        "</div>"+
+                        "        <span class=\"introduce\">详细地址：</span><br><textarea></textarea>\n" +
+                        "        <button class=\"submit_button\" type=\"button\" value=\"下一步\" onclick='step3()'>下一步</button><br>\n"
+                    $("#distpicker").distpicker();
+                }else if(rangeLevel<20){
+                    $.message({
+                        message:'等级未达到20级!',
+                        type:'error'
+                    });
+                }else {
+                    $.message({
+                        message:'请勾选同意按钮!',
+                        type:'error'
+                    });
+                }
+            }
+        }
+    }
+}
+//等待审核
+function step3() {
+    var content = document.getElementsByClassName("form_content");
+    var custName = content[0].value;
+    var custEmail = content[1].value;
+    var custProvince = content[2].value;
+    var custCity = content[3].value;
+    var custArea = content[4].value;
+
+    if (custName == "") {
+        $.message({
+            message: '未填写真实姓名!',
+            type: 'error'
+        });
+    } else if (custEmail == "") {
+        $.message({
+            message: '未填写邮箱!',
+            type: 'error'
+        });
+    } else if (custProvince == "") {
+        $.message({
+            message: '未填写省份!',
+            type: 'error'
+        });
+    } else if (custCity == "") {
+        $.message({
+            message: '未填写城市!',
+            type: 'error'
+        });
+    } else if (custArea == "") {
+        $.message({
+            message: '未填写地区!',
+            type: 'error'
+        });
+    } else {
+
+        xhr.open("GET", "/customer/verify/save?"+"custName="+custName+"&custProvince="+custProvince+"&custCity="+custCity+"&blank1="+custArea+"&custEmail="+custEmail, true);
+        xhr.onreadystatechange = success;
+        xhr.send();
+
+        function success() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if(xhr.responseText==="NeedLogin") {
+                    $.message({
+                        message: '身份失效,请重新登录!',
+                        type: 'error'
+                    });
+                }else {
+                    var step = document.getElementsByClassName("step_content");
+                    var result = JSON.parse(xhr.responseText);
+                    $.message({
+                        message: '成功提交申请!',
+                        type: 'success'
+                    });
+                    if(result==true) {
+                        step[1].style.cssText = "color: hsla(0,0%,100%,.6)";
+                        step[2].style.cssText = "color:#fff";
+                        document.getElementById("step_detail").innerHTML = "    <div class=\"img\">\n" +
+                            "        <img src='/images/sign/success.png' width=\"150\" height=\"150\">\n" +
+                            "    </div>\n" +
+                            "    <div class=\"img_tip\">\n" +
+                            "        <span>申请已提交,等待审核!</span>\n" +
+                            "    </div>\n" +
+                            "    <a class=\"back\" href=\"/index.html\">返回</a>"
+                    }else {
+                        $.message({
+                            message:'提交失败',
+                            type: 'error'
+                        });
+                    }
+                }
+
+            }
+        }
+    }
+}
+</script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/customer/distpicker.data.js"></script>
+<script src="/js/customer/distpicker.js"></script>
+<script src="/js/customer/main.js"></script>
+<script src="/js/customer/sign.js"></script>
+<script src="/js/common/message.js"></script>
+</body>
+</html>

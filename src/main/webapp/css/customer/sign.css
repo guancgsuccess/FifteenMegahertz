@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("../../images/sign/sign-back.jpg");
+}
+
+.title{
+    width: 100%;
+    height: 31px;
+    margin-top: 100px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+.step{
+    width: 440px;
+    height: 24px;
+    margin: 50px auto;
+}
+
+.step_content{
+    float: left;
+    color: hsla(0,0%,100%,.6);
+    font-size: 18px;
+    margin-right: 14px;
+}
+
+.dividing{
+    display: inline-block;
+    width: 62px;
+    height: 1px;
+    background: hsla(0,0%,100%,.3);
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+#step_detail{
+    width: 500px;
+    height: 550px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.step_detail_title{
+    width: 450px;
+    height: 60px;
+    text-align: center;
+    margin: 20px auto;
+    font-size: 1.4rem;
+    line-height: 60px;
+}
+
+.tips{
+    width: 450px;
+    height: 24px;
+    font-size: 17px;
+    color: rgba(0,0,0,.7);
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.agree{
+    font-size: 16px;
+    margin-left: 20px;
+    margin-top: 80px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 1px;
+    background-color: #ffffff;
+    border: 1px solid #c8c8c8;
+    margin-right: 14px;
+    cursor: pointer;
+}
+
+.agree_content span{
+    color: #57cb8f;
+    margin-left: 20px;
+}
+
+
+#checkbox{
+    display: none;
+}
+
+.hook{
+    width: 11px;
+    height: 5px;
+    margin: 4px 0 0 3px;
+    border-bottom: 2px solid #666;
+    border-left: 2px solid #666;
+    transform: rotate(-50deg);
+}
+
+#step_detail a{
+    display: inline-block;
+    text-decoration: none;
+    width: 450px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #56cb8f;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 100;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+#step_detail a:hover{
+    background-color: #41986b;
+}
+
+.authDocument{
+    font-size: 16px;
+    color: #57cb8f;
+    line-height: 1.5;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.agree_content{
+    display: inline-block;
+    margin-bottom: 5px;
+    position: relative;
+    bottom: 5px;
+}
+
+#step_detail label{
+    font-size: 17px;
+    color: rgba(0,0,0,.7);
+    margin-left: 20px;
+}
+
+.form_content{
+    border: 1px #aaa solid;
+    border-radius: 4px;
+    font-size: 17px;
+    width: 300px;
+    height: 30px;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.submit_button{
+    display: inline-block;
+    width: 450px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #56cb8f;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-top: 20px;
+    color: #ffffff;
+    border: 1px solid #56cb8f;
+    font-size: 17px;
+}
+
+.introduce{
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+textarea{
+    width: 450px;
+    height: 100px;
+    margin-left: 20px;
+    font-size: 17px;
+    font-family:Microsoft YaHei;
+}
+
+.img{
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.img_tip{
+    width: 200px;
+    height: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 20px auto;
+}
+
+.back{
+    text-decoration: none;
+    width: 450px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #56cb8f;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    color: #fff;
+    margin-left: 25px;
+    margin-top: 20px;
+}

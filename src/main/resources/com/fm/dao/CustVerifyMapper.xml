@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CustVerifyDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.CustVerify">
+    <id column="verify_id" jdbcType="INTEGER" property="verifyId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="verify_creat_time" jdbcType="TIMESTAMP" property="verifyCreatTime" />
+    <result column="verify_status" jdbcType="INTEGER" property="verifyStatus" />
+    <result column="cust_name" jdbcType="VARCHAR" property="custName" />
+    <result column="cust_age" jdbcType="INTEGER" property="custAge" />
+    <result column="cust_province" jdbcType="VARCHAR" property="custProvince" />
+    <result column="cust_city" jdbcType="VARCHAR" property="custCity" />
+    <result column="cust_email" jdbcType="VARCHAR" property="custEmail" />
+    <result column="blank_1" jdbcType="VARCHAR" property="blank1" />
+    <result column="blank_2" jdbcType="VARCHAR" property="blank2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    verify_id, cust_id, verify_creat_time, verify_status, cust_name, cust_age, cust_province, 
+    cust_city, cust_email, blank_1, blank_2
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.CustVerifyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cust_verify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cust_verify
+    where verify_id = #{verifyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cust_verify
+    where verify_id = #{verifyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.CustVerifyExample">
+    delete from cust_verify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.CustVerify">
+    insert into cust_verify (verify_id, cust_id, verify_creat_time, 
+      verify_status, cust_name, cust_age, 
+      cust_province, cust_city, cust_email, 
+      blank_1, blank_2)
+    values (#{verifyId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{verifyCreatTime,jdbcType=TIMESTAMP}, 
+      #{verifyStatus,jdbcType=INTEGER}, #{custName,jdbcType=VARCHAR}, #{custAge,jdbcType=INTEGER}, 
+      #{custProvince,jdbcType=VARCHAR}, #{custCity,jdbcType=VARCHAR}, #{custEmail,jdbcType=VARCHAR}, 
+      #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.CustVerify">
+    insert into cust_verify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="verifyId != null">
+        verify_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="verifyCreatTime != null">
+        verify_creat_time,
+      </if>
+      <if test="verifyStatus != null">
+        verify_status,
+      </if>
+      <if test="custName != null">
+        cust_name,
+      </if>
+      <if test="custAge != null">
+        cust_age,
+      </if>
+      <if test="custProvince != null">
+        cust_province,
+      </if>
+      <if test="custCity != null">
+        cust_city,
+      </if>
+      <if test="custEmail != null">
+        cust_email,
+      </if>
+      <if test="blank1 != null">
+        blank_1,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="verifyId != null">
+        #{verifyId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="verifyCreatTime != null">
+        #{verifyCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null">
+        #{verifyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custAge != null">
+        #{custAge,jdbcType=INTEGER},
+      </if>
+      <if test="custProvince != null">
+        #{custProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="custCity != null">
+        #{custCity,jdbcType=VARCHAR},
+      </if>
+      <if test="custEmail != null">
+        #{custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="blank1 != null">
+        #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.CustVerifyExample" resultType="java.lang.Long">
+    select count(*) from cust_verify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cust_verify
+    <set>
+      <if test="record.verifyId != null">
+        verify_id = #{record.verifyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.verifyCreatTime != null">
+        verify_creat_time = #{record.verifyCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.verifyStatus != null">
+        verify_status = #{record.verifyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.custName != null">
+        cust_name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custAge != null">
+        cust_age = #{record.custAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.custProvince != null">
+        cust_province = #{record.custProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custCity != null">
+        cust_city = #{record.custCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custEmail != null">
+        cust_email = #{record.custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank1 != null">
+        blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank2 != null">
+        blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cust_verify
+    set verify_id = #{record.verifyId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      verify_creat_time = #{record.verifyCreatTime,jdbcType=TIMESTAMP},
+      verify_status = #{record.verifyStatus,jdbcType=INTEGER},
+      cust_name = #{record.custName,jdbcType=VARCHAR},
+      cust_age = #{record.custAge,jdbcType=INTEGER},
+      cust_province = #{record.custProvince,jdbcType=VARCHAR},
+      cust_city = #{record.custCity,jdbcType=VARCHAR},
+      cust_email = #{record.custEmail,jdbcType=VARCHAR},
+      blank_1 = #{record.blank1,jdbcType=VARCHAR},
+      blank_2 = #{record.blank2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CustVerify">
+    update cust_verify
+    <set>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="verifyCreatTime != null">
+        verify_creat_time = #{verifyCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null">
+        verify_status = #{verifyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="custName != null">
+        cust_name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custAge != null">
+        cust_age = #{custAge,jdbcType=INTEGER},
+      </if>
+      <if test="custProvince != null">
+        cust_province = #{custProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="custCity != null">
+        cust_city = #{custCity,jdbcType=VARCHAR},
+      </if>
+      <if test="custEmail != null">
+        cust_email = #{custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="blank1 != null">
+        blank_1 = #{blank1,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        blank_2 = #{blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where verify_id = #{verifyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.CustVerify">
+    update cust_verify
+    set cust_id = #{custId,jdbcType=INTEGER},
+      verify_creat_time = #{verifyCreatTime,jdbcType=TIMESTAMP},
+      verify_status = #{verifyStatus,jdbcType=INTEGER},
+      cust_name = #{custName,jdbcType=VARCHAR},
+      cust_age = #{custAge,jdbcType=INTEGER},
+      cust_province = #{custProvince,jdbcType=VARCHAR},
+      cust_city = #{custCity,jdbcType=VARCHAR},
+      cust_email = #{custEmail,jdbcType=VARCHAR},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where verify_id = #{verifyId,jdbcType=INTEGER}
+  </update>
+</mapper>

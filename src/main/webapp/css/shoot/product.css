@@ -1,0 +1,642 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow: unset !important;
+}
+
+.modal-open{
+    padding-right: unset !important;
+}
+
+li{
+    list-style: none;
+}
+
+.product-item{
+    position: relative;
+    margin: 0 auto;
+    width: 1349px;
+    height: 550px;
+    padding-top: 100px;
+    margin-bottom: 40px;
+}
+
+.product-item .product-left{
+    width: 500px;
+    height: 341px;
+    margin-left: 5%;
+    margin-top: 40px;
+}
+
+.product-pictures{
+    position: relative;
+}
+
+.product-pictures .product-picList{
+    width: 502px;
+    height: 280px;
+}
+
+.product-pictures .product-picList img{
+    display: block;
+}
+
+.product-pictures .product-picSmallList{
+    padding-top: 8px;
+    width: 515px;
+    display: block;
+}
+
+.product-pictures .product-picSmallList li{
+    position: relative;
+    float: left;
+    width: 94px;
+    height: 53px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.product-pictures .product-picSmallList li i{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 94px;
+    height: 53px;
+    display: none;
+    border: 3px green solid;
+}
+
+.product-pictures .product-picSmallList li.hover i{
+    display: block;
+}
+
+.product-pictures .product-picSmallList li img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.product-item .product-right{
+    position: absolute;
+    right: 0;
+    width: 700px;
+    height: 341px;
+    margin-right: 3%;
+}
+
+.product-priceInfoBox{
+    padding: 43px;
+    padding-top: 0;
+    padding-left: 30px;
+    background-color: #fff;
+    padding-bottom: 7px;
+    padding-right: 0;
+    height: auto;
+}
+
+.product-tittle{
+    height: 70px;
+    margin-top: -20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.tittle{
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    display: inline-block;
+    line-height: 1.2;
+}
+
+.tittle-desc{
+    font-size: 14px;
+    color: hsla(0,0%,88%,.5);
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.priceInfo_bg{
+    position: relative;
+    margin-bottom: 15px;
+}
+
+#price{
+    margin-right: 10px;
+    overflow: visible;
+    border-bottom: 1px #666 dotted;
+}
+
+.priceInfo_bg .outline-item{
+    margin-bottom: 0;
+    line-height: 40px;
+    padding: 15px 0;
+    padding-left: 65px;
+}
+
+.priceInfo_bg .outline-item>dt{
+    color: white;
+    float: none;
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    margin-left: -65px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.priceInfo_bg .outline-item>dd{
+    color: #666;
+    float: none;
+    display: inline-block;
+    margin-right: 0;
+    margin-left: 20px;
+    vertical-align: -7px;
+}
+
+.priceInfo_bg .outline-item .price{
+    vertical-align: 6px;
+}
+
+.priceInfo_bg .outline-item .price>strong{
+    color: rgb(86, 203, 143);
+    font-size: 42px;
+    font-family: Arial;
+    font-weight: 700;
+}
+
+.line-msg{
+    display: block;
+    font-size: 12px;
+    color: #666;
+    border: 1px #666 dashed;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    float: left;
+    margin-right: 10px;
+}
+
+.product-priceInfo{
+    font-size: 12px;
+    margin-right: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.product-priceInfo td{
+    height: 40px;
+    vertical-align: text-top;
+}
+
+.product-priceInfo .t-alginRight{
+    text-align: right;
+    color: white;
+    width: 60px;
+}
+
+.product-priceInfo .product-priceInfoContent{
+    color: #666;
+    margin-left: 24px;
+}
+
+.payType{
+    color: hsla(0,0%,88%,.5);
+    text-decoration: none;
+}
+
+.payType::before{
+    background: url("../../images/shoot/zhifubao.png") no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    content: '';
+    vertical-align: -3px;
+    margin-right: 4px;
+}
+
+#pay-button{
+    width: 130px;
+    height: 35px;
+    background: greenyellow;
+    background-image: linear-gradient(95deg, rgb(86, 203, 143), green);
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 0.3em;
+    font-size: 14px;
+    padding: unset;
+}
+
+#pay-button:hover{
+    background: greenyellow;
+    background-image: linear-gradient(95deg, green , rgb(86, 203, 143));
+    font-size: 15px;
+}
+
+.btn-primary{
+    background: greenyellow;
+    background-image: linear-gradient(95deg, rgb(86, 203, 143), green);
+}
+
+.div-line{
+    width: 1348px;
+    margin: 0 auto;
+    background:linear-gradient(to left,darkgreen,green,greenyellow);height:5px;
+}
+
+.user-comment-container{
+    position: relative;
+    margin: 0 auto;
+    width: 944px;
+    height: auto;
+    border: 1px solid #dcdcdc;
+    font-family: "微软雅黑";
+}
+
+.user-comment-header{
+    padding-left: 48px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #333333;
+    border-bottom: 3px solid green;
+    background: url("../../images/shoot/logo1.png") 24px center no-repeat;
+    background-size: 14px 16px;
+}
+
+#user-comment-header{
+    color: green;
+}
+
+.user-comment-navs{
+    margin-left: 15px;
+    margin-top: 26px;
+    margin-bottom: 13px;
+    width: 853px;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.user-comment-navs .user-comment-nav--focus {
+    color: #fff;
+    background: greenyellow;
+    border-color: greenyellow;
+}
+
+.user-comment-navs .user-comment-nav {
+    display: inline-block;
+    margin-bottom: 13px;
+    margin-right: 13px;
+    padding-left: 12px;
+    padding-right: 12px;
+    min-width: 60px;
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+}
+
+#user-comment-navs-more {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 75px;
+    font-size: 12px;
+    color: green;
+    cursor: pointer;
+}
+
+#user-comment-publish{
+    margin-left: 10px;
+    width: 925px;
+    height: 180px;
+    border-top: 1px dashed #e8e8e8;
+}
+
+#user-comment-border{
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 90%;
+    height: 100px;
+    border: 1px solid green;
+}
+
+.textarea-fw{
+    border: 0;
+    width: 95%;
+    height: 80px;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 14px;
+    color: #bfbfbf;
+    outline: none;
+    resize: none;
+}
+
+.user-comment-button{
+    border-radius: 0.3em;
+    width: 100px;
+    height: 30px;
+    background: greenyellow;
+    background-image: linear-gradient(95deg, rgb(86, 203, 143), green);
+    float: right;
+    margin: -20px 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.user-comment-button>span{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    margin-top: 3px;
+}
+
+.user-comment-button:hover{
+    background: greenyellow;
+    background-image: linear-gradient(95deg, green , rgb(86, 203, 143));
+     font-size: 15px;
+ }
+
+.user-comment-range{
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.user-comment-star{
+    cursor: pointer;
+    width: 20px;
+}
+
+.user-comment-range1{
+    float: right;
+}
+
+.user-comment-lists .user-comment-list{
+    position: relative;
+    width: 925px;
+    border-bottom: 1px dashed #e8e8e8;
+}
+
+.user-comment-lists .user-comment-list .user-comment-avator{
+    position: relative;
+    left: 21px;
+    top: 110px;
+    width: 50px;
+    height: 50px;
+    border-radius: 3px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user-comment-lists .user-comment-list .user-comment-username{
+    position: relative;
+    left: 17px;
+    top: 121px;
+    width: 60px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content{
+    margin-left: 142px;
+    padding-top: 25px;
+    padding-bottom: 15px;
+    width: 660px;
+    height: auto;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-labels{
+    margin-bottom: 8px;
+    width: 660px;
+    height: auto;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-labels .user-comment-labelTittle{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    line-height: 28px;
+    text-align: right;
+    font-size: 12px;
+    color: #333;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-labels .user-comment-label{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    line-height: 22px;
+    font-size: 0;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-labels .user-comment-label div{
+    margin-left: 9px;
+    padding: 0 15px;
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #666;
+    background: #f9f9f9;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-detail{
+    margin-top: 16px;
+    margin-bottom: 24px;
+    width: 660px;
+    height: auto;
+    line-height: 24px;
+    font-size: 12px;
+    color: #666;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-picture{
+    margin-right: 7px;
+    margin-bottom: 7px;
+    display: inline-block;
+    width: 66px;
+    height: 66px;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-picture-focus{
+    border: 2px solid #ff9a00;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-bigPicBox{
+    position: relative;
+    width: 660px;
+    height: 495px;
+    background: #f9f9f9 center center no-repeat;
+    cursor: pointer;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-bigPicBox .user-comment-bigPicBox-left{
+    left: 5px;
+    background: url(../../images/home/left.png) center center no-repeat;
+    background-size: 32px 32px;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-bigPicBox div{
+    display: inline-block;
+    position: relative;
+    top: 239px;
+    width: 50px;
+    height: 50px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-bigPicBox .user-comment-bigPicBox-right{
+    left: 558px;
+    background: url(../../images/home/right.png) center center no-repeat;
+    background-size: 32px 32px;
+}
+
+.user-comment-lists .user-comment-list .user-comment-content .user-comment-createtime{
+    margin-top: 15px;
+    width: auto;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    color: #999;
+}
+
+#pagearea{
+    margin-top: 60px;
+    height: 30px;
+    margin-left: 550px;
+    font-size: 14px;
+    color: green;
+}
+
+#pagearea>span{
+    margin-right: 10px;
+}
+
+#pagearea>input{
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    border-color: green;
+}
+
+#pagearea>button{
+    width: 35px;
+    height: 25px;
+    border-color: green;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+#pagearea>a{
+    color: green;
+    margin-right: 10px;
+}
+
+#pagearea>a:hover{
+    color: darkgreen;
+    text-decoration: none;
+}
+
+.list-atlas{
+    width: 1348px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 200px;
+    margin-bottom: 30px;
+}
+
+.list-atlas p{
+    font-size: 14px;
+    line-height: 24px;
+    margin: 10px 0 5px;
+}
+
+.list-atlas .thumblists{
+    width: 100%;
+    overflow: hidden;
+    background: #f8f8f8;
+    margin-bottom: 0;
+}
+
+.thumblists img{
+    width: 100%;
+}
+
+.modal-body-phone-input{
+    margin-left: 26px;
+    width: 195px;
+    height: 34px;
+    border-radius: 0.3em;
+    background-color: #eee;
+}
+
+.modal-body-location-input{
+    margin-left: 26px;
+    width: 195px;
+    height: 34px;
+    border-radius: 0.3em;
+    background-color: #eee;
+}
+
+#send-code-button{
+    width: 130px;
+    height: 35px;
+    background: greenyellow;
+    background-image: linear-gradient(95deg, rgb(86, 203, 143), green);
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 0.3em;
+    font-size: 14px;
+    padding: unset;
+    border: 1px solid transparent;
+    outline: none;
+}
+
+#send-code-button:hover{
+    background: greenyellow;
+    background-image: linear-gradient(95deg, green , rgb(86, 203, 143));
+    font-size: 15px;
+}
+
+.modal-code-input{
+    margin-left: 40px;
+    width: 195px;
+    height: 34px;
+    border-radius: 0.3em;
+    background-color: #eee;
+}
+
+
+
+

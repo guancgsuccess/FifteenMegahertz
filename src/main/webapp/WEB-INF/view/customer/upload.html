@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>上传图片</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/common/upload.css" rel="stylesheet">
+    <link href="/css/common/message.css" rel="stylesheet">
+</head>
+<body>
+<a class="btn btn-success" onclick="showUpload()">上传</a>
+<!--上传模态框-->
+<div class="upload-modal modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body container" >
+                <div class="row">
+                    <div class="left col-lg-6" id="container">
+                        <div id="uploadImage" class="col-lg-4">➕选择文件</div>
+                        <div class="simg col-lg-8">
+                        </div>
+                    </div>
+                    <div class="right col-lg-5">
+                        <input type="text" class="imageName form-control col-lg-12" placeholder="作品名称(必填)">
+                        <textarea rows="3" class="keyword col-lg-12" placeholder="尽量填写多的关键词,有利于搜索(选填)"></textarea>
+                        <select class="category-select form-control" >
+                            <option value="14">请选择类别(默认为 其他)</option>
+                        </select>
+                        <div class="price form-inline col-xs-12">
+                            <label class="radio-inline">
+                                <input type="radio" class="form-inline radio-price" name="isFree" value="1" onclick="changePriceStatus(this)" checked>免费
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" class="form-inline radio-price" name="isFree" value="2" onclick="changePriceStatus(this)">收费
+                            </label>
+                        </div>
+                        <input type="text" class="imagePrice form-control col-xs-12" value="0" placeholder="价格" readonly>
+                        <span class="col-xs-12" style="font-size: 12px;color: red;text-align: right">*单位:积分,用户下载之后返回50%的积分给作者</span>
+                        <input type="text" class="imageBrand form-control col-xs-12" placeholder="品牌(选填)">
+                        <input type="text" class="imageModel form-control col-xs-12" placeholder="型号(选填)">
+                        <input type="text" class="imageFocalLength form-control col-xs-12"  placeholder="焦距(选填)">
+                        <input type="text" class="imageFocus form-control col-xs-12" placeholder="光圈(选填)">
+                        <input type="text" class="imageISO form-control col-xs-12" placeholder="ISO(选填)">
+                        <input type="text" class="imageExposureTime form-control col-xs-12" placeholder="曝光补偿(选填)">
+                        <input type="text" class="imageBrightness form-control col-xs-12" placeholder="亮度(选填)">
+                    </div>
+                    <div class="show-process progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                        </div>
+                    </div>
+                    <button class="upload btn btn-success" onclick="upload()">发布作品</button>
+                </div>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+</body>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/upload/plupload.full.min.js"></script>
+<script src="/js/upload/qiniu.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/common/message.js"></script>
+<script src="/js/upload/upload.js"></script>
+</html>

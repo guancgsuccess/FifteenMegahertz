@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ShootOrderDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.ShootOrder">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="shoot_id" jdbcType="INTEGER" property="shootId" />
+    <result column="shoot_loc" jdbcType="VARCHAR" property="shootLoc" />
+    <result column="shoot_time" jdbcType="TIMESTAMP" property="shootTime" />
+    <result column="order_pay" jdbcType="INTEGER" property="orderPay" />
+    <result column="order_create_time" jdbcType="TIMESTAMP" property="orderCreateTime" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="order_phone" jdbcType="VARCHAR" property="orderPhone" />
+    <result column="blank_2" jdbcType="VARCHAR" property="blank2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    order_id, cust_id, shoot_id, shoot_loc, shoot_time, order_pay, order_create_time, 
+    order_status, order_phone, blank_2
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ShootOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shoot_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shoot_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shoot_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ShootOrderExample">
+    delete from shoot_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.ShootOrder">
+    insert into shoot_order (order_id, cust_id, shoot_id, 
+      shoot_loc, shoot_time, order_pay, 
+      order_create_time, order_status, order_phone, 
+      blank_2)
+    values (#{orderId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{shootId,jdbcType=INTEGER}, 
+      #{shootLoc,jdbcType=VARCHAR}, #{shootTime,jdbcType=TIMESTAMP}, #{orderPay,jdbcType=INTEGER}, 
+      #{orderCreateTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{orderPhone,jdbcType=VARCHAR}, 
+      #{blank2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.ShootOrder">
+    insert into shoot_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="shootId != null">
+        shoot_id,
+      </if>
+      <if test="shootLoc != null">
+        shoot_loc,
+      </if>
+      <if test="shootTime != null">
+        shoot_time,
+      </if>
+      <if test="orderPay != null">
+        order_pay,
+      </if>
+      <if test="orderCreateTime != null">
+        order_create_time,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="orderPhone != null">
+        order_phone,
+      </if>
+      <if test="blank2 != null">
+        blank_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="shootId != null">
+        #{shootId,jdbcType=INTEGER},
+      </if>
+      <if test="shootLoc != null">
+        #{shootLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="shootTime != null">
+        #{shootTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPay != null">
+        #{orderPay,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null">
+        #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderPhone != null">
+        #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        #{blank2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ShootOrderExample" resultType="java.lang.Long">
+    select count(*) from shoot_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shoot_order
+    <set>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shootId != null">
+        shoot_id = #{record.shootId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shootLoc != null">
+        shoot_loc = #{record.shootLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shootTime != null">
+        shoot_time = #{record.shootTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderPay != null">
+        order_pay = #{record.orderPay,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderCreateTime != null">
+        order_create_time = #{record.orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderStatus != null">
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderPhone != null">
+        order_phone = #{record.orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank2 != null">
+        blank_2 = #{record.blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shoot_order
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      shoot_id = #{record.shootId,jdbcType=INTEGER},
+      shoot_loc = #{record.shootLoc,jdbcType=VARCHAR},
+      shoot_time = #{record.shootTime,jdbcType=TIMESTAMP},
+      order_pay = #{record.orderPay,jdbcType=INTEGER},
+      order_create_time = #{record.orderCreateTime,jdbcType=TIMESTAMP},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      order_phone = #{record.orderPhone,jdbcType=VARCHAR},
+      blank_2 = #{record.blank2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.ShootOrder">
+    update shoot_order
+    <set>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="shootId != null">
+        shoot_id = #{shootId,jdbcType=INTEGER},
+      </if>
+      <if test="shootLoc != null">
+        shoot_loc = #{shootLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="shootTime != null">
+        shoot_time = #{shootTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPay != null">
+        order_pay = #{orderPay,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null">
+        order_create_time = #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderPhone != null">
+        order_phone = #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="blank2 != null">
+        blank_2 = #{blank2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.ShootOrder">
+    update shoot_order
+    set cust_id = #{custId,jdbcType=INTEGER},
+      shoot_id = #{shootId,jdbcType=INTEGER},
+      shoot_loc = #{shootLoc,jdbcType=VARCHAR},
+      shoot_time = #{shootTime,jdbcType=TIMESTAMP},
+      order_pay = #{orderPay,jdbcType=INTEGER},
+      order_create_time = #{orderCreateTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_phone = #{orderPhone,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getCount" parameterType="map" resultType="java.lang.Integer">
+      select count(order_id)
+      from shoot_order
+      where cust_id = #{custId} and shoot_id = #{shootId}
+  </select>
+
+  <select id="selectById" parameterType="com.fm.entity.ShootOrder" resultMap="BaseResultMap">
+      select *
+      from shoot_order
+      where cust_id = #{custId}
+  </select>
+
+  <delete id="deleteByCustIdAndOrderId" parameterType="map">
+      delete from shoot_order
+      where cust_id = #{custId} and order_id = #{orderId}
+  </delete>
+  <update id="updateOrderPayByOrderId" parameterType="HashMap">
+    update shoot_order
+    set order_pay = #{orderPay}
+    where order_id = #{orderId}
+  </update>
+</mapper>

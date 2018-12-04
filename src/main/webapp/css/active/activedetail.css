@@ -1,0 +1,313 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#banner{
+    width: 100%;
+    height: 440px;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.title{
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px darkgray solid;
+}
+
+.category-list{
+    display: inline-block;
+    float: left;
+    width: 592px;
+    height: 80px;
+    margin-left: 387px;
+
+}
+
+.category-list li{
+    list-style: none;
+    float: left;
+    width: 84px;
+    height: 80px;
+    line-height: 80px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 50px;
+    text-align: center;
+
+}
+
+.category-list a{
+    text-decoration: none;
+    color: darkgray;
+}
+
+
+.category-list a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.publish_button{
+    width: 184px;
+    height: 60px;
+    display: inline-block;
+    float: left;
+    background-color: #56cb8f;
+    margin-left: 150px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.publish_button a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.active_content{
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+    margin-bottom: 50px;
+}
+
+.item_content{
+    font-size: 16px;
+}
+
+.time p{
+    font-size: 20px;
+    line-height: 2;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+
+.award p{
+    font-size: 20px;
+    line-height: 2;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.award span{
+    font-size: 20px;
+    display: block;
+    margin-top: 20px;
+    line-height: 4;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.all_author{
+    width: 1178px;
+    height: auto;
+    margin: 20px auto;
+    margin-bottom: 50px;
+  }
+
+.author_detail{
+    width: 1178px;
+    height: 140px;
+    margin-top: 50px;
+    /*border: 1px solid red;*/
+}
+
+.user{
+    width: 408px;
+    height: 140px;
+    display: inline-block;
+}
+
+.user_photo{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: inline-block;
+    background-size: cover!important;
+/*    background-position: 50%!important;*/
+    overflow: hidden;
+}
+
+.user_info{
+    width: 240px;
+    height: 140px;
+    display: inline-block;
+    float: right;
+}
+
+#all_author .user_info p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+#all_author .user_info span{
+    font-size: 15px;
+    max-height: 58px;
+    color: rgba(0,0,0,.7);
+    margin-top: 4px;
+}
+
+#all_author .follow{
+    width: 80px;
+    height: 40px;
+    margin-top: 40px;
+    margin-left: 0;
+}
+
+#all_author .follow_btn{
+    width: 80px;
+    height: 40px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    background: #56cb8f;
+    border: 1px solid #56cb8f;
+    border-radius: 4px;
+}
+
+#all_author .author_images{
+    width: 738px;
+    height: 140px;
+    display: inline-block;
+    float: right;
+}
+
+#all_author .author_image{
+    width: 240px;
+    height: 140px;
+    float: left;
+    margin: 0 2px;
+}
+
+/*html, body {width: 100%; height: 100%; background-color: #EDEDED;}*/
+.main {
+    position: relative;
+    width: 100%; /*限定父容器的宽度*/
+    margin: auto 0;
+    min-height: 500px;
+}
+.box {
+    position: absolute;
+    padding: 5px; /*不建议使用 margin*/
+    box-sizing: border-box;
+}
+.wrapper {
+    background-color: #fff;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+}
+.pic {
+    font-size: 0; /*消除行内元素的间隙*/
+}
+.pic img {
+    width: 100%;
+    height: auto;
+}
+.color-choose{
+    background-color:#5cb85c;
+    border-color:#4cae4c;
+    color: white;
+}
+.color-unchoose{
+    background-color: #fff;
+    border-color: #ccc;
+    color: black;
+}
+
+.page{
+    width: 850px;
+    height: 37px;
+    margin: 50px auto;
+}
+
+
+.page a{
+    display: inline-block;
+    float: left;
+    text-decoration: none;
+    width: 70px;
+    height: 37px;
+    text-align: center;
+    line-height: 35px;
+    color: #000;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.page_router a{
+    width: 32.5px;
+    height: 35px;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    line-height: 35px;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 6px;
+}
+
+.page a:hover,.page_router a:hover{
+    background: #d6e8ec;
+}
+
+.jump{
+    display: inline-block;
+    float: left;
+    width: 200px;
+    height: 35px;
+    margin-left: 10px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 35px;
+}
+
+.jump input,button{
+    float: left;
+    width: 50px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.jump span{
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#load_more{
+    text-align: center;
+}
+
+.load_more a{
+    display: inline-block;
+    margin: 20px 40px;
+    width: 60%;
+    height: 48px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.08);
+    text-align: center;
+    line-height: 48px;
+    font-size: 18px;
+    color: rgba(0,0,0,.5);
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,.05);
+    letter-spacing: 1px;
+}
+
+.load_more a:hover{
+    text-decoration: none;
+    color: black;
+    background-color: rgba(0,0,0,.15);
+}

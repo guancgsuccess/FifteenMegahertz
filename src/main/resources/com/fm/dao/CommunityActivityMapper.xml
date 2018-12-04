@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CommunityActivityDao">
+    <cache type="com.fm.cache.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.fm.entity.CommunityActivity">
+        <id column="community_id" jdbcType="INTEGER" property="communityId"/>
+        <id column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="activity_name" jdbcType="VARCHAR" property="activityName"/>
+        <result column="activity_create_time" jdbcType="TIMESTAMP" property="activityCreateTime"/>
+        <result column="activity_end_time" jdbcType="TIMESTAMP" property="activityEndTime"/>
+        <result column="activity_loc" jdbcType="VARCHAR" property="activityLoc"/>
+        <result column="blank_1" jdbcType="VARCHAR" property="blank1"/>
+        <result column="blank_2" jdbcType="VARCHAR" property="blank2"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fm.entity.CommunityActivity">
+        <result column="activity_participate" jdbcType="LONGVARCHAR" property="activityParticipate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    community_id, activity_id, activity_name, activity_create_time, activity_end_time, 
+    activity_loc, blank_1, blank_2
+  </sql>
+    <sql id="Blob_Column_List">
+    activity_participate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="com.fm.entity.CommunityActivityKey" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_activity
+        where community_id = #{communityId,jdbcType=INTEGER}
+        and activity_id = #{activityId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.fm.entity.CommunityActivityKey">
+    delete from community_activity
+    where community_id = #{communityId,jdbcType=INTEGER}
+      and activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fm.entity.CommunityActivity">
+    insert into community_activity (community_id, activity_id, activity_name, 
+      activity_create_time, activity_end_time, 
+      activity_loc, blank_1, blank_2, 
+      activity_participate)
+    values (#{communityId,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, 
+      #{activityCreateTime,jdbcType=TIMESTAMP}, #{activityEndTime,jdbcType=TIMESTAMP}, 
+      #{activityLoc,jdbcType=VARCHAR}, #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}, 
+      #{activityParticipate,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fm.entity.CommunityActivity">
+        insert into community_activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="communityId != null">
+                community_id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="activityName != null">
+                activity_name,
+            </if>
+            <if test="activityCreateTime != null">
+                activity_create_time,
+            </if>
+            <if test="activityEndTime != null">
+                activity_end_time,
+            </if>
+            <if test="activityLoc != null">
+                activity_loc,
+            </if>
+            <if test="blank1 != null">
+                blank_1,
+            </if>
+            <if test="blank2 != null">
+                blank_2,
+            </if>
+            <if test="activityParticipate != null">
+                activity_participate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="communityId != null">
+                #{communityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityName != null">
+                #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityCreateTime != null">
+                #{activityCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityEndTime != null">
+                #{activityEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityLoc != null">
+                #{activityLoc,jdbcType=VARCHAR},
+            </if>
+            <if test="blank1 != null">
+                #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                #{blank2,jdbcType=VARCHAR},
+            </if>
+            <if test="activityParticipate != null">
+                #{activityParticipate,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CommunityActivity">
+        update community_activity
+        <set>
+            <if test="activityName != null">
+                activity_name = #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityCreateTime != null">
+                activity_create_time = #{activityCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityEndTime != null">
+                activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityLoc != null">
+                activity_loc = #{activityLoc,jdbcType=VARCHAR},
+            </if>
+            <if test="blank1 != null">
+                blank_1 = #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                blank_2 = #{blank2,jdbcType=VARCHAR},
+            </if>
+            <if test="activityParticipate != null">
+                activity_participate = #{activityParticipate,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where community_id = #{communityId,jdbcType=INTEGER}
+        and activity_id = #{activityId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fm.entity.CommunityActivity">
+    update community_activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_create_time = #{activityCreateTime,jdbcType=TIMESTAMP},
+      activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
+      activity_loc = #{activityLoc,jdbcType=VARCHAR},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR},
+      activity_participate = #{activityParticipate,jdbcType=LONGVARCHAR}
+    where community_id = #{communityId,jdbcType=INTEGER}
+      and activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.fm.entity.CommunityActivity">
+    update community_activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_create_time = #{activityCreateTime,jdbcType=TIMESTAMP},
+      activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
+      activity_loc = #{activityLoc,jdbcType=VARCHAR},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where community_id = #{communityId,jdbcType=INTEGER}
+      and activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+    <!-- 查询总记录数 -->
+    <select id="selectActivityCountByEndTime" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select
+        count(*)
+        from community_activity
+        <where>
+            <if test="underway == 1">
+                activity_end_time > now()
+            </if>
+        </where>
+    </select>
+    <!-- 查询近两月创建的活动 -->
+    <select id="selectCurrentTwoMonthNewCommActivity" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_activity
+        where activity_create_time > date_sub(now(),interval 60 day)
+    </select>
+    <!-- 分页查询活动 -->
+    <select id="selectCommActivityByPage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_activity
+        <where>
+            <if test="underway == 1">
+                activity_end_time > now()
+            </if>
+        </where>
+        order by activity_create_time desc
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

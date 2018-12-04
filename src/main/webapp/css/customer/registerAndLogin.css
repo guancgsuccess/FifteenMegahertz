@@ -1,0 +1,463 @@
+
+li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap a{
+     text-decoration: none;
+     color:rgba(0,0,0,.5);
+ }
+
+
+.wrap button{
+    width: 400px;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    margin-top: 27px;
+    cursor:pointer
+}
+
+.wrap input{
+    box-sizing: border-box;
+    width: 400px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #e4e4e4;
+    outline: none;
+    font-size: 16px;
+    padding: 0 16px;
+    transition: border .2s;
+}
+
+
+.wrap{
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 30;
+    width: 450px;
+    height: 570px;
+    box-shadow: 0 2px 50px 0 rgba(0,0,0,.3);
+    top: calc(50% - 286px);
+    top: -webkit-calc(50% - 286px);
+    right: calc(50% - 236px);
+    right: -webkit-calc(50% - 236px);
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: center;
+}
+
+
+
+
+
+.regLogo {
+    color: black;
+    font-size: 30px;
+    height: 46px;
+    width: 134px;
+    margin: 35px auto 0;
+}
+
+
+
+.regMobileDiv{
+    box-sizing: border-box;
+    width: 400px;
+    height: 48px;
+    margin-left: calc(50% - 200px);
+    display: flex;
+    align-items: center;
+}
+
+.wrap  #regPhoneSpan{
+    position:absolute;
+    margin-left: 281px;
+}
+.wrap .regMobileDiv #PhoneButton{
+    float: right;
+    padding: 0px;
+    height: 40px;
+    background: #e4e4e4;
+    width: 115px;
+    cursor:pointer;
+    transition:border .4s;
+
+}
+#Mobile:hover{
+    border: 1px solid black;
+    transition:border .4s;
+
+}
+.wrap .regMobileDiv #PhoneButton:hover{
+    border: 1px solid black;
+    transition:border .4s;
+}
+
+
+#password1:hover{
+    border: 1px solid black;
+    transition:border .4s;
+}
+#password2:hover{
+    border: 1px solid black;
+    transition:border .4s;
+}
+
+
+
+
+.wrap .mt141{
+    margin-top: 28px;
+}
+ .wrap #regAgreementBox{
+     margin-right: 350px;
+     margin-top: 25px;
+}
+.wrap #regAgreement{
+    margin-right: 30px;
+}
+.wrap #regAgreementBox #regAgreementCheckbox{
+    width: 17px;
+    height: 17px;
+}
+.wrap #regAgreementTitle {
+    margin-top: -24px;
+    margin-right: 152px;
+}
+.wrap #regAgreement #regAgreementTitle a{
+    font-size: 16px;
+    color: #57cb8f;
+    cursor: pointer;
+}
+
+.wrap #regButton{
+     background-color: #57cb8f;
+     color: #fff;
+     transition: background-color .4s;
+ }
+.wrap #regButton:hover{
+    background-color: #34ab6d;
+    transition: background-color .4s;
+}
+
+
+.wrap #outerBox1 #backToIndex1{
+    float: left;
+    margin-top: 20px;
+    margin-left:25px;
+
+    font-size: 16px;
+}
+ .wrap #outerBox1 #to-login1{
+    float: right;
+    font-size: 16px;
+    margin-top: 20px;
+     margin-right:25px;
+    display: inline-block;
+}
+
+
+
+
+
+
+ /*登录部分*/
+
+
+
+#tip{
+    top:12% ;
+    left: 46.5%;
+   position: fixed;
+
+}
+
+
+.logLogo {
+
+    font-size:30px;
+    color: black;
+    height: 46px;
+    width: 134px;
+    margin: 35px auto 0;
+}
+
+
+
+#loginBox .login-box-title, #loginBox .login-content {
+    width: 440px;
+    margin: 0 auto;
+}
+
+
+
+#loginBox .login-box-title .active{
+    border-bottom: 1px solid #FF552E;
+}
+
+#loginBox .login-box-title .active1 {
+    float: left;
+    width: 50%;
+    height: 58px;
+
+}
+#loginBox .login-box-title .active2 {
+    float: left;
+    width: 50%;
+    height: 58px;
+}
+
+#loginBox .login-box-title  a {
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+#loginBox .login-box-title .userPwdLogin a{
+    color: #57cb8f;
+    transition:color .4s;
+}
+#loginBox .login-box-title .phoneLogin a{
+    transition:color .4s;
+}
+
+
+
+.wrap .loginDiv{
+    box-sizing: border-box;
+    width: 400px;
+    margin-left: calc(50% - 200px);
+    align-items: center;
+}
+
+.wrap .logAgreement input{
+    width: 17px;
+    height: 17px;
+}
+
+#userName{
+    margin-top: 20px;
+}
+#userName:hover{
+    border: 1px  solid black;
+    transition:border .4s;
+}
+
+#userPwd:hover{
+    border: 1px  solid black;
+    transition:border .4s;
+}
+
+#Mobile:hover{
+    border: 1px  solid black;
+    transition:border .4s;
+}
+#code:hover{
+    border: 1px  solid black;
+    transition:border .4s;
+}
+
+
+.wrap .logAgreementBox{
+    margin-right: 378px;
+}
+.logAgreement{
+    margin-top: 30px;
+}
+
+.wrap .logAgreementTitle {
+    margin-top: -24px;
+    margin-right: 305px;
+}
+
+.wrap .forget-psw{
+    margin-top: -21px;
+    margin-left: 338px;
+}
+
+#loginButtonDiv{
+    margin-top: 20px;
+}
+.wrap .login-button{
+    background-color:#57cb8f;
+    color: white;
+    transition: background-color .4s;
+}
+.wrap .login-button:hover{
+    background-color: #34ab6d;
+    transition: background-color .4s;
+}
+
+
+
+.loginPhoneDiv {
+    box-sizing: border-box;
+    width: 400px;
+    margin-left: calc(50% - 200px);
+    align-items: center;
+}
+
+.logPhoneCode{
+    margin-top: 44px;
+}
+
+
+.wrap  #logPhoneSpan{
+    position:absolute;
+    margin-left: 281px;
+}
+
+
+.wrap .loginPhoneDiv #PhoneButton{
+    float: right;
+    padding: 0px;
+    height: 40px;
+    background: #e4e4e4;
+    width: 115px;
+    cursor:pointer;
+    transition:border .4s;
+
+}
+
+.wrap .loginPhoneDiv #PhoneButton:hover{
+    border: 1px solid black;
+    transition:border .4s;
+}
+
+.wrap .logPhoneDiv{
+    margin-top: -43.5px;
+    margin-left: -400px;
+}
+
+.wrap .mt142{
+    margin-top: 40px;
+}
+
+
+
+.wrap .qq-login i {
+    background: url(/images/customer/icon.png) -138px -248px;
+    background-size: 348px;
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+}
+
+
+
+.wrap .qq-login{
+    margin-top: 30px;
+    margin-left: -290px;
+    cursor: pointer;
+}
+
+
+.wrap .qq-login span {
+    position: relative;
+    top: -15px;
+    left: 5px;
+    transition: color .4s;
+}
+
+
+
+
+
+.wrap .vchar-login i {
+    background: url(/images/customer/icon.png) -306px -248px;
+    background-size: 348px;
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+
+}
+
+
+.wrap .vchar-login{
+    margin-top: -47px;
+    margin-left: 0px;
+}
+.wrap .vchar-login span {
+    position: relative;
+    top: -15px;
+    left: 5px;
+    transition: color .4s;
+}
+
+.wrap .sina-login i{
+    background: url(/images/customer/icon.png) -264px -248px;
+    background-size: 348px;
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+
+}
+.wrap .sina-login{
+    margin-top: -47px;
+    margin-left: 290px;
+}
+.wrap .sina-login span {
+    position: relative;
+    top: -15px;
+    left: 5px;
+    transition: color .4s;
+}
+
+
+
+
+.wrap .outerBox2 .backToIndex2{
+    float: left;
+    margin-top: 30px;
+    margin-left:25px;
+
+    font-size: 16px;
+}
+.wrap .outerBox2 .to-register{
+    float: right;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-right:25px;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>所有套餐</title>
+    <link rel="shortcut icon" href="../../../images/Favicon.ico" />
+    <link rel="stylesheet" href="../../../css/shoot/all_products.css">
+    <script type="text/javascript" src="../../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../../js/common/common.js"></script>
+    <script type="text/javascript" src="../../../js/upload/upload.js"></script>
+    <script type="text/javascript" src="../../../js/home/home.js"></script>
+    <script type="text/javascript" src="../../../js/vue.js"></script>
+    <script type="text/javascript" src="../../../js/home/nav.js"></script>
+    <script src="../../../js/shoot/all_product.js"></script>
+</head>
+<body>
+    <nav id="nav">
+        <ul id="nav-ul">
+            <li id="nav-first">
+                <img src="../../../images/home/logo.png" id="nav-logo">
+            </li>
+            <li id="nav-first-button">
+                <a href="../../index.html" class="nav-button">首页</a>
+            </li>
+            <li>
+                <a href="/view/all_image" class="nav-button">图库</a>
+            </li>
+            <li>
+                <a href="/view/active" class="nav-button">活动</a>
+            </li>
+            <li>
+                <a href="" class="nav-button">社区</a>
+            </li>
+            <li>
+                <a href="/view/all" class="nav-button">定制</a>
+            </li>
+            <li id="nav-search-img">
+                <img src="http://7mx.com/static/img/searchIcon.83cfcde.svg" id="search-img" onclick="search()">
+            </li>
+            <li id="nav-search-input">
+                <input type="text" placeholder="search here~~" id="search-input" style="background-color: rgba(0, 0, 0, 0.2);">
+            </li>
+            <li>
+                <a href="/view/sign" id="signing" class="nav-button">签约</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" id="upload-btn" class="nav-button" onclick="showUpload()">上传</a>
+            </li>
+            <li>
+                <a href="../../register.html" id="regist" class="nav-button">注册</a>
+            </li>
+            <li>
+                <a href="../../login.html" id="nav-login" class="nav-button">登录</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body container" >
+                    <div class="row">
+                        <div class="left col-lg-6" id="container">
+                            <div id="uploadImage" class="col-lg-4">➕选择文件</div>
+                            <div class="simg col-lg-8">
+                            </div>
+                        </div>
+                        <div class="right col-lg-5">
+                            <input type="text" class="imageName form-control col-lg-12" placeholder="作品名称(必填)">
+                            <textarea rows="3" class="keyword col-lg-12" placeholder="尽量填写多的关键词,有利于搜索(选填,每个关键词以#开头)"></textarea>
+                            <select class="category-select form-control" >
+                                <option value="14">请选择类别(默认为 其他)</option>
+                            </select>
+                            <div class="price form-inline col-xs-12">
+                                <label class="radio-inline">
+                                    <input type="radio" class="form-inline radio-price" name="isFree" value="1" onclick="changePriceStatus(this)" checked>免费
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="form-inline radio-price" name="isFree" value="2" onclick="changePriceStatus(this)">收费
+                                </label>
+                            </div>
+                            <input type="text" class="imagePrice form-control col-xs-12" value="0" placeholder="价格" readonly>
+                            <span class="col-xs-12" style="font-size: 12px;color: red;text-align: right">*单位:积分,用户下载之后返回50%的积分给作者</span>
+                            <input type="text" class="imageBrand form-control col-xs-12" placeholder="品牌(选填)">
+                            <input type="text" class="imageModel form-control col-xs-12" placeholder="型号(选填)">
+                            <input type="text" class="imageFocalLength form-control col-xs-12"  placeholder="焦距(选填)">
+                            <input type="text" class="imageFocus form-control col-xs-12" placeholder="光圈(选填)">
+                            <input type="text" class="imageISO form-control col-xs-12" placeholder="ISO(选填)">
+                            <input type="text" class="imageExposureTime form-control col-xs-12" placeholder="曝光补偿(选填)">
+                            <input type="text" class="imageBrightness form-control col-xs-12" placeholder="亮度(选填)">
+                        </div>
+                        <div class="show-process progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            </div>
+                        </div>
+                        <button class="upload btn btn-success" onclick="upload()">发布作品</button>
+                    </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <div>
+        <div id="photographer">
+            <div class="title">
+                <b>作品推荐</b>
+                15M明星摄影师优秀作品
+            </div>
+            <ul id="photographer-list">
+                <li class="photographer-item" id="photographer-first-item" onmouseover="showPhotographerName(this)" onmouseout="hide(this)">
+                    <img class="js-picture" src="">
+                    <p class="js-name" style="display: block"></p>
+                    <a class="js-url" href="" target="_blank" style="display: none">
+                        <p class="js-cover-name"></p>
+                        <span class="cover-more" onmouseover="show1(this)" onmouseout="hide1(this)">更多</span>
+                    </a>
+                </li>
+                <li class="photographer-item" onmouseover="showPhotographerName(this)" onmouseout="hide(this)">
+                    <img class="js-picture" src="">
+                    <p class="js-name" style="display: block"></p>
+                    <a class="js-url" href="" target="_blank" style="display: none">
+                        <p class="js-cover-name"></p>
+                        <span class="cover-more" onmouseover="show1(this)" onmouseout="hide1(this)">更多</span>
+                    </a>
+                </li>
+                <li class="photographer-item" onmouseover="showPhotographerName(this)" onmouseout="hide(this)">
+                    <img class="js-picture" src="">
+                    <p class="js-name" style="display: block"></p>
+                    <a class="js-url" href="" target="_blank" style="display: none">
+                        <p class="js-cover-name"></p>
+                        <span class="cover-more" onmouseover="show1(this)" onmouseout="hide1(this)">更多</span>
+                    </a>
+                </li>
+                <li class="photographer-item" onmouseover="showPhotographerName(this)" onmouseout="hide(this)">
+                    <img class="js-picture" src="">
+                    <p class="js-name" style="display: block"></p>
+                    <a class="js-url" href="" target="_blank" style="display: none">
+                        <p class="js-cover-name"></p>
+                        <span class="cover-more" onmouseover="show1(this)" onmouseout="hide1(this)">更多</span>
+                    </a>
+                </li>
+                <li class="photographer-item" onmouseover="showPhotographerName(this)" onmouseout="hide(this)">
+                    <img class="js-picture" src="">
+                    <p class="js-name" style="display: block"></p>
+                    <a class="js-url" href="" target="_blank" style="display: none">
+                        <p class="js-cover-name"></p>
+                        <span class="cover-more" onmouseover="show1(this)" onmouseout="hide1(this)">更多</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="margin-top: 50px;margin-bottom: 50px">
+        <div class="div-line">
+
+        </div>
+    </div>
+
+    <div style="margin: 0 auto;width: 1348px">
+        <div id="0" class="category">
+            <div class="title">
+                <b>主题分类</b>
+                <ul class="citem-list">
+                    <li class="citem active" onclick="showFirst()"></li>
+                    <li class="citem" onclick="showSecond()"></li>
+                    <li class="citem" onclick="showThird()"></li>
+                </ul>
+                <a class="more" href="../../index.html" target="_blank">15M></a>
+            </div>
+            <div class="category-list">
+                <ul class="category-ul" id="category-ul-first">
+
+                </ul>
+
+                <ul class="category-ul" id="category-ul-second" style="display: none;">
+
+                </ul>
+
+                <ul class="category-ul" id="category-ul-third" style="display: none;">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <div class="next-page" id="next-page-first">
+        </div>
+
+        <div class="next-page" id="next-page-second" style="display: none">
+        </div>
+
+        <div class="next-page" id="next-page-third" style="display: none;">
+        </div>
+
+    <div style="margin-top: 50px;margin-bottom: 50px">
+        <div class="div-line">
+
+        </div>
+    </div>
+
+    <div style="margin: 0 auto;width: 1348px">
+        <div id="1" class="category">
+            <div class="title">
+                <b>周边旅拍</b>
+                <ul class="citem-list">
+                    <li class="citem active" onclick="showHZ()">杭州</li>
+                    <li class="citem" onclick="showSZ()">苏州</li>
+                    <li class="citem" onclick="showCD()">成都</li>
+                    <li class="citem" onclick="showYN()">云南</li>
+                </ul>
+                <a class="more" href="../../index.html" target="_blank">15M></a>
+            </div>
+            <div class="category-list">
+                <ul class="category-ul" id="category-ul-hz">
+
+                </ul>
+                <ul class="category-ul" id="category-ul-sz" style="display: none">
+
+                </ul>
+                <ul class="category-ul" id="category-ul-cd" style="display: none">
+
+                </ul>
+                <ul class="category-ul" id="category-ul-yn" style="display: none">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <div class="next-page" id="next-page-hz">
+        </div>
+
+        <div class="next-page" id="next-page-sz" style="display: none">
+        </div>
+
+        <div class="next-page" id="next-page-cd" style="display: none">
+        </div>
+
+        <div class="next-page" id="next-page-yn" style="display: none">
+        </div>
+
+    <div style="margin-top: 50px;margin-bottom: 50px">
+        <div class="div-line">
+
+        </div>
+    </div>
+
+    <div id="2" class="enjoy">
+        <div class="title">
+            <b>作品欣赏</b>
+            欣赏你的美
+            <a class="more" href="/view/all_image" target="_blank">更多></a>
+        </div>
+        <div class="enjoy-content">
+            <div class="enjoy-type1 enjoy-type" onmouseover="show2(this)" onmouseout="hide2(this)">
+                <img src="../../../images/shoot/x1.jpg">
+                <div class="cover-box">
+                    <a class="enjoy-cover-link" href="" target="_blank"></a>
+                    <div class="enjoy-cover">
+                        <a href="" target="_blank">
+                            <p class="enjoy-cover-tittle"></p>
+                        </a>
+                        <a class="enjoy-cover-name" href="" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="enjoy-type2 enjoy-type" onmouseover="show2(this)" onmouseout="hide2(this)">
+                <img src="../../../images/shoot/x2.jpg">
+                <div class="cover-box">
+                    <a class="enjoy-cover-link" href="" target="_blank"></a>
+                    <div class="enjoy-cover">
+                        <a href="" target="_blank">
+                            <p class="enjoy-cover-tittle"></p>
+                        </a>
+                        <a class="enjoy-cover-name" href="" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="enjoy-type2 enjoy-type" onmouseover="show2(this)" onmouseout="hide2(this)">
+                <img src="../../../images/shoot/x3.jpg">
+                <div class="cover-box">
+                    <a class="enjoy-cover-link" href="" target="_blank"></a>
+                    <div class="enjoy-cover">
+                        <a href="" target="_blank">
+                            <p class="enjoy-cover-tittle"></p>
+                        </a>
+                        <a class="enjoy-cover-name" href="" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="enjoy-type3 enjoy-type" onmouseover="show2(this)" onmouseout="hide2(this)">
+                <img src="../../../images/shoot/x4.jpg">
+                <div class="cover-box">
+                    <a class="enjoy-cover-link" href="" target="_blank"></a>
+                    <div class="enjoy-cover">
+                        <a href="" target="_blank">
+                            <p class="enjoy-cover-tittle"></p>
+                        </a>
+                        <a class="enjoy-cover-name" href="" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="footer-left"></div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li">
+                    <h3>社区</h3>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">热门</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">交友</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">隐私条款</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">帮助</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li">
+                    <h3>商业</h3>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">签约合作</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">创作分成</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">定制商业摄影</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">活动发起</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li">
+                    <h3>联系我们</h3>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">888-8888-8888</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">yftpaper@15m.com</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li">
+                    <h3>关于</h3>
+                </li> <li>
+                <a href="" class="footer-btn">关于15M</a>
+            </li>
+                <li>
+                    <a href="" class="footer-btn">15M工作</a>
+                </li>
+                <li>
+                    <a href="" class="footer-btn">意见反馈</a>
+                </li>
+            </ul>
+        </div>
+        <div id="copyright">
+            <span>© 2018 Copyright 苏州十五兆科技摄影责任有限公司 苏ICP备14057276号-4</span>
+        </div>
+    </footer>
+</body>
+<script src="../../../js/shoot/all_url.js"></script>
+</html>

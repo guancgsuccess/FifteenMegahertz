@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>套餐详情</title>
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <link rel="stylesheet" href="/css/shoot/product.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/common/personalCenter.css">
+    <link rel="stylesheet" href="/css/home/home.css">
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common/message.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/shoot/product.js"></script>
+
+</head>
+<body>
+
+    <div id="big-container">
+
+    <mynav></mynav>
+    <div style="width: 100%;background-color: rgb(26,26,26);">
+        <div class="product-item">
+            <div style="width: 674.5px;float: left;margin: 0 auto;position: relative">
+                <div class="product-left">
+                    <div class="product-pictures">
+                        <div class="product-picList">
+                            <img id="bi" src="">
+                        </div>
+                        <ul class="product-picSmallList">
+                            <li class="" onmouseover="imgOver(this)" onmouseout="imgOut(this)">
+                                <i></i>
+                                <img src="">
+                            </li>
+                            <li class="" onmouseover="imgOver(this)" onmouseout="imgOut(this)">
+                                <i></i>
+                                <img src="">
+                            </li>
+                            <li class="" onmouseover="imgOver(this)" onmouseout="imgOut(this)">
+                                <i></i>
+                                <img src="">
+                            </li>
+                            <li class="" onmouseover="imgOver(this)" onmouseout="imgOut(this)">
+                                <i></i>
+                                <img src="">
+                            </li>
+                            <li class="" onmouseover="imgOver(this)" onmouseout="imgOut(this)">
+                                <i></i>
+                                <img src="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 674.5px;float: left;margin: 0 auto;position: relative">
+                <div class="product-right">
+                    <div class="product_priceInfoBox">
+                        <div class="product-tittle">
+                            <h2 class="tittle">
+
+                            </h2>
+                            <p class="tittle-desc">
+                                没有套路，像朋友一样的拍摄，下单后12个月内均可预约拍摄，拍摄请至少提前一周电话预约拍摄时间
+                            </p>
+                        </div>
+                        <div class="priceInfo_bg">
+                            <dl class="outline-item" id="price">
+                                <dt>产品价格 :</dt>
+                                <dd>
+                            <span class="price">
+                                <strong></strong>
+                                元起 (成人)
+                            </span>
+                                </dd>
+                            </dl>
+                            <dl class="outline-item">
+                                <dt>产品特色 :</dt>
+                                <dd>
+                                    <i class="line-msg">专业摄影团队</i>
+                                    <i class="line-msg">明星造型团队</i>
+                                    <i class="line-msg">专属拍摄定制</i>
+                                </dd>
+                            </dl>
+                        </div>
+                        <table class="product-priceInfo" style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td class="t-alginRight">集&nbsp;&nbsp;合&nbsp;地 :</td>
+                                <td>
+                                    <div class="product-priceInfoContent">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t-alginRight">支付方式 :</td>
+                                <td>
+                                    <div class="product-priceInfoContent">
+                                        <a class="payType">支付宝</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t-alginRight">出团通知 :</td>
+                                <td>
+                                    <div class="product-priceInfoContent">
+                                        <span>周边游提前1天，国内游提前3天，出境游提前3-5天。</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button id="pay-button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">立即下单</button>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">请填写信息</h4>
+                                    </div>
+                                    <div class="modal-body" style="height: 300px;">
+                                        <div class="modal-body-phone" style="margin-bottom: 30px">
+                                            <span style="font-weight: 600;">联系方式: </span>
+                                            <input type="text" class="modal-body-phone-input">
+                                            <button id="send-code-button" onclick="sendContactTelCode()">发送验证码</button>
+                                        </div>
+
+                                        <div class="modal-code" style="margin-bottom: 30px">
+                                            <span style="font-weight: 600">验证码: </span>
+                                            <input type="text" class="modal-code-input">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="dtp_input1" class="col-md-2 control-label"  style="margin-left: -15px; margin-right: 6px;margin-top: 7px;width: 100px;">拍摄时间: </label>
+                                            <div class="input-group date form_datetime col-md-5" data-date="2018-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1" style="margin-left: -10px">
+                                                <input class="form-control" size="16" type="text" value="" readonly style="width: 230px">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove" style=""></span></span>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                            <input type="hidden" id="dtp_input1" value="" /><br/>
+                                        </div>
+
+                                        <div class="modal-body-location">
+                                            <span style="font-weight: 600">拍摄地点: </span>
+                                            <input type="text" class="modal-body-location-input">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel1">下单成功！</h4>
+                                    </div>
+                                    <div class="modal-body" style="height: 120px;font-size: 20px">
+                                        <a class="modal-body-a" href="">前往个人中心支付</a>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div style="margin-top: 40px;margin-bottom: 40px">
+            <div class="div-line">
+
+            </div>
+        </div>
+
+    <div class="user-comment-container">
+        <div class="user-comment-header">
+            用户评价
+            <span id="user-comment-header"></span>
+        </div>
+        <div style="height: 43px;" id="user-comment-navs" class="user-comment-navs" alt="1">
+            <div class="user-comment-nav user-comment-nav-focus">全部(1)</div>
+            <div class="user-comment-nav">行程物超所值(1)</div>
+            <div class="user-comment-nav">会推荐朋友参加(1)</div>
+            <div class="user-comment-nav">终生难忘的旅行(1)</div>
+            <div class="user-comment-nav">成功被圈粉(1)</div>
+            <div class="user-comment-nav">强烈支持15M(1)</div>
+            <div class="user-comment-nav">完美到超出预期(1)</div>
+        </div>
+        <div id="user-comment-navs-more" style="display: block;" onclick="show(this)">查看全部V</div>
+        <div id="user-comment-publish">
+            <div id="user-comment-border">
+                <textarea node-type="textarea" class="textarea-fw" placeholder="来秀一波..." onfocus="cleanText(this)" onblur="reduction(this)"></textarea>
+            </div>
+            <div class="user-comment-range">
+                <img class="user-comment-star" onmouseover="showStar(this)" name="1" src="/images/shoot/star-off.png" title="1分" />
+                <img class="user-comment-star" onmouseover="showStar(this)" name="2" src="/images/shoot/star-off.png" title="2分" />
+                <img class="user-comment-star" onmouseover="showStar(this)" name="3" src="/images/shoot/star-off.png" title="3分" />
+                <img class="user-comment-star" onmouseover="showStar(this)" name="4" src="/images/shoot/star-off.png" title="4分" />
+                <img class="user-comment-star" onmouseover="showStar(this)" name="5" src="/images/shoot/star-off.png" title="5分" />
+            </div>
+            <div class="user-comment-button" onclick="addAppraise()">
+                <span>发表</span>
+            </div>
+        </div>
+        <div id="user-comment-lists" class="user-comment-lists">
+            <div class="user-comment-list">
+
+            </div>
+            <div id="pagearea">
+
+            </div>
+        </div>
+    </div>
+
+        <div style="margin-top: 40px;margin-bottom: 40px">
+            <div class="div-line">
+
+            </div>
+        </div>
+
+    <div class="list-atlas" id="mg-images">
+        <p class="thumblists">
+            <img class="lazyload" style="max-width: 945px;display: block" src="">
+        </p>
+        <p class="thumblists">
+            <img class="lazyload" style="max-width: 945px;display: block" src="">
+        </p>
+    </div>
+    <myfooter></myfooter>
+    </div>
+
+</body>
+<script src="/js/shoot/order_url.js"></script>
+<script src="/js/shoot/product_ul.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/common/message.js"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        weekStart: 0, //一周从哪一天开始
+        todayBtn:  1, //
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+
+</script>
+</html>

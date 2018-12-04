@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="Lwolf" name="author">
+    <title>个人中心</title>
+    <link rel="shortcut icon" href="../../../images/Favicon.ico" />
+    <link rel="stylesheet" href="../../../css/shoot/order.css">
+    <link rel="stylesheet" href="../../../css/customer/personalCenter.css">
+    <link rel="stylesheet" href="../../../css/common/message.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+
+</head>
+<body>
+
+<!--顶部-->
+<div id="personalCenter" style="background-color: black" >
+    <nav id="nav">
+        <ul id="nav-ul">
+            <li id="nav-first"><a href="/index.html"><img src="../../../images/home/logo.png"  id="nav-logo"></a></li>
+            <li id="nav-first-button"><a href="/index.html" class="nav-button">首页</a></li>
+            <li><a href="/view/all_image" class="nav-button">图库</a></li>
+            <li><a href="/view/active" class="nav-button">活动</a></li>
+            <li><a href="/view/comm" class="nav-button">社区</a></li>
+            <li><a href="/view/all" class="nav-button">定制</a></li>
+            <li><a href="" class="nav-button"></a></li>
+            <li><a href="" class="nav-button"></a></li>
+            <li id="nav-search-img"><img src="http://7mx.com/static/img/searchIcon.83cfcde.svg" id="search-img"></li>
+            <li id="nav-search-input"><input type="text"  placeholder="搜索" id="search-input"></li>
+            <li><a href="/view/sign" id="nav-register">签约</a></li>
+            <li><a href="/register.html" class="opera" >注册</a>
+                <div  class="ring" onclick="noticeOpen()" >
+                    <img  src="../../../images/customer/message.svg" width="18" alt="通知" class="actionIcon">
+                    <div  class="newMessage" >0</div>
+
+            <!--消息通知-->
+                    <div  class="push-notifi" style="display: none">
+                        <div  class="array_wrap">
+                            <div  class="array">
+                            </div>
+                        </div>
+                        <div  class="tabs">
+                            <div  class="normal" style="color: rgb(0, 0, 0);font-size: 17px">
+                                消息
+                            </div>
+                        </div>
+                        <div  class="content_wrap"><!---->
+                            <div  class="activityList">
+                                <div  class="list">
+                                </div>
+                                <img class="no-more" src="/images/customer/no-more.png" alt="暂时没有未读消息">
+                                <div class="more">暂无未读消息..</div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </li>
+
+            <li><a href="/login.html" class="opera" >登录</a>
+
+                <div class="avatar" id="avatarMin" onmouseover="operationOver()" onmouseout="operationOut()" style="cursor: pointer;">
+                    <!--个人中心操作-->
+                    <div  id="perslist" style="display:none">
+                        <div class="array_wrap">
+                            <div  class="array">
+                            </div>
+                        </div>
+                        <ul>
+                            <li><a  href="" class="link router-link-exact-active router-link-active" id="myHome">我的主页</a></li>
+                            <li><a  href="" class="link">交易记录</a></li>
+                            <li><a  href="javascript:myLike(1)" class="link">收藏</a></li>
+                            <li><a  href="javascript:myIdols(1)" class="link">关注</a></li>
+                            <li><a  data-toggle="modal" data-target="#mySetModal" href="" class="link">设置</a></li>
+                            <li><a  href="javascript:signOut()" class="link">退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <!--中间一块-->
+    <div class="user-info">
+        <div class="avatar" id="avatarCenter">
+            <!-- //经验等级-->
+            <div class="level" >
+                <div id="level">
+                    <span id="levelSpan"></span>
+                </div>
+            </div>
+            <div id="progress">
+                <div class="progress" style="height:16px">
+                    <div class="progress-bar progress-bar-success" id="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="cursor:pointer;font-size: 10px">
+                        <span class="sr-only">60% Complete (success)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="name" id="custNick">
+            X
+        </div>
+
+        <div id="user-popular" >
+            <div class="user-popular">
+                <a  class="integral" onclick="">
+                    <span id="integral-remainder">0</span>
+                    <span class="integral-remainder">积分</span>
+                </a>
+                <div class="dividing"></div>
+                <a  class="integral" onclick="">
+                    <span id="followers"></span>
+                    <a class="integral-remainder" data-toggle="modal" data-target="#inputPayCount">充值</a>
+                </a>
+                <!-- 充值金额输入框（Modal） -->
+                <div class="modal fade" id="inputPayCount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">请输入充值金额</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input type="text" class="form-control money" aria-label="Amount (to the nearest dollar)">
+                                    <span class="input-group-addon">.00</span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-success" onclick="goPay()">立即充值</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div  style="height: 55px">
+        <div  id="user-home-nav" class="user-home-nav-relative">
+            <div  class="navs">
+                <span  class="option-selected span" onclick="myWorks(1)" style="color: black"><span id="myWorksSpan">作品</span><span id="myWorks">0</span></span>
+                <span  class="span"  onclick="myLike(1)"><span id="likeSpan">收藏</span><span id="like">0</span></span>
+                <span  class="span"  onclick="myIdols(1)"><span id="myIdolsSpan">关注</span><span id="myIdols">0</span></span>
+                <span  class="span"  onclick="myFollowers(1)"><span id="myFollowersSpan">追随者</span><span id="myFollowers">0</span></span>
+                <span  class="span" id="myPurchaseSpan" onclick="myPurchase()">购买记录<span id="myPurchase"></span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="min-height: 500px">
+        <!--等待界面-->
+        <div class="loading" style="display: none" >
+            <div class="k-line2 k-line12-1" ></div>
+            <div class="k-line2 k-line12-2" ></div>
+            <div class="k-line2 k-line12-3" ></div>
+            <div class="k-line2 k-line12-4" ></div>
+            <div class="k-line2 k-line12-5" ></div>
+            <div class="k-line2 k-line12-6" ></div>
+            <div class="k-line2 k-line12-7" ></div>
+            <div class="k-line2 k-line12-8" ></div>
+        </div>
+
+        <!--个人中心图片展示区-->
+        <div class="content" id="content" >
+            <div id="device" class="gridalicious">
+                <div class="galcolumn">
+                </div>
+            </div>
+        </div>
+
+        <!--个人关注和追随展示区-->
+        <div  class="photographers" id="photographers" style="display: block">
+        </div>
+
+        <!--什么都没有的显示-->
+        <div>
+            <div class="not-found" id="not-found" style="display: none;width: 100%;margin: auto auto 100px;">
+                <img class="center-block" src="../../../images/not-found.png">
+                <div class="tip center-block">这个人很懒，什么也没留下 ~</div>
+            </div>
+        </div>
+
+        <!--购买记录-->
+        <!--购买记录-->
+        <div id="order-container" style="display: none">
+            <div class="contentOrder">
+                <div class="tab-content">
+                    <div class="tab-item" onclick="showOrder()" >
+                        <span>图片订单</span>
+                    </div>
+                    <div class="tab-item" onclick="showShootOrder()" >
+                        <span>拍摄订单</span>
+                    </div>
+                </div>
+            </div>
+            <div class="table-box" style="display: block">
+                <div class="orderList" style="width: 100%;padding-top: 10px;">
+                    <div class="table-header-wrapper">
+                        <table class="table table-hover image-order" style="margin-top: 20px">
+                            <tr>
+                                <td>订单编号</td>
+                                <td>作品名称</td>
+                                <td>下单时间</td>
+                                <td>订单价格</td>
+                                <td>下载链接</td>
+                            </tr>
+                        </table>
+                        <div style="cursor: pointer">加载更多</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shoot-order-container" style="display: none;">
+                <div class="content">
+                    <div>
+                        <div>
+                            <div class="tab-content">
+                                <div class="tab-item tab-item-font" style="min-width: 33.3333%;" onclick="showTableBox()">
+                                    全部订单
+                                </div>
+                                <div class="tab-item" style="min-width: 33.3333%;" onclick="showTableBox1()">
+                                    尚未支付
+                                </div>
+                                <div class="tab-item" style="min-width: 33.3333%;" onclick="showTableBox2()">
+                                    已支付
+                                </div>
+                            </div>
+                            <div class="tab-line">
+                                <div class="tab-active" style="width: 33.3333%; transform: translateX(0%);"></div>
+                            </div>
+                        </div>
+                        <div id="has-gutter-ul" style="display: block">
+                            <table class="table table-striped" id="has-gutter-table" style="table-layout: fixed">
+
+                            </table>
+                        </div>
+                        <div id="has-gutter-ul1" style="display: none">
+                            <table class="table table-striped" id="has-gutter-table1" style="table-layout: fixed">
+
+                            </table>
+                        </div>
+                        <div id="has-gutter-ul2" style="display: none">
+                            <table class="table table-striped" id="has-gutter-table2" style="table-layout: fixed">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--分页区-->
+        <div class="row" id="page" style="display: none">
+            <ul class="pagination pagination-sm">
+            </ul>
+        </div>
+    </div>
+
+
+    <footer>
+        <div id="footer-left"></div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li"><h3>社区</h3></li>
+                <li><a href="" class="footer-btn">热门</a></li>
+                <li><a href="" class="footer-btn">交友</a></li>
+                <li><a href="" class="footer-btn">隐私条款</a></li>
+                <li><a href="" class="footer-btn">帮助</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li"><h3>商业</h3></li>
+                <li><a href="" class="footer-btn">签约合作</a></li>
+                <li><a href="" class="footer-btn">创作分成</a></li>
+                <li><a href="" class="footer-btn">定制商业摄影</a></li>
+                <li><a href="" class="footer-btn">活动发起</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li"><h3>联系我们</h3></li>
+                <li><a href="" class="footer-btn">888-8888-8888</a></li>
+                <li><a href="" class="footer-btn">yftpaper@15m.com</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-ul">
+                <li class="first-li"><h3>关于</h3></li>
+                <li><a href="" class="footer-btn">关于15M</a></li>
+                <li><a href="" class="footer-btn">15M工作</a></li>
+                <li><a href="" class="footer-btn">意见反馈</a></li>
+            </ul>
+        </div>
+        <div id="copyright">
+            <span>© 2018 Copyright 苏州十五兆科技摄影责任有限公司 苏ICP备14057276号-4</span>
+        </div>
+    </footer>
+    <!-- 个人设置响应框 -->
+    <div class="modal fade" id="mySetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="setting-container">
+                        <div  class="options">
+                            <span  class="option-selected" id="dataSpan" onclick="dataSpan()">资料</span>
+                            <span  class="" id="bindingSpan" onclick="bindingSpan()">绑定</span>
+                            <span  class="" id="passwordSpan" onclick="passwordSpan()">密码</span>
+                        </div>
+                        <div class="option" id="data" style="display: block;">
+                            <div id="container1">
+                                <div id="uploadImage1">
+                                    <div  id="pick-avatar-container" class="avatar" style="position: relative;" >
+                                        <div id="pick-avatar" class="avatar-cover" style="z-index: 1;">
+                                            <div class="camera" style="background-image: url(http://7mx.com/static/img/camera.3213374.svg);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input  id="optionInputCustNick">
+                            <textarea  id="optionTextareaCustIntro"></textarea>
+                        </div>
+
+                        <div  class="option" id="binding" style="display: none;">
+                            <div  class="domain-name">
+                                <input type="text"  placeholder="邮箱" id="optionInputCustEmail" oninput="emailInput()">
+                                <div class="optionDiv" style="display: none" >
+                                    <span><input class="PhoneButton" type="button" value="  验证邮箱"></span>
+                                </div>
+                            </div>
+
+                            <div  class="phone-input-container">
+                                <input  type="text"  placeholder="手机号" id="optionInputCustPhone" oninput="phoneInput()">
+                                <div class="optionDiv" style="display: none">
+                                <span><input class="PhoneButton" type="button" value="发送验证码"></span>
+                                <input  placeholder="验证码" class="mt14">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div  class="option" id="password" style="display: none;">
+                            <input type="password" placeholder="原密码" id="oldPassword">
+                            <input type="password" placeholder="新密码" id="newPassword">
+                            <input type="password" placeholder="重复新密码" id="repeatNewPassword" >
+                        </div>
+                        <button onclick="modifyData()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../../../js/jquery-3.3.1.min.js"></script>
+<script src="../../../js/customer/personalCenter.js"></script>
+<script src="../../../js/shoot/order.js"></script>
+<script src="../../../js/shoot/order_url.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
+<script src="../../../js/customer/jquery.min.js"></script>
+<script src="../../../js/common/message.js"></script>
+<script src="../../../js/upload/plupload.full.min.js"></script>
+<script src="../../../js/upload/qiniu.min.js"></script>
+<script src="../../../js/customer/jquery.grid-a-licious.min.js"></script>
+<script src="../../../js/common/Jqueryplugs.js"></script>
+<script>
+    var uploader = Qiniu.uploader({
+        runtimes: 'html5,flash,html4',    //上传模式,依次退化
+        browse_button: 'uploadImage1',       //上传选择的点选按钮，**必需**
+        uptoken_url: '/upload/getToken', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+        unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+        save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
+        domain: 'http://img.gcc666.top/',   //bucket 域名，下载资源时用到，**必需**
+        get_new_uptoken: true,  //设置上传文件的时候是否每次都重新获取新的token
+        container: 'container1',           //上传区域DOM ID，默认是browser_button的父元素，
+        max_file_size: '100mb',           //最大文件体积限制
+        //flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+        max_retries: 3,                   //上传失败最大重试次数
+        dragdrop: false,                   //开启可拖曳上传
+        drop_element: 'container1',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+        chunk_size: '4mb',                //分块上传时，每片的体积
+        auto_start: true,
+        filters: {  //对上传文件类型进行限制
+            mime_types : [
+                { title : "Image files", extensions : "jpg,jpeg,png"}
+            ],
+            prevent_duplicates: false
+        },
+
+        //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+        init: {
+            'FilesAdded': function(up, files) {
+                plupload.each(files, function(file) {
+                    // 文件添加进队列后,处理相关的事情
+                });
+            },
+            'BeforeUpload': function(up, file) {
+                // 每个文件上传前,处理相关的事情
+
+            },
+            'UploadProgress': function(up, file) {
+                // 每个文件上传时,处理相关的事情
+            },
+            'FileUploaded': function(up, file, info) {
+                // 每个文件上传成功后,处理相关的事情
+                // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
+                // {
+                //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+                //    "key": "gogopher.jpg"
+                //  }
+                // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+
+                var domain = up.getOption('domain');
+                var res = JSON.parse(info);
+                var sourceLink = domain + res.key; //获取上传成功后的文件的Url
+                modifyHeadPortrait(sourceLink);
+
+
+            },
+            'Error': function(up, err, errTip) {
+                //上传出错时,处理相关的事情
+                $.message({
+                    message: '头像修改失败！',
+                    time:'3000',
+                    type: 'error',
+                    autoClose:true
+                });
+            },
+            'UploadComplete': function() {
+                //队列文件处理完毕后,处理相关的事情
+            },
+            'Key': function(up, file) {
+                // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                // 该配置必须要在 unique_names: false , save_key: false 时才生效
+
+                var key = "";
+                // do something with key here
+                return key;
+            }
+        }
+    });
+    $("#device").gridalicious({
+        gutter: 20,
+        width: 300,
+        animate: true,
+    });
+
+    function goPay() {
+        let money=document.getElementsByClassName("money")[0];
+        if(money.value==""){
+            $.message({
+                message:'请填写充值金额!',
+                type:'error'
+            });
+            return false;
+        }
+        if(!/^[1-9]\d*$/.test(money.value)){
+            $.message({
+               message:'输入格式错误!',
+               type:'error'
+            });
+            return true;
+        }else {
+            window.location.href="/pay/go2Pay/"+money.value;
+        }
+    }
+</script>
+<script>
+    var websocket=null;
+    // 首先判断是否 支持 WebSocket
+    if('WebSocket' in window) {
+        websocket = new WebSocket("ws://www.gcc666.top:8080/websocket");
+    } else if('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://www.gcc666.top:8080/websocket");
+    } else {
+        websocket = new SockJS("http://www.gcc666.top:8080/sockjs/websocket");
+    }
+    // 打开时
+    websocket.onopen = function(evnt) {
+        console.log("  websocket.onopen  ");
+    };
+    // 处理消息时
+    websocket.onmessage = function(evnt) {
+        let messages=JSON.parse(evnt.data);
+        let messageList=document.getElementsByClassName("list")[0];
+        if(messages.status===5){
+            //在线消息
+            document.getElementsByClassName("newMessage")[0].style.display="block";
+            document.getElementsByClassName("newMessage")[0].innerText=parseInt(document.getElementsByClassName("newMessage")[0].innerText)+1;
+            let date=new Date(messages.data.message.messageTime);
+            let messageTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+            messageList.innerHTML+="<div  class=\"list_item\">\n" +
+                "                                    <div  class=\"avatar\" style=\"background-image: url("+messages.data.message.fromProfile+");\"></div>\n" +
+                "                                    <div  class=\"text\">\n" +
+                "                                        <div  class=\"operation\">\n" +
+                "                                            <span  class=\"name\">"+messages.data.message.fromName+"</span>\n" +
+                "                                            <span  class=\"action\">"+messages.data.message.messageText+"</span>\n" +
+                "                                        </div>\n" +
+                "                                            <span  class=\"title\">"+messageTime+"</span>\n" +
+                "                                        </div>\n" +
+                "                                    </div>";
+            if(document.getElementsByClassName("list_item").length>2){
+                document.getElementsByClassName("list")[0].removeChild(document.getElementsByClassName("list_item")[0]);
+            }
+            document.getElementsByClassName("no-more")[0].style.display="none";
+            document.getElementsByClassName("more")[0].innerHTML="查看更多!";
+        }else {
+            //离线消息
+            document.getElementsByClassName("newMessage")[0].style.display="block";
+            document.getElementsByClassName("newMessage")[0].innerText=messages.data.message.length;
+            if(messages.data.message.length!==0){
+                for(let i in messages.data.message ){
+                    if(i==2){
+                        break;
+                    }else{
+                        let date=new Date(messages.data.message[i].messageTime);
+                        let messageTime=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+                        messageList.innerHTML+="<div  class=\"list_item\">\n" +
+                            "                                    <div  class=\"avatar\" style=\"background-image: url("+messages.data.message[i].fromProfile+");\"></div>\n" +
+                            "                                    <div  class=\"text\">\n" +
+                            "                                        <div  class=\"operation\">\n" +
+                            "                                            <span  class=\"name\">"+messages.data.message[i].fromName+"</span>\n" +
+                            "                                            <span  class=\"action\">"+messages.data.message[i].messageText+"</span>\n" +
+                            "                                        </div>\n" +
+                            "                                            <span  class=\"title\">"+messageTime+"</span>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>";
+                    }
+                }
+                document.getElementsByClassName("no-more")[0].style.display="none";
+                document.getElementsByClassName("more")[0].innerHTML="查看更多!";
+            }else {
+                document.getElementsByClassName("no-more")[0].style.display="block";
+                document.getElementsByClassName("more")[0].innerHTML="暂无未读消息!";
+            }
+
+        }
+        console.log("websocket.onmessage");
+    };
+    websocket.onerror = function(evnt) {
+        console.log("  websocket.onerror  ");
+    };
+    websocket.onclose = function(evnt) {
+        console.log("  websocket.onclose  ");
+    };
+    function noticeOpen(){
+        document.getElementsByClassName("push-notifi")[0].style.display="block";
+        document.getElementsByClassName("newMessage")[0].style.display="none";
+        document.getElementsByClassName("newMessage")[0].innerText="0";
+        websocket.send(null);
+        event.stopPropagation();
+    }
+    document.onclick=function () {
+        document.getElementsByClassName("push-notifi")[0].style.display="none";
+    }
+</script>
+</body>
+</html>

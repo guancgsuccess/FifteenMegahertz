@@ -1,0 +1,114 @@
+.community-search-content-center-one-community {
+    margin-bottom: 20px;
+}
+
+.community-search-content-center-one-community-tip {
+    padding-bottom: 6px;
+    font-family: "微软雅黑 Light";
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.community-search-content-center-one-community-content {
+    margin-bottom: 14px;
+}
+
+.community-search-content-center-one-community-content-unit {
+    display: flex;
+    margin-top: 10px;
+    padding: 16px 1% 0 1%;
+    border-top: silver 1px solid;
+}
+
+.community-search-content-center-one-community-content-img {
+    flex: 2;
+}
+
+.community-search-content-center-one-community-content-img > img {
+    width: 100%;
+    border: #e3e3e3 1px solid;
+}
+
+.community-search-content-center-one-community-content-text {
+    flex: 10;
+    position: relative;
+}
+
+.community-search-content-center-one-community-content-text-one {
+    margin-left: 3%;
+}
+
+.community-search-content-center-one-community-content-text-one-one {
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.community-search-content-center-one-community-content-text-one-one:hover {
+    color: #0a67fb;
+}
+
+.community-search-content-center-one-community-content-text-one-two {
+    float: right;
+    cursor: pointer;
+}
+
+.community-search-content-center-one-community-content-text-one-two:hover {
+    color: #ff8d00;
+}
+
+.community-search-content-center-one-community-content-text-one-two > img {
+    position: relative;
+    top: -2px;
+    width: 26px;
+    border-radius: 100%;
+}
+
+.community-search-content-center-one-community-content-text-two {
+    margin-left: 3%;
+    font-size: 1.4rem;
+    color: #afafaf;
+    word-wrap: break-word;
+}
+
+.community-search-content-center-one-community-content-text-three {
+    position: absolute;
+    bottom: 0;
+    margin-left: 3%;
+    width: 97%;
+}
+
+.community-search-content-center-one-community-content-text-three-one {
+    cursor: pointer;
+}
+
+.community-search-content-center-one-community-content-text-three-one:hover {
+    color: #ff8d00;
+}
+
+.community-search-content-center-one-community-content-text-three-one > img {
+    width: 22px;
+
+}
+
+.community-search-content-center-one-community-content-text-three-one > span {
+    position: relative;
+    top: 3px;
+    font-size: 1.5rem;
+}
+
+.community-search-content-center-one-community-content-text-three-two {
+    float: right;
+    position: relative;
+    top: 4px;
+}
+
+.community-search-content-center-one-community-content-text-three-two > img {
+    width: 16px;
+}
+
+.community-search-content-center-one-community-content-text-three-two > span {
+    position: relative;
+    top: 3px;
+    color: #b8b8b8;
+}

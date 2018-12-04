@@ -1,0 +1,36 @@
+.community-info-content-content-page{
+    margin: 12px 0 16px 2%;
+}
+
+.community-info-content-content-page > span{
+    margin-right: 4px;
+}
+
+.community-info-content-content-page > a{
+    margin-right: 4px;
+    padding: 3px 10px;
+    color: #858585;
+    border: #858585 2px solid;
+    border-radius: 3px;
+}
+
+.community-info-content-content-page > a:hover{
+    color: #000000;
+    border: #000000 2px solid;
+}
+
+.not-click-btn{
+    padding: 3px 10px;
+    color: #858585;
+    border: #858585 2px solid;
+    border-radius: 3px;
+}
+
+.current-page{
+    color: #3290f6 !important;
+    border: #3290f6 2px solid !important;
+}
+
+.page-btn{
+
+}

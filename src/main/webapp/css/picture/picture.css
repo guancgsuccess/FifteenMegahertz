@@ -1,0 +1,83 @@
+/**
+ * Created by guochangji on 2018/10/5.
+ */
+*{
+    margin: 0;
+    padding: 0;
+}
+#big-container{
+    height: 100%;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+.panel-title span{
+    font-size: 16px;
+    font-weight:bold;
+
+}
+.page{
+    margin-bottom: 50px;
+}
+.label.label-success{
+   padding: 5px 7px;
+}
+.list-line li{
+    padding-left: 5px;
+    margin-left: 5px;
+    border-radius: 5em;
+}
+.center-block{
+    text-align: center;
+}
+.myfoot{
+    width: 100%;
+    height: auto;
+}
+.page-jump{
+    display: inline-block;
+}
+.page-jump a{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.jump-div{
+    margin: auto;
+}
+.jump-div input{
+    max-width: 66px;
+}
+.jump-div label{
+    font-size: 19px;
+}
+
+.search-list{
+    display: none;
+}
+.keyword-div{
+    display: inline-block;
+    border: 1px solid #f6b07f;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    top:3px;
+    margin-right: 10px;
+}
+.keyword-div:hover{
+    height: 35px;
+}
+.keyword-name{
+    font-size: 12px;
+    padding: 0 10px;
+}
+a{
+    text-decoration: none;
+}
+.keyword-close{
+    display: inline-block;
+    width:10px;
+    height: 25px;
+    font-size: 16px;
+    margin-right: 10px;
+}

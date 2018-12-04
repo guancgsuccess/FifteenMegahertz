@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CommunityDao">
+    <cache type="com.fm.cache.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.fm.entity.Community">
+        <id column="community_id" jdbcType="INTEGER" property="communityId"/>
+        <result column="community_name" jdbcType="VARCHAR" property="communityName"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="cust_id" jdbcType="INTEGER" property="custId"/>
+        <result column="community_photo" jdbcType="VARCHAR" property="communityPhoto"/>
+        <result column="community_label" jdbcType="VARCHAR" property="communityLabel"/>
+        <result column="community_status" jdbcType="INTEGER" property="communityStatus"/>
+        <result column="blank_1" jdbcType="VARCHAR" property="blank1"/>
+        <result column="blank_2" jdbcType="VARCHAR" property="blank2"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    community_id, community_name, category_id, cust_id, community_photo, community_label, 
+    community_status, blank_1, blank_2
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where community_id = #{communityId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from community
+    where community_id = #{communityId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fm.entity.Community">
+    insert into community (community_id, community_name, category_id, 
+      cust_id, community_photo, community_label, 
+      community_status, blank_1, blank_2
+      )
+    values (#{communityId,jdbcType=INTEGER}, #{communityName,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
+      #{custId,jdbcType=INTEGER}, #{communityPhoto,jdbcType=VARCHAR}, #{communityLabel,jdbcType=VARCHAR}, 
+      #{communityStatus,jdbcType=INTEGER}, #{blank1,jdbcType=VARCHAR}, #{blank2,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fm.entity.Community">
+        insert into community
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="communityId != null">
+                community_id,
+            </if>
+            <if test="communityName != null">
+                community_name,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="custId != null">
+                cust_id,
+            </if>
+            <if test="communityPhoto != null">
+                community_photo,
+            </if>
+            <if test="communityLabel != null">
+                community_label,
+            </if>
+            <if test="communityStatus != null">
+                community_status,
+            </if>
+            <if test="blank1 != null">
+                blank_1,
+            </if>
+            <if test="blank2 != null">
+                blank_2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="communityId != null">
+                #{communityId,jdbcType=INTEGER},
+            </if>
+            <if test="communityName != null">
+                #{communityName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="custId != null">
+                #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="communityPhoto != null">
+                #{communityPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="communityLabel != null">
+                #{communityLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="communityStatus != null">
+                #{communityStatus,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                #{blank2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.Community">
+        update community
+        <set>
+            <if test="communityName != null">
+                community_name = #{communityName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="custId != null">
+                cust_id = #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="communityPhoto != null">
+                community_photo = #{communityPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="communityLabel != null">
+                community_label = #{communityLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="communityStatus != null">
+                community_status = #{communityStatus,jdbcType=INTEGER},
+            </if>
+            <if test="blank1 != null">
+                blank_1 = #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="blank2 != null">
+                blank_2 = #{blank2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where community_id = #{communityId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fm.entity.Community">
+    update community
+    set community_name = #{communityName,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER},
+      community_photo = #{communityPhoto,jdbcType=VARCHAR},
+      community_label = #{communityLabel,jdbcType=VARCHAR},
+      community_status = #{communityStatus,jdbcType=INTEGER},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      blank_2 = #{blank2,jdbcType=VARCHAR}
+    where community_id = #{communityId,jdbcType=INTEGER}
+  </update>
+    <!-- 根据类别查询社区 -->
+    <select id="selectCommunityByCategoryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where category_id = #{id,jdbcType=INTEGER}
+        and community_status = 1
+    </select>
+    <!-- 根据标题大概查询社区 -->
+    <select id="selectCommunityByContext" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where community_status = 1
+        and community_name like concat('%',#{context,jdbcType=VARCHAR},'%')
+    </select>
+    <!-- 修改社区状态 -->
+    <update id="updateCommunityByCommunityId" parameterType="java.lang.Integer">
+        update community
+        set community_status = 0
+        where community_id = #{id,jdbcType=INTEGER}
+    </update>
+    <!-- 根据社区ids查询社区集合 -->
+    <select id="selectCommunityByCommunityIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where community_status = 1
+        and community_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item.communityId,jdbcType=INTEGER}
+        </foreach>
+    </select>
+    <!-- 查询最新几个社区 -->
+    <select id="selectCommunityByNewN" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where community_status = 1
+        order by community_id desc
+        limit #{n,javaType=INTEGER}
+    </select>
+    <!-- 查询状态为1的社区数量 -->
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        select count(community_id)
+        from community
+        where community_status = 1
+    </select>
+    <!-- 分页查询全部社区 -->
+    <select id="selectAllCommunityByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select community.community_id,community_name,
+        category_id,community.cust_id,community_photo,
+        community_label,community_status,community.blank_1,community.blank_2
+        from community left join community_members m on community.community_id = m.community_id
+        where community_status = 1
+        group by community.community_id
+        order by count(community.community_id) desc
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!-- 分页查询用户拥有社区 -->
+    <select id="selectMyCommunityByCustId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where community_status = 1
+        and cust_id = #{custId,javaType=INTEGER}
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!-- 查询状态为1的社区数量 -->
+    <select id="selectMyCommunityCountByCustId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(community_id)
+        from community
+        where community_status = 1
+        and cust_id = #{custId,javaType=INTEGER}
+    </select>
+    <!-- 根据社区名查询社区 -->
+    <select id="selectCommunityNameByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from community
+        where community_status = 1
+        and community_name = #{commName,jdbcType=VARCHAR}
+    </select>
+</mapper>

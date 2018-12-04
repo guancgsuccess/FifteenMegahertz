@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.CommunityMessageDao">
+    <cache type="com.fm.cache.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.fm.entity.CommunityMessage">
+        <id column="message_id" jdbcType="INTEGER" property="messageId"/>
+        <result column="cust_id" jdbcType="INTEGER" property="custId"/>
+        <result column="image_id" jdbcType="INTEGER" property="imageId"/>
+        <result column="community_id" jdbcType="INTEGER" property="communityId"/>
+        <result column="message_status" jdbcType="INTEGER" property="messageStatus"/>
+        <result column="message_create_time" jdbcType="TIMESTAMP" property="messageCreateTime"/>
+        <result column="blank_2" jdbcType="VARCHAR" property="blank2"/>
+        <result column="blank_1" jdbcType="VARCHAR" property="blank1"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fm.entity.CommunityMessage">
+        <result column="message_content" jdbcType="LONGVARCHAR" property="messageContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    message_id, cust_id, image_id, community_id, message_status, message_create_time, 
+    blank_2, blank_1
+  </sql>
+    <sql id="Blob_Column_List">
+    message_content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_message
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from community_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fm.entity.CommunityMessage">
+    insert into community_message (message_id, cust_id, image_id, 
+      community_id, message_status, message_create_time, 
+      blank_2, blank_1, message_content
+      )
+    values (#{messageId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{imageId,jdbcType=INTEGER}, 
+      #{communityId,jdbcType=INTEGER}, #{messageStatus,jdbcType=INTEGER}, #{messageCreateTime,jdbcType=TIMESTAMP}, 
+      #{blank2,jdbcType=VARCHAR}, #{blank1,jdbcType=VARCHAR}, #{messageContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fm.entity.CommunityMessage">
+        insert into community_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="messageId != null">
+                message_id,
+            </if>
+            <if test="custId != null">
+                cust_id,
+            </if>
+            <if test="imageId != null">
+                image_id,
+            </if>
+            <if test="communityId != null">
+                community_id,
+            </if>
+            <if test="messageStatus != null">
+                message_status,
+            </if>
+            <if test="messageCreateTime != null">
+                message_create_time,
+            </if>
+            <if test="blank2 != null">
+                blank_2,
+            </if>
+            <if test="blank1 != null">
+                blank_1,
+            </if>
+            <if test="messageContent != null">
+                message_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="messageId != null">
+                #{messageId,jdbcType=INTEGER},
+            </if>
+            <if test="custId != null">
+                #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="imageId != null">
+                #{imageId,jdbcType=INTEGER},
+            </if>
+            <if test="communityId != null">
+                #{communityId,jdbcType=INTEGER},
+            </if>
+            <if test="messageStatus != null">
+                #{messageStatus,jdbcType=INTEGER},
+            </if>
+            <if test="messageCreateTime != null">
+                #{messageCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="blank2 != null">
+                #{blank2,jdbcType=VARCHAR},
+            </if>
+            <if test="blank1 != null">
+                #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="messageContent != null">
+                #{messageContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.CommunityMessage">
+        update community_message
+        <set>
+            <if test="custId != null">
+                cust_id = #{custId,jdbcType=INTEGER},
+            </if>
+            <if test="imageId != null">
+                image_id = #{imageId,jdbcType=INTEGER},
+            </if>
+            <if test="communityId != null">
+                community_id = #{communityId,jdbcType=INTEGER},
+            </if>
+            <if test="messageStatus != null">
+                message_status = #{messageStatus,jdbcType=INTEGER},
+            </if>
+            <if test="messageCreateTime != null">
+                message_create_time = #{messageCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="blank2 != null">
+                blank_2 = #{blank2,jdbcType=VARCHAR},
+            </if>
+            <if test="blank1 != null">
+                blank_1 = #{blank1,jdbcType=VARCHAR},
+            </if>
+            <if test="messageContent != null">
+                message_content = #{messageContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fm.entity.CommunityMessage">
+    update community_message
+    set cust_id = #{custId,jdbcType=INTEGER},
+      image_id = #{imageId,jdbcType=INTEGER},
+      community_id = #{communityId,jdbcType=INTEGER},
+      message_status = #{messageStatus,jdbcType=INTEGER},
+      message_create_time = #{messageCreateTime,jdbcType=TIMESTAMP},
+      blank_2 = #{blank2,jdbcType=VARCHAR},
+      blank_1 = #{blank1,jdbcType=VARCHAR},
+      message_content = #{messageContent,jdbcType=LONGVARCHAR}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.fm.entity.CommunityMessage">
+    update community_message
+    set cust_id = #{custId,jdbcType=INTEGER},
+      image_id = #{imageId,jdbcType=INTEGER},
+      community_id = #{communityId,jdbcType=INTEGER},
+      message_status = #{messageStatus,jdbcType=INTEGER},
+      message_create_time = #{messageCreateTime,jdbcType=TIMESTAMP},
+      blank_2 = #{blank2,jdbcType=VARCHAR},
+      blank_1 = #{blank1,jdbcType=VARCHAR}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+    <!-- 查询全部社区信息得数量 -->
+    <select id="selectAllCountByCommunityId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*)
+        from community_message
+        where message_status = 1
+        and community_id = #{communityId,jdbcType=INTEGER}
+    </select>
+    <!-- 查询全部社区信息 -->
+    <select id="selectAllCommunityMessage" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_message
+        where message_status = 1
+        order by message_create_time desc
+        limit #{n,jdbcType=INTEGER}
+    </select>
+    <!-- 根据用户id或社区id或内容大概模糊查询社区信息 -->
+    <select id="selectCommunityMessageByCondition" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_message
+        where message_status = 1
+        <if test="communityId != null">
+            and community_id = #{communityId,jdbcType=INTEGER}
+        </if>
+        order by message_create_time desc
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!-- 根据内容大概查询内容 -->
+    <select id="selectCommunityMessageByContext" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_message
+        where message_status = 1
+        and message_content like concat('%',#{context,jdbcType=VARCHAR},'%')
+    </select>
+    <!-- 查询社区留言数量 -->
+    <select id="selectCommunityMessageCountByCommunityId" parameterType="java.lang.Integer"
+            resultType="java.lang.Integer">
+        select count(*)
+        from community_message
+        where message_status = 1
+        and community_id = #{communityId,javaType=INTEGER}
+    </select>
+    <!-- 查询用户留言数量 -->
+    <select id="selectAllCountByCustId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*)
+        from community_message
+        where cust_id = #{custId,javaType=INTEGER}
+    </select>
+    <!-- 根据用户id或社区id或内容大概模糊查询社区信息 -->
+    <select id="selectMyMessageByCustomerId" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from community_message
+        where cust_id = #{custId,jdbcType=INTEGER}
+        order by message_create_time desc
+        <if test="offset != null">
+            limit #{offset,jdbcType=INTEGER},
+            #{limit,jdbcType=INTEGER}
+        </if>
+        <if test="offset == null">
+            limit #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fm.dao.ShootDao">
+  <resultMap id="BaseResultMap" type="com.fm.entity.Shoot">
+    <id column="shoot_id" jdbcType="INTEGER" property="shootId" />
+    <result column="theme_id" jdbcType="INTEGER" property="themeId" />
+    <result column="shoot_desc" jdbcType="VARCHAR" property="shootDesc" />
+    <result column="shoot_price" jdbcType="DOUBLE" property="shootPrice" />
+    <result column="shoot_status" jdbcType="INTEGER" property="shootStatus" />
+    <result column="shoot_loc" jdbcType="VARCHAR" property="shootLoc" />
+    <result column="img1_path" jdbcType="VARCHAR" property="img1Path" />
+    <result column="img2_path" jdbcType="VARCHAR" property="img2Path" />
+    <result column="img3_path" jdbcType="VARCHAR" property="img3Path" />
+    <result column="img4_path" jdbcType="VARCHAR" property="img4Path" />
+    <result column="img5_path" jdbcType="VARCHAR" property="img5Path" />
+    <result column="img6_path" jdbcType="VARCHAR" property="img6Path" />
+    <result column="img7_path" jdbcType="VARCHAR" property="img7Path" />
+    <result column="img8_path" jdbcType="VARCHAR" property="img8Path" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    shoot_id, theme_id, shoot_desc, shoot_price, shoot_status, shoot_loc, img1_path, 
+    img2_path, img3_path, img4_path, img5_path, img6_path, img7_path, img8_path
+  </sql>
+  <select id="selectByExample" parameterType="com.fm.entity.ShootExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shoot
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shoot
+    where shoot_id = #{shootId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shoot
+    where shoot_id = #{shootId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fm.entity.ShootExample">
+    delete from shoot
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fm.entity.Shoot">
+    insert into shoot (shoot_id, theme_id, shoot_desc, 
+      shoot_price, shoot_status, shoot_loc, 
+      img1_path, img2_path, img3_path, 
+      img4_path, img5_path, img6_path, 
+      img7_path, img8_path)
+    values (#{shootId,jdbcType=INTEGER}, #{themeId,jdbcType=INTEGER}, #{shootDesc,jdbcType=VARCHAR}, 
+      #{shootPrice,jdbcType=DOUBLE}, #{shootStatus,jdbcType=INTEGER}, #{shootLoc,jdbcType=VARCHAR}, 
+      #{img1Path,jdbcType=VARCHAR}, #{img2Path,jdbcType=VARCHAR}, #{img3Path,jdbcType=VARCHAR}, 
+      #{img4Path,jdbcType=VARCHAR}, #{img5Path,jdbcType=VARCHAR}, #{img6Path,jdbcType=VARCHAR}, 
+      #{img7Path,jdbcType=VARCHAR}, #{img8Path,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fm.entity.Shoot">
+    insert into shoot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shootId != null">
+        shoot_id,
+      </if>
+      <if test="themeId != null">
+        theme_id,
+      </if>
+      <if test="shootDesc != null">
+        shoot_desc,
+      </if>
+      <if test="shootPrice != null">
+        shoot_price,
+      </if>
+      <if test="shootStatus != null">
+        shoot_status,
+      </if>
+      <if test="shootLoc != null">
+        shoot_loc,
+      </if>
+      <if test="img1Path != null">
+        img1_path,
+      </if>
+      <if test="img2Path != null">
+        img2_path,
+      </if>
+      <if test="img3Path != null">
+        img3_path,
+      </if>
+      <if test="img4Path != null">
+        img4_path,
+      </if>
+      <if test="img5Path != null">
+        img5_path,
+      </if>
+      <if test="img6Path != null">
+        img6_path,
+      </if>
+      <if test="img7Path != null">
+        img7_path,
+      </if>
+      <if test="img8Path != null">
+        img8_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shootId != null">
+        #{shootId,jdbcType=INTEGER},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=INTEGER},
+      </if>
+      <if test="shootDesc != null">
+        #{shootDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="shootPrice != null">
+        #{shootPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="shootStatus != null">
+        #{shootStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shootLoc != null">
+        #{shootLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="img1Path != null">
+        #{img1Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img2Path != null">
+        #{img2Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img3Path != null">
+        #{img3Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img4Path != null">
+        #{img4Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img5Path != null">
+        #{img5Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img6Path != null">
+        #{img6Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img7Path != null">
+        #{img7Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img8Path != null">
+        #{img8Path,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fm.entity.ShootExample" resultType="java.lang.Long">
+    select count(*) from shoot
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shoot
+    <set>
+      <if test="record.shootId != null">
+        shoot_id = #{record.shootId,jdbcType=INTEGER},
+      </if>
+      <if test="record.themeId != null">
+        theme_id = #{record.themeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shootDesc != null">
+        shoot_desc = #{record.shootDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shootPrice != null">
+        shoot_price = #{record.shootPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shootStatus != null">
+        shoot_status = #{record.shootStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.shootLoc != null">
+        shoot_loc = #{record.shootLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img1Path != null">
+        img1_path = #{record.img1Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img2Path != null">
+        img2_path = #{record.img2Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img3Path != null">
+        img3_path = #{record.img3Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img4Path != null">
+        img4_path = #{record.img4Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img5Path != null">
+        img5_path = #{record.img5Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img6Path != null">
+        img6_path = #{record.img6Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img7Path != null">
+        img7_path = #{record.img7Path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img8Path != null">
+        img8_path = #{record.img8Path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shoot
+    set shoot_id = #{record.shootId,jdbcType=INTEGER},
+      theme_id = #{record.themeId,jdbcType=INTEGER},
+      shoot_desc = #{record.shootDesc,jdbcType=VARCHAR},
+      shoot_price = #{record.shootPrice,jdbcType=DOUBLE},
+      shoot_status = #{record.shootStatus,jdbcType=INTEGER},
+      shoot_loc = #{record.shootLoc,jdbcType=VARCHAR},
+      img1_path = #{record.img1Path,jdbcType=VARCHAR},
+      img2_path = #{record.img2Path,jdbcType=VARCHAR},
+      img3_path = #{record.img3Path,jdbcType=VARCHAR},
+      img4_path = #{record.img4Path,jdbcType=VARCHAR},
+      img5_path = #{record.img5Path,jdbcType=VARCHAR},
+      img6_path = #{record.img6Path,jdbcType=VARCHAR},
+      img7_path = #{record.img7Path,jdbcType=VARCHAR},
+      img8_path = #{record.img8Path,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fm.entity.Shoot">
+    update shoot
+    <set>
+      <if test="themeId != null">
+        theme_id = #{themeId,jdbcType=INTEGER},
+      </if>
+      <if test="shootDesc != null">
+        shoot_desc = #{shootDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="shootPrice != null">
+        shoot_price = #{shootPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="shootStatus != null">
+        shoot_status = #{shootStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shootLoc != null">
+        shoot_loc = #{shootLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="img1Path != null">
+        img1_path = #{img1Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img2Path != null">
+        img2_path = #{img2Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img3Path != null">
+        img3_path = #{img3Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img4Path != null">
+        img4_path = #{img4Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img5Path != null">
+        img5_path = #{img5Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img6Path != null">
+        img6_path = #{img6Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img7Path != null">
+        img7_path = #{img7Path,jdbcType=VARCHAR},
+      </if>
+      <if test="img8Path != null">
+        img8_path = #{img8Path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shoot_id = #{shootId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fm.entity.Shoot">
+    update shoot
+    set theme_id = #{themeId,jdbcType=INTEGER},
+      shoot_desc = #{shootDesc,jdbcType=VARCHAR},
+      shoot_price = #{shootPrice,jdbcType=DOUBLE},
+      shoot_status = #{shootStatus,jdbcType=INTEGER},
+      shoot_loc = #{shootLoc,jdbcType=VARCHAR},
+      img1_path = #{img1Path,jdbcType=VARCHAR},
+      img2_path = #{img2Path,jdbcType=VARCHAR},
+      img3_path = #{img3Path,jdbcType=VARCHAR},
+      img4_path = #{img4Path,jdbcType=VARCHAR},
+      img5_path = #{img5Path,jdbcType=VARCHAR},
+      img6_path = #{img6Path,jdbcType=VARCHAR},
+      img7_path = #{img7Path,jdbcType=VARCHAR},
+      img8_path = #{img8Path,jdbcType=VARCHAR}
+    where shoot_id = #{shootId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select *
+      from shoot
+      where theme_id = #{themeId}
+  </select>
+
+  <select id="getAllByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select *
+      from shoot
+      where theme_id = #{themeId}
+      limit #{page.startRecord},#{page.pageSize}
+  </select>
+
+  <select id="getCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select count(shoot_id)
+      from shoot
+      where theme_id = #{themeId}
+  </select>
+
+  <select id="getLocCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+      select count(shoot_id)
+      from shoot
+      where shoot_loc = #{shootLoc,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getAllByLoc" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select *
+      from shoot
+      where shoot_loc = #{shootLoc,jdbcType=VARCHAR}
+      limit #{page.startRecord},#{page.pageSize}
+  </select>
+
+</mapper>

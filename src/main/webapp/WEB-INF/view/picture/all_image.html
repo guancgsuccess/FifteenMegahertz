@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/Favicon.ico" />
+    <title>全部-15M摄影</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/home/home.css" rel="stylesheet">
+    <link href="/css/common/personalCenter.css" rel="stylesheet">
+    <link href="/css/picture/picture.css" rel="stylesheet">
+    <link href="/css/common/upload.css" rel="stylesheet">
+    <link href="/css/common/message.css" rel="stylesheet">
+    <style type="text/css">
+        * {margin: 0; padding: 0;}
+        html, body {width: 100%; height: 100%; background-color: #EDEDED;}
+        #main {
+            position: relative;
+            width: 100%; /*限定父容器的宽度*/
+            margin: auto 0;
+        }
+        .box {
+            position: absolute;
+            padding: 5px; /*不建议使用 margin*/
+            box-sizing: border-box;
+            /*width: 472px; 限定数据块的宽度*/
+        }
+        .wrapper {
+            background-color: #fff;
+            border: 1px solid #e4e4e4;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+        }
+        .pic {
+            font-size: 0; /*消除行内元素的间隙*/
+        }
+        .pic img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="big-container">
+    <myupload></myupload>
+    <div class="navbar navbar-inverse">
+        <mynav></mynav>
+
+    </div>
+    <div class="container" style="width: 100%">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <span>筛选作品</span>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="cate-list list-inline col-md-12">
+                    <li><button class='btn btn-info'>类别 :</button></li>
+                    <li><button class='choose btn btn-success color-choose' value="0" onclick='changeColor("cate-list",this);loadImg(this)'>全部</button></li>
+                </ul>
+                <ul class="pay-list list-inline col-md-12">
+                    <li><button class='btn btn-info'>价格 :</button></li>
+                    <li><button class='choose btn btn-success color-choose' value="0" onclick='changeColor("pay-list",this);loadImg(this)'>全部</button></li>
+                    <li><button class='choose btn btn-default' value="1" onclick='changeColor("pay-list",this);loadImg(this)'>免费</button></li>
+                    <li><button class='choose btn btn-default' value="2" onclick='changeColor("pay-list",this);loadImg(this)'>收费</button></li>
+                </ul>
+                <ul class="sort-list list-inline col-md-12">
+                    <li><button class='btn btn-info'>排序 :</button></li>
+                    <li><button class='choose btn btn-success color-choose' value="0"  onclick="changeColor('sort-list',this);loadImg(this)">默认排序</button></li>
+                    <li><button class="choose btn btn-default"  value="1" onclick="changeColor('sort-list',this);loadImg(this)">浏览量↓</button></li>
+                    <li><button class="choose btn btn-default"  value="2"  onclick="changeColor('sort-list',this);loadImg(this)">下载量↓</button></li>
+                    <li><button class="choose btn btn-default"  value="3" onclick="changeColor('sort-list',this);loadImg(this)">收藏量↓</button></li>
+                    <li><button class="choose btn btn-default"  value="4" onclick="changeColor('sort-list',this);loadImg(this)">点赞量↓</button></li>
+                    <li><button class="choose btn btn-default"  value="5" onclick="changeColor('sort-list',this);loadImg(this)">最新发布↓</button></li>
+                </ul>
+                <ul class="search-list list-inline col-md-12">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="clearfix">
+    </div>
+    <div class="not-found" style="display: none ;width: 100%;margin: auto auto 100px;">
+        <img class="center-block" src="/images/not-found.png">
+        <div class="tip center-block">没有找到符合条件的作品~~~~~</div>
+    </div>
+    <div class="container center-block page">
+        <nav aria-label="Page navigation">
+            <div class="row">
+                <ul class="pagination  pagination-lg">
+                </ul>
+            </div>
+            <div class="form-group form-inline jump-div" style="max-width: 800px;">
+                <div class="page-jump"><label class="label label-info">跳转到第</label></div>
+                <div class="page-jump">
+                    <label>
+                        <input id="targetPage" type="text" class="form-control"/>
+                    </label>
+                </div>
+                <div class="page-jump"><label class="label label-info">页</label></div>
+                <div class="page-jump"><a  href="javascript:target2Page();" class="btn btn-success btn-lg">跳转</a></div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="navbar navbar-inverse myfoot">
+        <myfooter></myfooter>
+    </div>
+</div>
+
+</body>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/common/message.js"></script>
+<script src="/js/picture/picture.js"></script>
+<script src="/js/upload/plupload.full.min.js"></script>
+<script src="/js/upload/qiniu.min.js"></script>
+<script src="/js/upload/upload.js"></script>
+<script>
+    let ajax=null;
+    let currentUrl="";
+    let storage=window.sessionStorage;
+    if(window.XMLHttpRequest){
+        ajax=new XMLHttpRequest();
+    }else{
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    window.onload=function() {
+        if(storage.getItem("keyword")==null||storage.getItem("keyword")===""){
+            currentUrl="/image/get/0/0/0/1";
+        }else{
+            currentUrl="/image/get/0/0/0/1?keyword="+storage.getItem("keyword");
+            storage.removeItem("keyword");
+        }
+        loadFirst(currentUrl);
+    };
+    //清除关键词搜索
+    function cancelKeyword() {
+        document.getElementsByClassName("search-list")[0].style.display="none";
+        currentUrl=currentUrl.substring(0,currentUrl.lastIndexOf("?"));
+        loadImgByPage(currentUrl);
+    }
+    //打开作品详情页面
+    function goDetail(id) {
+        storage.id=id;
+        window.open('/view/image_info');
+    }
+    //更换选中状态
+    function changeColor(str,ele) {
+        let li=document.querySelectorAll("ul."+str+" button.choose");
+        for(let i of li){
+            if(i===ele){
+                i.style.background="#5cb85c";
+                i.style.borderColor="#4cae4c";
+                i.style.color="white";
+            }else {
+                i.style.background="#fff";
+                i.style.borderColor="#ccc";
+                i.style.color="black";
+            }
+        }
+    }
+    //第一次加载(类别+图片)
+    function loadFirst(url) {
+        let pageButton=document.getElementsByClassName("pagination")[0];
+        let imgDiv=document.getElementById("main");
+        let categoryDiv=document.getElementsByClassName("cate-list")[0];
+        imgDiv.innerHTML="";
+        pageButton.innerHTML="";
+        ajax.open("GET",url,true);
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                let jsText=JSON.parse(ajax.responseText);
+                //渲染类别
+                for(let i in jsText.data.categoryInfo){
+                    let div="<li><button class='choose btn btn-default' value='"+jsText.data.categoryInfo[i].categoryId+"' onclick='changeColor(\"cate-list\",this);loadImg(this)'>"+jsText.data.categoryInfo[i].categoryName+"</button></li>";
+                    categoryDiv.innerHTML+=div;
+                }
+                //关键词渲染
+                let key=document.getElementsByClassName("search-list")[0];
+                if(jsText.data.keyword!=null){
+                    key.style.display="block";
+                    key.innerHTML="<li><button class='btn btn-info'>关键词 :</button></li>" +
+                        "                    <li>" +
+                        "                        <div class='keyword-div'>" +
+                        "                            <span class='keyword-name'>"+jsText.data.keyword+"</span><a  class='keyword-close'  href='javascript:cancelKeyword();'>x</a>" +
+                        "                        </div>" +
+                        "                    </li>";
+                }else{
+                    key.style.display="none";
+                }
+                //渲染图片
+
+                if(jsText.data.pageModel.modelList.length===0){
+                    $('#main').removeAttr("style");
+                    document.getElementsByClassName("not-found")[0].style.display="block";
+                }else{
+                    document.getElementsByClassName("not-found")[0].style.display="none";
+                    for(let i in jsText.data.pageModel.modelList){
+                        let div="<div class='box'>" +
+                            "        <div class='wrapper'>" +
+                            "            <a href='javascript:goDetail("+jsText.data.pageModel.modelList[i].imageId+");' class='pic'><img class='inner-pic' src='"+jsText.data.pageModel.modelList[i].imageCompressPath+"' /></a>" +
+                            "        </div>" +
+                            "    </div>";
+                        imgDiv.innerHTML+=div;
+                        document.getElementsByClassName("box")[i].style.width=document.body.offsetWidth/4+"px";
+                        document.getElementsByClassName("inner-pic")[i].onload=function(){
+                            waterFall("main", "box");
+                        }
+                    }
+                }
+                //渲染分页按钮组
+                let pageUrl = "/image/get/" + jsText.data.categoryId + "/" + jsText.data.priceType + "/" + jsText.data.sortType + "/";
+                var prePage;
+                var nextPage;
+                if(jsText.data.keyword==null){
+                    prePage=parseInt(jsText.data.pageModel.currentPageCode)-1;
+                    nextPage=parseInt(jsText.data.pageModel.currentPageCode)+1;
+                }else {
+                    prePage=parseInt(jsText.data.pageModel.currentPageCode)-1+"?keyword="+jsText.data.keyword;
+                    nextPage=parseInt(jsText.data.pageModel.currentPageCode)+1+"?keyword="+jsText.data.keyword;
+                }
+                if(jsText.data.pageModel.currentPageCode===1){
+                    var preLi="<li class='disabled'>" +
+                        "                        <a href='javascript:void(0);' aria-label='Previous' >" +
+                        "                            <span aria-hidden='true' class='disabled'>上一页</span>" +
+                        "                        </a>" +
+                        "      </li>";
+                }else {
+
+                    var preLi="<li>" +
+                        "                        <a href='javascript:loadImgByPage(\""+pageUrl+prePage+"\");' aria-label='Previous' >" +
+                        "                            <span aria-hidden='true'>上一页</span>" +
+                        "                        </a>" +
+                        "      </li>";
+                }
+                pageButton.innerHTML=preLi+
+                    "                     <li class='active'>"+
+                    "                        <span>当前第"+jsText.data.pageModel.currentPageCode+"页,共<span id='totalPage'>"+jsText.data.pageModel.totalPages+"</span>页</span>"+
+                    "                     </li>" ;
+                if(jsText.data.pageModel.currentPageCode===jsText.data.pageModel.totalPages||jsText.data.pageModel.totalPages===0){
+                    var nextLi="             <li class='disabled'>" +
+                        "                        <a href='javascript:void(0);' aria-label='Next'>" +
+                        "                            <span aria-hidden='true' class='disabled'>下一页</span>" +
+                        "                        </a>" +
+                        "                    </li>";
+                }else {
+                    var nextLi="             <li>" +
+                        "                        <a href='javascript:loadImgByPage(\""+pageUrl+nextPage+"\");' aria-label='Next'>" +
+                        "                            <span aria-hidden='true'>下一页</span>" +
+                        "                        </a>" +
+                        "                    </li>";
+                }
+                pageButton.innerHTML+=nextLi;
+
+            }
+
+        };
+        ajax.send(null);
+
+    }
+    //筛选栏拼接URL
+    function loadImg(ele) {
+        // 拼接URL
+        let ulClassName=ele.parentNode.parentNode.className.split(" ")[0];
+        let url="";
+        let tempUrl="";
+        let endUrl;
+        if(currentUrl.lastIndexOf("?")!==-1){
+            tempUrl=currentUrl.substring(0,currentUrl.lastIndexOf("?"));
+            endUrl=currentUrl.substring(currentUrl.lastIndexOf("?"),currentUrl.length);
+        }else {
+            tempUrl=currentUrl;
+            endUrl="";
+        }
+        if(ulClassName==="cate-list"){
+            url=tempUrl.substring(0,11)+ele.value+tempUrl.substring(tempUrl.length-6);
+        }else if(ulClassName==="pay-list"){
+            url=tempUrl.substring(0,tempUrl.length-5)+ele.value+tempUrl.substring(tempUrl.length-4);
+        }else if(ulClassName==="sort-list"){
+            url=tempUrl.substring(0,tempUrl.length-3)+ele.value+tempUrl.substring(tempUrl.length-2);
+        }
+        currentUrl=url+endUrl;
+        loadImgByPage(url+endUrl);
+    }
+    //加载图片
+    function loadImgByPage(url) {
+        let imgDiv=document.getElementById("main");
+        let pageButton=document.getElementsByClassName("pagination")[0];
+        imgDiv.innerHTML="";
+        ajax.open("GET",url,true);
+        ajax.onreadystatechange=function () {
+            if(ajax.readyState===4&&ajax.status===200){
+                let jsText=JSON.parse(ajax.responseText);
+                if(jsText.data.pageModel.modelList.length===0){
+                    $('#main').removeAttr("style");
+                    document.getElementsByClassName("not-found")[0].style.display="block";
+                }else{
+                    //渲染图片
+                    document.getElementsByClassName("not-found")[0].style.display="none";
+                    for(let i in jsText.data.pageModel.modelList){
+                        let div="<div class='box'>" +
+                            "        <div class='wrapper'>" +
+                            "            <a href='javascript:goDetail("+jsText.data.pageModel.modelList[i].imageId+");' class='pic'><img class='inner-pic' src='"+jsText.data.pageModel.modelList[i].imageCompressPath+"' /></a>" +
+                            "        </div>" +
+                            "    </div>";
+                        imgDiv.innerHTML+=div;
+                        document.getElementsByClassName("box")[i].style.width=document.body.offsetWidth/4+"px";
+                        document.getElementsByClassName("inner-pic")[i].onload=function(){
+                            waterFall("main", "box");
+                        }
+                    }
+                }
+                if(jsText.data.keyword==null){
+                    currentUrl="/image/get/"+jsText.data.categoryId+"/"+jsText.data.priceType+"/"+jsText.data.sortType+"/1";
+                }else {
+                    currentUrl="/image/get/"+jsText.data.categoryId+"/"+jsText.data.priceType+"/"+jsText.data.sortType+"/1"+"?keyword="+jsText.data.keyword;
+                }
+                //渲染分页按钮组
+                var pageUrl="/image/get/"+jsText.data.categoryId+"/"+jsText.data.priceType+"/"+jsText.data.sortType+"/";
+                var prePage;
+                var nextPage;
+                if(jsText.data.keyword==null){
+                    prePage=parseInt(jsText.data.pageModel.currentPageCode)-1;
+                    nextPage=parseInt(jsText.data.pageModel.currentPageCode)+1;
+                }else {
+                    prePage=parseInt(jsText.data.pageModel.currentPageCode)-1+"?keyword="+jsText.data.keyword;
+                    nextPage=parseInt(jsText.data.pageModel.currentPageCode)+1+"?keyword="+jsText.data.keyword;
+                }
+                if(jsText.data.pageModel.currentPageCode===1){
+                    var preLi="<li class='disabled'>" +
+                        "                        <a href='javascript:void(0);' aria-label='Previous' >" +
+                        "                            <span aria-hidden='true' class='disabled'>上一页</span>" +
+                        "                        </a>" +
+                        "      </li>";
+                }else {
+
+                    var preLi="<li>" +
+                        "                        <a href='javascript:loadImgByPage(\""+pageUrl+prePage+"\");' aria-label='Previous' >" +
+                        "                            <span aria-hidden='true'>上一页</span>" +
+                        "                        </a>" +
+                        "      </li>";
+                }
+                pageButton.innerHTML=preLi+
+                    "                     <li class='active'>"+
+                    "                        <span>当前第"+jsText.data.pageModel.currentPageCode+"页,共<span id='totalPage'>"+jsText.data.pageModel.totalPages+"</span>页</span>"+
+                    "                     </li>" ;
+                if(jsText.data.pageModel.currentPageCode===jsText.data.pageModel.totalPages||jsText.data.pageModel.totalPages===0){
+                    var nextLi="             <li class='disabled'>" +
+                        "                        <a href='javascript:void(0);' aria-label='Next'>" +
+                        "                            <span aria-hidden='true' class='disabled'>下一页</span>" +
+                        "                        </a>" +
+                        "                    </li>";
+                }else {
+                    var nextLi="             <li>" +
+                        "                        <a href='javascript:loadImgByPage(\""+pageUrl+nextPage+"\");' aria-label='Next'>" +
+                        "                            <span aria-hidden='true'>下一页</span>" +
+                        "                        </a>" +
+                        "                    </li>";
+                }
+                pageButton.innerHTML+=nextLi;
+            }
+
+        };
+        ajax.send(null);
+        backTop();
+    }
+    //实现跳转
+    function target2Page() {
+        let targetPage=document.getElementById("targetPage").value;
+        let totalPage=document.getElementById("totalPage").innerText;
+        if(targetPage===""){
+            targetPage="1";
+        }else{
+            if(parseInt(targetPage)>parseInt(totalPage)){
+                targetPage=totalPage;
+            }
+            if(parseInt(targetPage)<=0){
+                targetPage="1";
+            }
+        }
+        let url=currentUrl.substring(0,currentUrl.length-1)+targetPage;
+        loadImgByPage(url);
+    }
+    //回到顶部
+    function backTop() {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+    //瀑布流布局
+    function waterFall(main, box) {
+        var main = document.getElementById(main);
+        var boxs = main.getElementsByClassName(box);
+        var boxWidth =document.body.offsetWidth/4; //获取每个数据块的宽度
+        var cols = 4; //计算列数
+
+        var heightArr = []; //定义一个存放 top 值的数组
+        for(var i = 0; i < boxs.length; i++) {
+            var boxHeight = boxs[i].offsetHeight;
+            if(i < cols) { //第一行
+                heightArr.push(boxs[i].offsetHeight);
+                boxs[i].style.top = '0px';
+                boxs[i].style.left = i * boxWidth +'px';
+            } else {
+                //求出最矮盒子的高度
+                var minBoxHeight = Math.min.apply(this, heightArr);
+                //求出最矮盒子的索引
+                var minBoxIndex = getIndex(minBoxHeight, heightArr);
+                boxs[i].style.top = minBoxHeight + 'px'; //顶部间距即最矮盒子的高度
+                boxs[i].style.left = minBoxIndex * boxWidth +'px';
+                //关键:更新最矮盒子的高度
+                heightArr[minBoxIndex] += boxHeight;
+            }
+        }
+        document.getElementById("main").style.height=Math.max.apply({},heightArr)+50+"px";
+    }
+    //求出最矮盒子的索引
+    function getIndex(val, arr) {
+        for(var i in arr) {
+            if(val == arr[i]) {
+                return i;
+            }
+        }
+    }
+</script>
+</html>

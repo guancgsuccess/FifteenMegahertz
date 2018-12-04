@@ -1,0 +1,194 @@
+.imgAndAuthor{
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 950px;
+}
+.navbar{
+    margin-bottom: 0 !important;
+}
+.img-info{
+    display: inline-block;
+    margin-top: 50px;
+    width: 100%;
+    height: 818px;
+}
+.left-array,.right-array{
+    width: 20px;
+    height: 40px;
+    position: relative;
+    top: 409px;
+}
+.left-array{
+    background: url("../../images/image_detail/left-array.svg") no-repeat;
+}
+.right-array{
+    background: url("../../images/image_detail/right-array.svg") no-repeat;
+}
+.img-detail{
+    height: 818px;
+    position: relative;
+    background-size: contain!important;
+    background-position: 50%!important;
+    background-repeat: no-repeat!important;
+}
+.author-info{
+    height: 818px;
+}
+.author-profile{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    cursor: pointer;
+    background-size: cover!important;
+    background-position: 50%;
+}
+.name-follow{
+    display: inline-block;
+    height: 55px;
+    color: hsla(0,0%,88%,.5);
+}
+.name-follow .name{
+    font-size: 16px;
+    color: white !important;
+    text-decoration: none;
+    width: 50px;
+    height: 50px;
+}
+.following{
+    float: right;
+    position: relative;
+    top: 10px;
+}
+.img-popular label{
+    width: 100px;
+    font-size: 14px;
+    color: hsla(0,0%,88%,.5);
+}
+.look-container,.download-container,.comment-container{
+    text-align: right;
+}
+.like,.collection{
+    margin-top: 20px;
+    font-size: 14px !important;
+}
+.works-title{
+    margin-top: 32px;
+    font-size: 20px;
+    color: #fff;
+    margin-left: -8px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.category-style{
+    background: #313131;
+    color: white;
+    font-size: 16px;
+    padding: 5px 0;
+    max-width: 270px;
+
+}
+.category-style .category{
+    text-align: left;
+    display: inline-block;/*
+    width: 105px;*/
+}
+.category-style .category-name{
+    text-align: right;
+    display: inline-block;/*
+    width:105px;*/
+}
+.detail-container{
+    height: 235px;
+    margin-bottom: 10px;
+}
+.img-detail-info{
+    margin-bottom: 10px;
+    color: hsla(0,0%,88%,.5);
+    font-size: 14px;
+    height: 19px;
+}
+.buy{
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 44px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 30px 0 0;
+    background: rgb(86, 203, 143);
+}
+.comments-container{
+    max-width: 900px;
+    height: 300px;
+    margin-top: 60px;
+}
+.send-btn{
+    text-align: right;
+}
+.send-btn .send{
+    margin-top: 15px;
+    width: 200px;
+    margin-bottom: 100px;
+}
+.review-container{
+    max-width: 900px;
+    min-height: 500px;
+}
+.review-item{
+    height: 80px;
+    margin-bottom: 50px;
+}
+.review-item a{
+    height: 60px;
+    display: inline-block;
+}
+.review-author{
+    width: 60px !important;
+    height: 60px !important;
+}
+.nick-name{
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    width: 500px;
+}
+.review-content label{
+    padding-right: 20px;
+}
+.review-content{
+    display: inline-block;
+    font-size: 16px;
+    width: 800px;
+}
+.content{
+    float: right;
+    width: 600px;
+    margin-left: 10px;
+    position: relative;
+    left: -200px;
+}
+.review-time{
+    margin-left: 50px;
+}
+.title{
+    max-width: 900px;
+}
+.pay-remain,.pay-need{
+    font-size: 16px;
+    margin-top: 10px;
+}
+.modal{
+    margin-top: 10%;
+}
+.review-span{
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 20px;
+}
+.review-span:hover{
+    color: deepskyblue;
+
+}
